@@ -1,0 +1,67 @@
+<%= form_with(model: @client, local: true) do |form| %>
+  <% if client.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
+
+      <ul>
+      <% client.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :clientid %>
+    <%= form.number_field :clientid, id: :client_clientid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :company_id_id %>
+    <%= form.text_field :company_id_id, id: :client_company_id_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cardnumber %>
+    <%= form.number_field :cardnumber, id: :client_cardnumber %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pin %>
+    <%= form.number_field :pin, id: :client_pin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pin_enabled %>
+    <%= form.check_box :pin_enabled, id: :client_pin_enabled %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :client_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birthdate %>
+    <%= form.date_select :birthdate, id: :client_birthdate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :client_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :score %>
+    <%= form.number_field :score, id: :client_score %>
+  </div>
+
+  <div class="field">
+    <%= form.label :client_enabled %>
+    <%= form.number_field :client_enabled, id: :client_client_enabled %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

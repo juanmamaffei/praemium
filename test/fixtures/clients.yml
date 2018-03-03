@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  clientid: 1
+  company_id: one
+  cardnumber: 1
+  pin: 1
+  pin_enabled: false
+  name: MyString
+  birthdate: 2018-03-03
+  email: MyString
+  score: 1
+  client_enabled: 1
+
+two:
+  clientid: 1
+  company_id: two
+  cardnumber: 1
+  pin: 1
+  pin_enabled: false
+  name: MyString
+  birthdate: 2018-03-03
+  email: MyString
+  score: 1
+  client_enabled: 1

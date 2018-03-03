@@ -10,7 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180303045305) do
+ActiveRecord::Schema.define(version: 20180303154618) do
+
+  create_table "clients", force: :cascade do |t|
+    t.integer "clientid"
+    t.integer "company_id_id"
+    t.integer "cardnumber"
+    t.integer "pin"
+    t.boolean "pin_enabled"
+    t.string "name"
+    t.date "birthdate"
+    t.string "email"
+    t.integer "score"
+    t.integer "client_enabled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "username", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.index ["company_id_id"], name: "index_clients_on_company_id_id"
+    t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_clients_on_username", unique: true
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -20,6 +48,16 @@ ActiveRecord::Schema.define(version: 20180303045305) do
     t.string "employers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "company_id_id"
+    t.integer "client_id_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id_id"], name: "index_transactions_on_client_id_id"
+    t.index ["company_id_id"], name: "index_transactions_on_company_id_id"
   end
 
 end
