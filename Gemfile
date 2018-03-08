@@ -40,8 +40,8 @@ gem 'materialize-sass'
 gem 'material_icons' 
 gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
-
-
+gem 'cancancan', '~> 1.10'
+gem 'devise-i18n'
 
 
 group :development, :test do

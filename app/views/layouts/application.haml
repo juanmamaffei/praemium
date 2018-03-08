@@ -1,0 +1,33 @@
+%html
+  %head
+    %title Praemium
+    = csrf_meta_tags
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+
+
+  %body
+    %nav
+      %div{:class=>"nav-wrapper green darken-4"}
+        .row
+          .col.s3
+            .logo Praemium
+          .col.s9
+            %a{:href=>"#", :class=>"brand-logo center"}
+              -if (defined?(@company.name))
+                =@company.name
+              -else
+                -
+            -if user_signed_in?
+              %ul.right.hide-on-med-and-down
+                %li
+                  =link_to "Cerrar sesión", destroy_user_session_path, method: :delete
+                %li
+                  =link_to "Perfil", edit_user_registration_path # Cerrar sesión
+            -else
+              %ul.right.hide-on-med-and-down
+                %li
+                  =link_to "Iniciar sesión", new_user_session_path
+    = yield

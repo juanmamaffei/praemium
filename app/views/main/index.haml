@@ -1,3 +1,6 @@
 %h1 Nuestros clientes
 %p
   %a(href='companies') Listado
+  =current_user.id
+  =Company.first.admin
+  =current_user.id == Company.first.admin

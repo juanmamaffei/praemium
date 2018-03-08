@@ -1,5 +1,12 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  #Admin sin restricciones
+  before_action :authenticate_admin!, only: [:index, :destroy, :new, :create]
+  #Dueño de compañía A, SHOW y EDIT compañía A.
+  before_action :authenticate_owner!, only: [:show, :edit, :update]
+  #Empleado de compañía A, SHOW de compañía A.
+  #Cliente, NADA.
 
   # GET /companies
   # GET /companies.json
