@@ -17,6 +17,7 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    verify_own_id
   end
 
   # GET /companies/new
@@ -26,6 +27,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
+    verify_own_id
   end
 
   # POST /companies
@@ -77,5 +79,13 @@ class CompaniesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:name, :url, :admin, :clientcount, :employers)
+    end
+
+    def verify_own_id
+      unless (@company.admin == current_user.id)
+        unless current_user.is_admin?
+           redirect_to root_path
+        end
+      end
     end
 end

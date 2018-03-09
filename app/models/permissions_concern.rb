@@ -12,7 +12,7 @@ module PermissionsConcern
 
 	def is_owner?
 		self.permissions >= 30
-		#self.admin == current_user.id
+
 	end
 
 	def is_admin?
