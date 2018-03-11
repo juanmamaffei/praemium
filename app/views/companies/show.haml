@@ -4,8 +4,12 @@
     swipeable : true,
     responsiveThreshold : 150
     $('.collapsible').collapsible();
+    function Foco(){
+      document.getElementById('input#clientnum').focus();
+      alert("funca");
+    }
+    setInterval(Foco,1000);
   });
-
 
 
 
@@ -24,7 +28,7 @@
         %li{:class=>"tab col s3"}
           %a{:href=>"#clientes"}Clientes
       %div{:id=>"tab-1", :class=>"col s12 green lighten-3"}
-
+      =form_for :cards, url: {action: "update"} do |f|
         %ul{:class=>'collapsible', :data-collapsible=>'accordion'}
           %li
             .collapsible-header
@@ -32,35 +36,34 @@
               Escanear código de barras
             .collapsible-body
               .row.center
-                =form_tag do
-                  .input-field.col.s9
-                    %i{:class=>"material-icons prefix"} credit_card
-                    = label_tag(:icon_prefix, "Código de barras", :class=>"icon_prefix")
-                    = text_field_tag(:icon_prefix,"", class: "validate")
-                  .col.s3
-                    = submit_tag("Buscar",:class=>"waves-effect waves-light btn")
+                
+                .input-field.col.s9
+                  %i{:class=>"material-icons prefix"} credit_card
+                  = label_tag(:icon_prefix, "Código de barras", :class=>"icon_prefix")
+                  = text_field_tag(:icon_prefix,"", class: "validate")
+                .col.s3
+                  = submit_tag("Buscar",:class=>"waves-effect waves-light btn")
         %ul{:class=>'collapsible', :data-collapsible=>'accordion'}
           %li
             .collapsible-header.active
               %i.material-icons filter_drama
               Introducir datos manualmente
             .collapsible-body.white
-              =form_tag do
-                .row
-                  .input-field
-                    Código de país: 779 [ARGENTINA]
-                  .input-field
-                    Compañía:
-                    = @company.id
-                    [
-                    =@company.name
-                    ]
-                  .input-field
-                    = label_tag(:clientnum, "Número de cliente", :class=>"icon_prefix")
-                    = text_field_tag(:clientnum,"", class: "validate")
-                  .input-field
-                    %p1
-                  = submit_tag("Buscar",:class=>"waves-effect waves-light btn")
+              .row
+                .input-field
+                  Código de país: 779 [ARGENTINA]
+                .input-field
+                  Empresa:
+                  = @company.id
+                  [
+                  =@company.name
+                  ]
+                .input-field
+                  = label_tag(:clientnum, "Número de cliente", :class=>"icon_prefix")
+                  = text_field_tag(:clientnum,"", class: "validate")
+                  %p1
+        .input-field
+          = submit_tag("Buscar",:class=>"waves-effect waves-light btn")
 
       %div{:id=>"informes", :class=>"col s12 blue lighten-4"}
         .row.center

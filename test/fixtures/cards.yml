@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: one
+  user: 1
+  country: 1
+  credit1: 1
+  credit2: 1
+  status: 1
+  credit2_enabled: false
+
+two:
+  company: two
+  user: 1
+  country: 1
+  credit1: 1
+  credit2: 1
+  status: 1
+  credit2_enabled: false

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @card.company %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @card.user %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @card.country %>
+</p>
+
+<p>
+  <strong>Credit1:</strong>
+  <%= @card.credit1 %>
+</p>
+
+<p>
+  <strong>Credit2:</strong>
+  <%= @card.credit2 %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @card.status %>
+</p>
+
+<p>
+  <strong>Credit2 enabled:</strong>
+  <%= @card.credit2_enabled %>
+</p>
+
+<%= link_to 'Edit', edit_company_card_path([@company,@card]) %> |
+<%= link_to 'Back', company_cards_path %>

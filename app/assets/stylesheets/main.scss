@@ -1,3 +1,38 @@
 // Place all the styles related to the main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import url('https://fonts.googleapis.com/css?family=Michroma');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+
+html{
+  	font-family: 'Titillium Web', sans-serif;
+  }
+
+body{
+	background-color: grey lighten-4;
+}
+
+.logo{
+	font-family: 'Michroma', sans-serif;
+	font-size: 3em;
+	text-align: center;
+	text-shadow: 1px 4px 2px #cccc;
+	color: black;
+}
+
+.logo-embed{
+	font-family: 'Michroma', sans-serif;
+	text-shadow: 1px 4px 2px #cccc;
+	color: black;	
+}
+.parallax-container {
+      height: 180px !important;
+}
+.separador{
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+.transparencia{
+	background-color: rgba(0,150,136,0.3);
+}

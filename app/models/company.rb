@@ -1,4 +1,3 @@
 class Company < ApplicationRecord
-	has_many :clients
-	has_many :transactions
+	has_many :cards
 end

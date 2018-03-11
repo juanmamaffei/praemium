@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308200538) do
+ActiveRecord::Schema.define(version: 20180309011739) do
+
+  create_table "cards", force: :cascade do |t|
+    t.integer "company_id"
+    t.integer "user"
+    t.integer "country", default: 779
+    t.integer "credit1"
+    t.integer "credit2"
+    t.integer "status", default: 0
+    t.boolean "credit2_enabled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "client"
+    t.integer "pin"
+    t.index ["company_id"], name: "index_cards_on_company_id"
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string "name"

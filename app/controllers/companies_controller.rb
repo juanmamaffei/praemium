@@ -18,6 +18,7 @@ class CompaniesController < ApplicationController
   # GET /companies/1.json
   def show
     verify_own_id
+    @cards = Card.where(company_id: @company)
   end
 
   # GET /companies/new

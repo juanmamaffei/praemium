@@ -1,4 +1,4 @@
-/*//= require materialize
+/*//
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -13,14 +13,8 @@
  *= require_tree .
  *= require_self
  *= require material_icons
+ *= require materialize
  */
-  @import "materialize";
-  @import url('https://fonts.googleapis.com/css?family=Ruda');
-  @import url('https://fonts.googleapis.com/css?family=Titillium+Web');
 
-
-
-
-  html{
-  	font-family: 'Titillium Web', sans-serif;
-  }
+ @import "materialize";
+ @import "materialize/components/typography";
