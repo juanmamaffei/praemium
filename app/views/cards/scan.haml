@@ -1,0 +1,17 @@
+-if @paso==2	
+  -if @error!= nil
+    %strong Se produjo un error:
+    %p
+      =@error
+  -else
+    %h1 Acredite o debite los puntos correspondientes
+    =render 'form', card: @card
+    
+-if @paso==1
+  %h1 Escanee la tarjeta o ingrese el número de cliente
+  = form_tag(company_panel_path(@company), method: "get") do
+    = label_tag(:q, "Ingrese número de tarjeta o número de cliente:")
+    = text_field_tag(:q)
+    = submit_tag("Buscar")
+-if @paso==3
+  %h1 Cargando cambios ...

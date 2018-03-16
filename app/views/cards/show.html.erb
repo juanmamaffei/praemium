@@ -37,3 +37,4 @@
 
 <%= link_to 'Edit', edit_company_card_path([@company,@card]) %> |
 <%= link_to 'Back', company_cards_path %>
+<%= render 'transactions/form', transaction: @transaction %>

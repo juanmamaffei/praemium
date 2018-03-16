@@ -20,6 +20,8 @@ class CardsController < ApplicationController
   # GET /cards/1
   # GET /cards/1.json
   def show
+    set_company
+    @transaction = Transaction.new
   end
 
   # GET /cards/new
@@ -50,6 +52,7 @@ class CardsController < ApplicationController
   # PATCH/PUT /cards/1
   # PATCH/PUT /cards/1.json
   def update
+    
     respond_to do |format|
       if @card.update(card_params)
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }
@@ -71,6 +74,59 @@ class CardsController < ApplicationController
     end
   end
 
+
+  def scan
+    set_company
+    query_present
+
+    if @q.present?
+      #Paso 2: Consultar tarjeta
+      @paso=2
+      @q.to_s
+
+      if @q.length==13
+
+        card_number=@q[3,9] 
+        card_company= card_number[0,4].to_i
+
+        #CONSULTAR CLIENTE por QUERY a columna NUMBER
+        if card_company == @company.id
+          @card = Card.find_by number: card_number
+          if @card == nil
+            @error = "El número de cliente de la tarjeta es inválido"
+          else
+            redirect_to company_card_path(@company,@card)
+          end
+        else
+          @error = "La tarjeta no pertenece a esta compañía"
+        end
+      else
+
+        #CONSULTAR CLIENTE por QUERY a columnas CLIENT y COMPANY_ID
+        @error = "Número inválido"
+      end
+
+    else
+
+        #Paso 1: Definir tarjeta de la cual se quiere debitar o acreditar
+        @paso=1
+
+    end
+
+
+  end
+
+  def movimiento
+    set_card
+    set_company
+    credit=params[:credit].to_i
+    debit=params[:debit].to_i
+
+    nuevocred=@card.credit1+cred-deb
+    @card.credit1=nuevocred
+    @card.Save
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card
@@ -82,7 +138,7 @@ class CardsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:company_id, :user, :country, :credit1, :credit2, :status, :credit2_enabled)
+      params.require(:card).permit(:user, :country, :credit1, :credit2, :status, :credit2_enabled, :client)
     end
         def verify_own_id
       unless (@company.admin == current_user.id)
@@ -90,5 +146,9 @@ class CardsController < ApplicationController
            redirect_to root_path
         end
       end
+    end
+    def query_present
+      @q=params[:q]
+
     end
 end

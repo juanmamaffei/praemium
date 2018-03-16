@@ -1,0 +1,18 @@
+%strong Cliente:
+%p
+  =@card.client
+  |
+  =@card.id
+%strong Usuario asignado:
+%p
+  =@card.user
+%strong Saldo:
+%p
+  =@card.credit1
+-#= form_with url: company_card_path(@company,@card) do |form|
+=form_for @card, :url => {:action => "update"} do |form|
+  = form.label(:credit, "Cantidad a  ACREDITAR (+):")
+  = form.text_field(:credit)
+  = form.label(:debit, "Cantidad a DEBITAR (-):")
+  = form.text_field(:credit2)
+  = form.submit

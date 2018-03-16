@@ -1,88 +1,13 @@
-:javascript
-  $(document).ready(function(){
-    $('ul.tabs').tabs();
-    swipeable : true,
-    responsiveThreshold : 150
-    $('.collapsible').collapsible();
-    function Foco(){
-      document.getElementById('input#clientnum').focus();
-      alert("funca");
-    }
-    setInterval(Foco,1000);
-  });
-
-
-
-
-
-.container
-  .row
-    %p{:id=>"notice" }
-  .row
-    .col.s12
-      %ul{:id=>"tabs-swipe-demo", :class=>"tabs"}
-        %li{:class=>"tab col s3"}
-          %a{:href=>"#tab-1", :class=>"active"}Créditos/Débitos
-        %li{:class=>"tab col s3"}
-          %a{:href=>"#informes"}Alta de tarjeta
-        %li{:class=>"tab col s3"}
-          %a{:href=>"#clientes"}Clientes
-      %div{:id=>"tab-1", :class=>"col s12 green lighten-3"}
-      =form_for :cards, url: {action: "update"} do |f|
-        %ul{:class=>'collapsible', :data-collapsible=>'accordion'}
-          %li
-            .collapsible-header
-              %i.material-icons filter_drama
-              Escanear código de barras
-            .collapsible-body
-              .row.center
-                
-                .input-field.col.s9
-                  %i{:class=>"material-icons prefix"} credit_card
-                  = label_tag(:icon_prefix, "Código de barras", :class=>"icon_prefix")
-                  = text_field_tag(:icon_prefix,"", class: "validate")
-                .col.s3
-                  = submit_tag("Buscar",:class=>"waves-effect waves-light btn")
-        %ul{:class=>'collapsible', :data-collapsible=>'accordion'}
-          %li
-            .collapsible-header.active
-              %i.material-icons filter_drama
-              Introducir datos manualmente
-            .collapsible-body.white
-              .row
-                .input-field
-                  Código de país: 779 [ARGENTINA]
-                .input-field
-                  Empresa:
-                  = @company.id
-                  [
-                  =@company.name
-                  ]
-                .input-field
-                  = label_tag(:clientnum, "Número de cliente", :class=>"icon_prefix")
-                  = text_field_tag(:clientnum,"", class: "validate")
-                  %p1
-        .input-field
-          = submit_tag("Buscar",:class=>"waves-effect waves-light btn")
-
-      %div{:id=>"informes", :class=>"col s12 blue lighten-4"}
-        .row.center
-        .row.center
-          =form_tag do
-            .row.center
-              .input-field.col.s9
-                %i{:class=>"material-icons prefix"} credit_card
-                = label_tag(:icon_prefix, "Escanear código o escribir número de tarjeta", :class=>"icon_prefix")
-                = text_field_tag(:icon_prefix,"", class: "validate")
-              .col.s3
-                -# =link_to 'Dar de alta', new_company_client_path(@company),:class=>"waves-effect waves-light btn"
-      %div{:id=>"clientes", :class=>"col s12 blue lighten-5"}
-        %p Listado de clientes
-
-
-
-
--# Comparar si = @company.admin = usuarioactual, y mostrar opciones de administración
--# = link_to 'Edit', edit_company_path(@company)
--# = link_to 'Atrás', companies_path
--# Comparar si alguno de los = @company.employers = usuarioactual, y mostrar opciones de administración para empleados
+%h1 Entorno de trabajo
+%p Es la forma más eficiente de realizar créditos y débitos a tarjetas de clientes. Está diseñado para una rápida carga con lector de códigos de barra o bien para un ingreso manual del número de cliente.
+=link_to "Ir", company_panel_path(@company)
+%h1 Crear tarjetas
+%p Desde este menú se podrán dar de alta tarjetas de membresía para luego:
+%ul
+  %li encargar su impresión,
+  %li imprimir tarjetas de códigos con diseño estándar, o bien 
+  %li imprimir lista de códigos de barra y PIN para encargar la producción de las tarjetas a #{@company.name}
+%h1 Clientes
+%p Desde aquí se pueden visualizar todas las tarjetas dadas de alta y toda la información relativa a las mismas, incluyendo los datos de los usuarios que las han registrado.
+%h1 Estadísticas
+%p Cuando se genera un volumen de datos lo suficientemente grande en su sistema, Praemium le ofrecerá sin cargo estadísticas que permitirán mejorar el servicio a sus clientes o captar nuevos.

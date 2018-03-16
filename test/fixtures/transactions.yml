@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  company_id: one
-  client_id: one
-  score: 1
+  card: one
+  company: one
+  user: one
+  amount: 1
+  description: MyString
 
 two:
-  company_id: two
-  client_id: two
-  score: 1
+  card: two
+  company: two
+  user: two
+  amount: 1
+  description: MyString

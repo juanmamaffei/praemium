@@ -20,13 +20,17 @@
             N de cliente:
             = card.client
           %li
-            Saldo
+            Saldo: 
             = card.credit1
+          %li
+            -if card.credit2_enabled?
+              Saldo 2:
+              = card.credit2
     -if @companies.count != 0
       %h1 Gestión de empresas
       - @companies.each do |company|
         %p
-          = company.name
+          = link_to company.name, company_path(:id=> company.id)
 
-    %p
+    %h2
       =link_to "Cerrar sesión", destroy_user_session_path, method: :delete

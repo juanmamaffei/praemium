@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
   
+  
   devise_for :users
 
   resources :companies do
-  	resources :cards
+  	resources :cards do
+      resources :transactions
+    end
+    get 'panel', to: 'cards#scan'
+    post 'panel', to: 'cards#scan'
+
   end
   
   authenticated :user do
@@ -14,5 +20,6 @@ Rails.application.routes.draw do
   		root 'main#landing'
   	end
   end
+
 
 end

@@ -10,10 +10,10 @@
 
   %body
     %nav
-      %div{:class=>"nav-wrapper green darken-4"}
+      %div{:class=>"nav-wrapper grey lighten-3"}
         .row
           .col.s3
-            .logo Praemium
+            =image_tag("logoh.jpg", :width => 150)
           .col.s9
             %a{:href=>"#", :class=>"brand-logo center"}
               -if (defined?(@company.name))
