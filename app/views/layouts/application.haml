@@ -5,31 +5,25 @@
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-
+    = favicon_link_tag
 
 
   %body
     %nav
-      %div{:class=>"nav-wrapper grey lighten-3"}
-        .row
-          .col.s3
-            =image_tag("logoh.jpg", :width => 150)
-          .col.s9
-            %a{:href=>"#", :class=>"brand-logo center"}
-              -if (defined?(@company.name))
-                =@company.name
-              -else
-                -
-            -if user_signed_in?
-              %ul.right.hide-on-med-and-down
-                %li
-                  =link_to "Cerrar sesión", destroy_user_session_path, method: :delete
-                %li
-                  =link_to "Perfil", edit_user_registration_path # Cerrar sesión
-            -else
-              %ul.right.hide-on-med-and-down
-                %li
-                  =link_to "Iniciar sesión", new_user_session_path
+      .nav-wrapper.white
+        .brand-logo.center
+          =image_tag("logoh.png", :width => 250)
+
+        -if user_signed_in?
+          %ul#nav-mobile.right.hide-on-med-and-down
+            %li
+              =link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "btn"
+            %li
+              =link_to "Perfil", edit_user_registration_path, class: "btn" # Cerrar sesión
+        -else
+          %ul.right.hide-on-med-and-down
+            %li
+              =link_to "Iniciar sesión", new_user_session_path
     %col.s12.red-text
       = notice
     = yield

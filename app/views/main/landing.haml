@@ -5,7 +5,7 @@
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    
+    = favicon_link_tag
     :javascript
       $(document).ready(function(){
         $('.parallax').parallax();
@@ -13,14 +13,16 @@
 
   %body
     %nav
-      .nav-wrapper.black
-        .brand-logo.center.logo
-          Praemium.tech
+      .nav-wrapper.white
+        .brand-logo.center
+          = image_tag("logoh.png", width: "260")
+        %ul#nav-mobile.right.hide-on-med-and-down
+          %li
+            %a.waves-effect.waves-light.btn{:href=>'\users\sign_in'} Iniciar sesión
     .parallax-container
       .parallax
-        = image_tag "par2.jpg"
-      %h2.center Video
-    
+        = image_tag "02.jpg"
+   
     .row.separador
       .container
         .col.m6.s12
@@ -31,7 +33,7 @@
             %small Pesos argentinos
           %a.waves-effect.waves-light.btn Prueba gratuita
         .col.m6.hide-on-small-only.responsive-img.materialboxed
-          = image_tag "landing1.jpg", :width=>'450'
+          -#= image_tag "01.jpg", :width=>'450'
     .row.transparencia
       .parallax-container.center
         .col.m12.s12
@@ -49,4 +51,4 @@
             %a.waves-effect.waves-light.btn Registrar tarjeta
         .col.m4.hide-on-small-only
           .materialboxed.responsive-img
-            = image_tag "landing3.jpg", :width=>'450'
+            = image_tag "03.jpg", :width=>'450'

@@ -36,7 +36,7 @@ gem 'jbuilder', '~> 2.5'
 
 #Gemas agregadas
 gem 'devise', '~> 4.4', '>= 4.4.1'
-gem 'materialize-sass'
+gem 'materialize-sass', '~> 1.0.0.alpha4'
 gem 'material_icons' 
 gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'

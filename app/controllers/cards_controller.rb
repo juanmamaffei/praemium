@@ -61,7 +61,8 @@ class CardsController < ApplicationController
       # Repetir cantidad desde CLIENTCOUNT+1 hasta CLIENTCOUNT+1+CANT
       inicio=@company.clientcount+1
       fin=inicio+@cant-1
-
+        buenas=0
+        malas=0
       for i in inicio..fin
         card = Card.new
         card.company_id = @company.id
@@ -95,8 +96,7 @@ class CardsController < ApplicationController
         #Cambiar STATUS según opción elegida
 
         # Si se guarda, avisar, si no ... también
-        buenas=0
-        malas=0
+
           if card.save
             buenas=buenas+1
             @company.clientcount=@company.clientcount+1

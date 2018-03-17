@@ -10,27 +10,50 @@
 
 
   %body
-    -if @cards.count != 0
-      %h1 Tarjetas registradas
-      - @cards.each do |card|
-        %ul
-          %li
-            = @company_names[card.company_id].name
-          %li
-            N de cliente:
-            = card.client
-          %li
-            Saldo: 
-            = card.credit1
-          %li
-            -if card.credit2_enabled?
-              Saldo 2:
-              = card.credit2
-    -if @companies.count != 0
-      %h1 Gestión de empresas
-      - @companies.each do |company|
-        %p
-          = link_to company.name, company_path(:id=> company.id)
+    %nav
+      .nav-wrapper.white
+        .brand-logo.center
+          =image_tag("logoh.png", :width => 250)
 
-    %h2
-      =link_to "Cerrar sesión", destroy_user_session_path, method: :delete
+        -if user_signed_in?
+          %ul#nav-mobile.right.hide-on-med-and-down
+            %li
+              =link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "btn"
+            %li
+              =link_to "Perfil", edit_user_registration_path, class: "btn" # Cerrar sesión
+        -else
+          %ul.right.hide-on-med-and-down
+            %li
+              =link_to "Iniciar sesión", new_user_session_path
+    %col.s12.red-text
+      = notice
+    .container
+      .row
+        -if @cards.count != 0
+          .col.s12.m6
+            %h1 Tarjetas registradas
+            - @cards.each do |card|
+              .card  
+                .card-content.white-text.teal
+                  %ul
+                    %li
+                      = @company_names[card.company_id].name
+                    %li
+                      N de cliente:
+                      = card.client
+                    %li
+                      Saldo: 
+                      = card.credit1
+                    %li
+                      -if card.credit2_enabled?
+                        Saldo 2:
+                        = card.credit2
+                .card-actions.center
+                  %a.btn Movimientos
+        -if @companies.count != 0
+          .col.s12.m6
+            %h1 Gestión de empresas
+            - @companies.each do |company|
+              %p
+                = link_to company.name, company_path(:id=> company.id), :class=> "btn"
+

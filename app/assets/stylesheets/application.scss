@@ -15,10 +15,25 @@
  *= require material_icons
  *= require materialize
  */
+@import "materialize/components/color-variables";
+$primary-color: #003C91 !default;
+$secondary-color: #4CA92C !default;
+@import 'materialize';
 
- @import "materialize";
- @import "materialize/components/typography";
+@import "materialize/components/typography";
 
 nav.brand-logo{
 	color: black !important;
+}
+
+nav .brand-logo{
+	color:#4CA92C !important;
+}
+body{
+	background-image: url("bg.png");
+	background-color: rgba(0,156,222,0.25);
+	background-size: cover;
+}
+h2{
+	font-size: 20px !important;
 }
