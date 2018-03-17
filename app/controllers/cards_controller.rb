@@ -26,6 +26,7 @@ class CardsController < ApplicationController
 
   # GET /cards/new
   def new
+    set_company
     @card = Card.new
   end
 
@@ -35,7 +36,7 @@ class CardsController < ApplicationController
 
   # POST /cards
   # POST /cards.json
-  def create
+  def createlik
     @card = Card.new(card_params)
 
     respond_to do |format|
@@ -46,6 +47,67 @@ class CardsController < ApplicationController
         format.html { render :new }
         format.json { render json: @card.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def create
+    # Variables del hash: "cant",  "type" ("tabla","impresion" o "encargo"), "commit"=>"Crear", "company_id"
+    set_company
+    create_params
+    
+
+    # Validar cantidad
+    unless @cant<0 || @cant>1000
+      # Repetir cantidad desde CLIENTCOUNT+1 hasta CLIENTCOUNT+1+CANT
+      inicio=@company.clientcount+1
+      fin=inicio+@cant-1
+
+      for i in inicio..fin
+        card = Card.new
+        card.company_id = @company.id
+        card.credit1 = 0
+        card.credit2 = 0
+        card.credit2_enabled = false
+      # Armar CLIENT(i) y NUMBER (CO,CO,CO,CO,CL,CL,CL,CL,CL)
+        card.client = i
+        #Llevar CLIENT a 5 caracteres
+        cl=i.to_s
+
+        unless cl.length==5
+            begin
+                cl="0"+cl
+            end until cl.length==5
+        end
+
+        #Llevar COMPANY a 4 caracteres
+        co=@company.id.to_s
+
+        unless co.length==4
+            begin
+                co="0"+co
+            end until co.length==4
+        end
+
+        card.number=co+cl
+      # Generar PIN aleatorio
+        card.pin = rand(1000..9999)
+
+        #Cambiar STATUS según opción elegida
+
+        # Si se guarda, avisar, si no ... también
+        buenas=0
+        malas=0
+          if card.save
+            buenas=buenas+1
+            @company.clientcount=@company.clientcount+1
+            @company.save
+          else
+            malas=malas+1
+          end
+        end       
+        redirect_to company_cards_path, notice: "Se terminó el proceso... 
+        Tarjetas exitosas: " + buenas.to_s + " | Tarjetas malas: " + malas.to_s + "Sobre un total de: " + @cant.to_s + " empezando desde el ID: " + inicio.to_s + " hasta : " + fin.to_s
+
     end
   end
 
@@ -132,6 +194,10 @@ class CardsController < ApplicationController
     def set_card
       @card = Card.find(params[:id])
 
+    end
+    def create_params
+      @cant = params["cant"].to_i
+      type = params[:type]
     end
     def set_company
       @company = Company.find(params[:company_id])      

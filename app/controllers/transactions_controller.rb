@@ -29,15 +29,26 @@ class TransactionsController < ApplicationController
   def create
     set_company_card
     @transaction = Transaction.new(transaction_params)
+    
+    @transaction.company = @company
+    @transaction.card = @card
+    @transaction.user = current_user
+    
+    @card.credit1 = @card.credit1.to_i+transaction_params[:amount].to_i
 
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+    if @card.save
+      respond_to do |format|
+        if @transaction.save
+          format.html { redirect_to company_panel_path(@company), notice: 'Se generó la transacción correctamente. El cliente tiene ahora un saldo de ' + @card.credit1.to_s + ' unidades'}
+          format.json { render :show, status: :created, location: @transaction }
+        else
+          format.html { render :new }
+          format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      format.html { render :new  }
+      format.json { render json: @card.errors, status: :unprocessable_entity }
     end
   end
 

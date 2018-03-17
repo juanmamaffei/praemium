@@ -1,0 +1,23 @@
+%h1 Crear tarjetas
+%subtitle En esta sección se crearán las tarjetas, pero por defecto estarán INHABILITADAS. Para habilitar una tarjeta, haga una primera carga de saldo (escaneando su código de barras) y será dada de alta automáticamente.
+
+-#<%= render 'form', card: @card %>
+= form_tag company_cards_path, action: :create do
+  = label_tag(:idi, "ID de cliente Inicial:")
+  = label_tag(:idi, @company.clientcount+1)
+
+  = label_tag(:cant, "Cantidad de TARJETAS a crear:")
+  = text_field_tag(:cant)
+
+
+  = radio_button_tag(:type, "encargo")
+  = label_tag(:type_encargo, "Encargar impresión de tarjetas (20 días hábiles para su entrega / Costo: $25 por tarjeta")
+  = radio_button_tag(:type, "tabla")
+  = label_tag(:type_tabla, "Exportar archivo de códigos para impresión propia")  
+  = radio_button_tag(:type, "impresion")
+  = label_tag(:type_impresion, "Exportar archivo imprimible")
+
+  = submit_tag(:Crear)
+
+
+= link_to 'Menú de gestión de empresa', company_path(@company)

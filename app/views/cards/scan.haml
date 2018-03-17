@@ -13,5 +13,6 @@
     = label_tag(:q, "Ingrese número de tarjeta o número de cliente:")
     = text_field_tag(:q)
     = submit_tag("Buscar")
+  = link_to 'Volver', company_path(@company)
 -if @paso==3
   %h1 Cargando cambios ...

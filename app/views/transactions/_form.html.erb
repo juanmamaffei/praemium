@@ -1,4 +1,4 @@
-<%= form_with(model: company_card_transaction_url, local: true) do |form| %>
+<%= form_for([@company,@card, @transaction]) do |form| %>
   <% if transaction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>

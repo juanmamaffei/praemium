@@ -7,7 +7,9 @@
   %li encargar su impresión,
   %li imprimir tarjetas de códigos con diseño estándar, o bien 
   %li imprimir lista de códigos de barra y PIN para encargar la producción de las tarjetas a #{@company.name}
+=link_to "Ir", new_company_card_path(@company)
 %h1 Clientes
 %p Desde aquí se pueden visualizar todas las tarjetas dadas de alta y toda la información relativa a las mismas, incluyendo los datos de los usuarios que las han registrado.
+=link_to "Ir", company_cards_path(@company)
 %h1 Estadísticas
 %p Cuando se genera un volumen de datos lo suficientemente grande en su sistema, Praemium le ofrecerá sin cargo estadísticas que permitirán mejorar el servicio a sus clientes o captar nuevos.
