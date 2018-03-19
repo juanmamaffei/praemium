@@ -22,7 +22,11 @@
     .parallax-container
       .parallax
         = image_tag "02.jpg"
-   
+    .container
+      .row.center
+        -unless notice==nil
+          .chip.center
+            = notice
     .row.separador
       .container
         .col.m6.s12

@@ -1,18 +1,38 @@
--if @paso==2	
-  -if @error!= nil
-    %strong Se produjo un error:
-    %p
-      =@error
-  -else
-    %h1 Acredite o debite los puntos correspondientes
-    =render 'form', card: @card
+
+
+
+
+
+.container
+  .row
     
--if @paso==1
-  %h1 Escanee la tarjeta o ingrese el número de cliente
-  = form_tag(company_panel_path(@company), method: "get") do
-    = label_tag(:q, "Ingrese número de tarjeta o número de cliente:")
-    = text_field_tag(:q)
-    = submit_tag("Buscar")
-  = link_to 'Volver', company_path(@company)
--if @paso==3
-  %h1 Cargando cambios ...
+    -if @paso==2	
+      -if @error!= nil
+        .card
+          %strong Se produjo un error:
+          %p
+            =@error
+          %p
+            =link_to "Volver a carga", company_panel_path(@company), :class=> "btn"
+      -else
+        %h1 Acredite o debite los puntos correspondientes
+        =render 'form', card: @card
+      
+    -if @paso==1
+      .card
+        :javascript
+          setInterval('q()',500);
+          function q(){
+            document.getElementById("q").focus();
+          }
+        %h1 Escanee la tarjeta o ingrese el número de cliente
+        = form_tag(company_panel_path(@company), method: "get") do
+          = label_tag(:q, "Ingrese número de tarjeta o número de cliente:")
+          = text_field_tag(:q)
+          = submit_tag("Buscar")
+
+    -if @paso==3
+      %h1 Cargando cambios ...
+
+
+    = link_to 'Volver', company_path(@company)

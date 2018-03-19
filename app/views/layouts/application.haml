@@ -25,5 +25,10 @@
             %li
               =link_to "Iniciar sesión", new_user_session_path
     %col.s12.red-text
-      = notice
+    =render partial: "layouts/sidenav"
+    .container
+      .row.center
+        -unless notice==nil
+          .chip.center
+            = notice
     = yield

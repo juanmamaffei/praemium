@@ -1,15 +1,46 @@
-%h1 Entorno de trabajo
-%p Es la forma más eficiente de realizar créditos y débitos a tarjetas de clientes. Está diseñado para una rápida carga con lector de códigos de barra o bien para un ingreso manual del número de cliente.
-=link_to "Ir", company_panel_path(@company)
-%h1 Crear tarjetas
-%p Desde este menú se podrán dar de alta tarjetas de membresía para luego:
-%ul
-  %li encargar su impresión,
-  %li imprimir tarjetas de códigos con diseño estándar, o bien 
-  %li imprimir lista de códigos de barra y PIN para encargar la producción de las tarjetas a #{@company.name}
-=link_to "Ir", new_company_card_path(@company)
-%h1 Clientes
-%p Desde aquí se pueden visualizar todas las tarjetas dadas de alta y toda la información relativa a las mismas, incluyendo los datos de los usuarios que las han registrado.
-=link_to "Ir", company_cards_path(@company)
-%h1 Estadísticas
-%p Cuando se genera un volumen de datos lo suficientemente grande en su sistema, Praemium le ofrecerá sin cargo estadísticas que permitirán mejorar el servicio a sus clientes o captar nuevos.
+
+%p 
+:javascript
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+.container
+  .row
+  %ul.collapsible{"data-collapsible"=>"accordion"}
+    %li
+      .collapsible-header
+        %i.material-icons touch_app
+        Entorno de trabajo
+      .collapsible-body
+        %span Es la forma más eficiente de realizar créditos y débitos a tarjetas de clientes. Está diseñado para una rápida carga con lector de códigos de barra o bien para un ingreso manual del número de cliente.
+        %p
+        =link_to "Ir", company_panel_path(@company), :class=> "btn"
+    %li
+      .collapsible-header
+        %i.material-icons
+          credit_card
+        Crear tarjetas
+      .collapsible-body
+        %span Desde este menú se podrán dar de alta tarjetas de membresía para luego:
+        %ul
+          %li encargar su impresión,
+          %li imprimir tarjetas de códigos con diseño estándar, o bien 
+          %li imprimir lista de códigos de barra y PIN para encargar la producción de las tarjetas a #{@company.name}
+        %p
+          =link_to "Ir", new_company_card_path(@company), :class=> "btn"
+    %li
+      .collapsible-header
+        %i.material-icons people
+        Clientes
+      .collapsible-body
+        %span Desde aquí se pueden visualizar todas las tarjetas dadas de alta y toda la información relativa a las mismas, incluyendo los datos de los usuarios que las han registrado.
+        %p
+          =link_to "Ir", company_cards_path(@company), :class=> "btn"
+    %li
+      .collapsible-header
+        %i.material-icons timeline
+        Estadísticas
+      .collapsible-body
+        %span Cuando se genera un volumen de datos lo suficientemente grande en su sistema, Praemium le ofrecerá sin cargo estadísticas que permitirán mejorar el servicio a sus clientes o captar nuevos.
+
+
