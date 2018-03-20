@@ -1,4 +1,23 @@
-
+:javascript
+  function launchFullScreen(element) {
+    if(element.requestFullScreen) {
+      element.requestFullScreen();
+    } else if(element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if(element.webkitRequestFullScreen) {
+      element.webkitRequestFullScreen();
+    }
+  }
+  // Lanza en pantalla completa en navegadores que lo soporten
+   function cancelFullScreen() {
+       if(document.cancelFullScreen) {
+           document.cancelFullScreen();
+       } else if(document.mozCancelFullScreen) {
+           document.mozCancelFullScreen();
+       } else if(document.webkitCancelFullScreen) {
+           document.webkitCancelFullScreen();
+       }
+   }
 
 
 
@@ -29,10 +48,20 @@
         = form_tag(company_panel_path(@company), method: "get") do
           = label_tag(:q, "Ingrese número de tarjeta o número de cliente:")
           = text_field_tag(:q)
-          = submit_tag("Buscar")
+          .center
+            = submit_tag("Buscar", :class=>"btn")
 
     -if @paso==3
       %h1 Cargando cambios ...
 
-
-    = link_to 'Volver', company_path(@company)
+    .row
+      .col.s12.m6
+        = link_to 'Volver', company_path(@company), :class=>"btn"
+      .col.s12.m6
+        .right   
+          %button{:onclick=>"launchFullScreen(document.documentElement);"}
+            %i.material-icons
+              fullscreen
+          %button{:onclick=>"cancelFullScreen();"}
+            %i.material-icons
+              fullscreen_exit

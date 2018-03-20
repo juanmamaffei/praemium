@@ -1,0 +1,69 @@
+.container
+  .row
+    .card
+      %h1.center
+        =@company.name
+      .row
+        .col.s12.m8.offset-m2.16.offset-13
+          .card-panel.grey.lighten-5.z-depth-1
+            .row.valign-wrapper
+              -unless @usuario==nil
+                .col.s2
+                  %img.circle.responsive-img{:src=> "http://materializecss.com/images/yuna.jpg"}
+                .col.s10
+                  %span.black-text
+                    %h2
+                      Usuario: 
+                      =current_user.username
+                    %strong
+                      =@usuario.name
+                      =@usuario.last_name
+              -else
+                .col.center
+                  USUARIO NO REGISTRADO. Recordarle que obtendrá descuentos si está registrado.
+      .row
+        .col.s12.m6
+          .card.center
+            .card-content
+              .card-title
+                %h2 SALDO ACTUAL
+              .card-actions
+                %i.material-icons.medium monetization_on
+                %span.money
+                  = @card.credit1
+      
+        .col.s12.m6
+          .card.center
+            .card-content
+              .card-title
+                %h2 CARGAR (+) O CONSUMIR (-)
+              .card-actions
+                -if @card.status == 1
+                  - estado = "1- ACTIVADA"
+                  .row
+                    = render 'transactions/form', transaction: @transaction
+                -else
+                  -if @card.status == 2
+                    - estado = "2- ROBADA/ PERDIDA"
+                  -else
+                    -if @card.status == 3
+                      - estado = "3- EN PROCESO DE FABRICACIÓN / ENVÍO"
+                    -else
+                      -if @card.status == 4
+                        - estado = "4 - ENTREGADA E INACTIVA"
+                      -else
+                        - estado = "INACTIVA"      
+                  %strong         
+                    Estado de la tarjeta: #{estado}
+                  %p Para activar nuevamente, presione EDITAR y cambie el valor de ESTADO por 1.
+      .row
+        
+      .row.center
+        = link_to 'Cambiar estado', edit_company_card_path(@company,@card), :class=> "btn"
+        =link_to "Volver", company_panel_path(@company), :class=> "btn"
+        -#= link_to 'Back', company_cards_path
+        
+
+
+
+

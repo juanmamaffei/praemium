@@ -15,12 +15,10 @@
  *= require material_icons
  *= require materialize
  */
-@import "materialize/components/color-variables";
-$primary-color: #003C91 !default;
-$secondary-color: #4CA92C !default;
+
 @import 'materialize';
 
-@import "materialize/components/typography";
+
 
 nav.brand-logo{
 	color: black !important;
@@ -39,4 +37,18 @@ h2{
 }
 h1{
 	font-size: 2em !important;
+}
+.money{
+	font-size: 5em;
+	text-align: center;
+}
+.fixed {
+  [type="checkbox"], [type="radio"] {
+    + label {   
+      pointer-events: auto;
+    }
+  }
+}
+.input-field label {
+  pointer-events: auto;
 }

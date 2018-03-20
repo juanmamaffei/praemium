@@ -14,14 +14,24 @@ class CardsController < ApplicationController
   def index
     set_company
     verify_own_id
+    
     @cards = Card.where(company_id: @company)
+
   end
 
   # GET /cards/1
   # GET /cards/1.json
   def show
     set_company
+    unless @company.id == @card.company_id
+      redirect_to root_path, notice: "COMPAÑÍA INVÁLIDA"
+      
+    end
     @transaction = Transaction.new
+    unless @card.user == nil
+      @usuario = User.find(@card.user)
+    end
+
   end
 
   # GET /cards/new
@@ -114,10 +124,10 @@ class CardsController < ApplicationController
   # PATCH/PUT /cards/1
   # PATCH/PUT /cards/1.json
   def update
-    
+    set_company
     respond_to do |format|
       if @card.update(card_params)
-        format.html { redirect_to @card, notice: 'Card was successfully updated.' }
+        format.html { redirect_to company_card_path(@company,@card), notice: 'Tarjeta actualizada' }
         format.json { render :show, status: :ok, location: @card }
       else
         format.html { render :edit }
@@ -193,7 +203,6 @@ class CardsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_card
       @card = Card.find(params[:id])
-
     end
     def create_params
       @cant = params["cant"].to_i
@@ -215,6 +224,5 @@ class CardsController < ApplicationController
     end
     def query_present
       @q=params[:q]
-
     end
 end

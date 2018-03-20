@@ -1,0 +1,9 @@
+
+.container
+  .row
+    .card
+      %h1.center
+        Cambiar estado
+      = render 'form', card: @card
+      .center
+        = link_to 'Descartar cambios', company_card_path, :class=> "btn"
