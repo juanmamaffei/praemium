@@ -16,6 +16,61 @@ class CardsController < ApplicationController
     verify_own_id
     
     @cards = Card.where(company_id: @company)
+    @users = User.all
+
+  end
+
+  def asignuser
+    
+    #Tomar params num y pin
+    num = params[:num]
+    pin = params[:pin]
+    num.to_s
+    #Verificar cantidad de dígitos
+    if num.length==13
+      if pin.to_s.length==4
+        #Descomponer el número de tarjeta
+        country=num[0..2].to_i
+        number=num[3..11]
+        #Consultar BD buscando la tarjeta
+        card=Card.find_by(country: country, number: number)
+        #Si no hay resultados, devolver error
+        unless card==nil
+          #Si hay resultado, verificar que la tarjeta no tenga otro usuario asignado
+          if card.user==nil
+            #Si todo lo anterior está bien, verificar que el pin sea el correcto
+            pin.to_i
+            if pin.to_s == card.pin.to_s
+              card.user= current_user.id
+              if card.save
+                redirect_to root_path, notice: "Asignaste usuario a tu nueva tarjeta"
+              else
+                redirect_to root_path, notice: "Tus datos son correctos pero ocurrió un error. Contactá con el administrador"
+              end
+            else
+              redirect_to root_path, notice: "Pin incorrecto"+pin.to_s+" | "+ card.pin.to_s
+            end
+
+
+          else
+            #Esta tarjeta tiene otro usuario asignado
+            redirect_to root_path, notice: "Esta tarjeta ya tiene un usuario asignado"
+          end
+          
+        else
+          #No existe esa tarjeta
+          redirect_to root_path, notice: "No existe esa tarjeta."
+        end
+        
+      else
+        #Pin inválido
+        redirect_to root_path, notice: "Pin inválido"
+      end
+    else
+      #Num inválido
+      redirect_to root_path, notice: "Número de tarjeta inválido"
+    end
+    
 
   end
 
@@ -116,7 +171,7 @@ class CardsController < ApplicationController
           end
         end       
         redirect_to company_cards_path, notice: "Se terminó el proceso... 
-        Tarjetas exitosas: " + buenas.to_s + " | Tarjetas malas: " + malas.to_s + "Sobre un total de: " + @cant.to_s + " empezando desde el ID: " + inicio.to_s + " hasta : " + fin.to_s
+        Tarjetas exitosas: " + buenas.to_s + " | Tarjetas malas: " + malas.to_s + " | Empezando desde el ID: " + inicio.to_s + " hasta : " + fin.to_s
 
     end
   end
@@ -207,6 +262,10 @@ class CardsController < ApplicationController
     def create_params
       @cant = params["cant"].to_i
       type = params[:type]
+    end
+    def asign_params
+      num = params[:num]
+      pin = params[:pin]
     end
     def set_company
       @company = Company.find(params[:company_id])      

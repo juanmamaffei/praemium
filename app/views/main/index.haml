@@ -42,7 +42,7 @@
                 .card-content.white-text.teal
                   %ul
                     %li
-                      = @company_names[card.company_id].name
+                      = @company_names.find_by(id: card.company_id).name
                     %li
                       N de cliente:
                       = card.client
@@ -55,10 +55,23 @@
                         = card.credit2
                 .card-actions.center
                   %a.btn Movimientos
+
         -if @companies.count != 0
           .col.s12.m6
             %h1 Gestión de empresas
             - @companies.each do |company|
               %p
                 = link_to company.name, company_path(:id=> company.id), :class=> "btn"
-
+      .row  
+        .col.s12.m6
+          .card
+            = form_tag(asignar_path, method: "post") do
+              .card-title.black.white-text.center
+                Añadir tarjeta
+              .card-content
+                = label_tag(:num, "Número de tarjeta (13 dígitos):")
+                = text_field_tag(:num)
+                = label_tag(:pin, "PIN:")
+                = text_field_tag(:pin)
+              .card-actions
+                = submit_tag("Añadir", :class=>"btn")

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     post 'panel', to: 'cards#scan'
 
   end
+  post 'asignar', to: 'cards#asignuser'
   
   authenticated :user do
   	root 'main#index'

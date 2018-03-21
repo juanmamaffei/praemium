@@ -22,6 +22,8 @@
               =link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "btn"
             %li
               =link_to "Perfil", edit_user_registration_path, class: "btn" # Cerrar sesión
+            %li
+              %a{:href=>"#", "data-activates"=>"slide-out", :class=>"btn button-collapse"} Menu
         -else
           %ul.right.hide-on-med-and-down
             %li
