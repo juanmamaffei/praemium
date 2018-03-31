@@ -28,11 +28,12 @@
               .input-field.col.s12.fixed
                 = form.radio_button(:status, "2")
                 = form.label(:status_2, "Robada / Perdida")
-              .input-field.col.s12.fixed
-                = form.radio_button(:status, "3")
-                = form.label(:status_3, "En proceso de impresión / Enviada")                  
-              .input-field.col.s12.fixed
-                = form.radio_button(:status, "4")
-                = form.label(:status_4, "Enviada e inactiva") 
+              -if current_user.is_admin?
+                .input-field.col.s12.fixed
+                  = form.radio_button(:status, "3")
+                  = form.label(:status_3, "En proceso de impresión / Enviada")                  
+                .input-field.col.s12.fixed
+                  = form.radio_button(:status, "4")
+                  = form.label(:status_4, "Enviada e inactiva") 
             = form.submit "Modificar", :class=> "btn"
 

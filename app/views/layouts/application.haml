@@ -10,6 +10,7 @@
     %script{:type=>"text/javascript", :src=>"js/materialize.min.js"}
 
 
+
   %body
     %nav
       .nav-wrapper.white
@@ -21,7 +22,7 @@
             %li
               =link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "btn"
             %li
-              =link_to "Perfil", edit_user_registration_path, class: "btn" # Cerrar sesión
+              =link_to "Perfil", user_path(current_user.id), class: "btn" # Cerrar sesión
             %li
               %a{:href=>"#", "data-activates"=>"slide-out", :class=>"btn button-collapse"} Menu
         -else

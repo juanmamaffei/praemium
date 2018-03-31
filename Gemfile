@@ -43,6 +43,8 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'cancancan', '~> 1.10'
 gem 'devise-i18n'
 gem 'jquery-turbolinks'
+gem 'recaptcha', require: 'recaptcha/rails'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

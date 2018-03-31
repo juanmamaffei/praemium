@@ -13,11 +13,17 @@
                 .col.s10
                   %span.black-text
                     %h2
-                      Usuario: 
-                      =current_user.username
-                    %strong
                       =@usuario.name
                       =@usuario.last_name
+                    %strong
+                      =@usuario.email
+                    | DNI:
+                    =@usuario.dni
+                    | Edad: 
+                    -unless @usuario.birth_date==nil
+                      =edad = Time.now.strftime("%Y").to_i - @usuario.birth_date.strftime("%Y").to_i
+                    años
+
               -else
                 .col.center
                   USUARIO NO REGISTRADO. Recordarle que obtendrá descuentos si está registrado.

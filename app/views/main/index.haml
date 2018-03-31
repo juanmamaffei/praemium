@@ -20,7 +20,7 @@
             %li
               =link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "btn"
             %li
-              =link_to "Perfil", edit_user_registration_path, class: "btn" # Cerrar sesión
+              =link_to "Perfil", user_path(current_user.id), class: "btn" # Cerrar sesión
         -else
           %ul.right.hide-on-med-and-down
             %li
@@ -54,7 +54,7 @@
                         Saldo 2:
                         = card.credit2
                 .card-actions.center
-                  %a.btn Movimientos
+                  = link_to 'Movimientos', company_card_transactions_path(card.company,card.id), :class=>"btn"
 
         -if @companies.count != 0
           .col.s12.m6

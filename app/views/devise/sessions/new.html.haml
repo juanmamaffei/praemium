@@ -14,6 +14,7 @@
             = f.label :password
             %br/
             = f.password_field :password, autocomplete: "off"
+
           - if devise_mapping.rememberable?
             .row.col.s12
               = f.check_box :remember_me

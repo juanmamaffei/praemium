@@ -1,0 +1,21 @@
+%h1 Movimientos
+
+%table
+  %thead
+    %tr
+      %th Fecha y hora
+      %th Monto
+      %th Descripción
+      %th{:colspan=>"3"}
+
+  %tbody
+    - @transactions.each do |transaction|
+      %tr
+        %td
+          = transaction.created_at
+        %td
+          = transaction.amount 
+        %td
+          = transaction.description 
+
+= link_to 'Volver', root_path, :class=> "btn"

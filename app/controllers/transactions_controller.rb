@@ -2,12 +2,24 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   before_action :set_company_card
   before_action :authenticate_admin!, only: [:destroy]
-  before_action :authenticate_owner!, only: [:index, :new, :create, :edit, :update, :scan]
+  before_action :authenticate_owner!, only: [:new, :create, :edit, :update]
 
   # GET /transactions
   # GET /transactions.json
   def index
+
+    #Sólo se puede ver si está logueado como OWNER del company_id asociado a la CARD
+    # o como USUARIO asociado a la tarjeta.
+    unless current_user.id==@card.user
+      unless (@company.admin == current_user.id)
+        unless current_user.is_admin?
+           redirect_to root_path, notice: "No estás autorizado a ver las transacciones de esta tarjeta."
+        end
+      end
+    end
+
     @transactions = Transaction.where(card: @card, company: @company)
+    
   end
 
   # GET /transactions/1
@@ -90,5 +102,13 @@ class TransactionsController < ApplicationController
     def set_company_card
       @company = Company.find(params[:company_id]) 
       @card = Card.find(params[:card_id]) 
+    end
+
+    def verify_own_id
+      unless (@company.admin == current_user.id)
+        unless current_user.is_admin?
+           redirect_to root_path, notice: "No estás autorizado a ver esto."
+        end
+      end
     end
 end

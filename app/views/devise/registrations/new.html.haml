@@ -40,6 +40,8 @@
             = f.label :password_confirmation
             %br/
             = f.password_field :password_confirmation, autocomplete: "off"
+            = flash[:alert]
+            = recaptcha_tags
           .card-action.center
             = f.submit "Registrar", :class => "btn"
           .card-action
