@@ -21,9 +21,17 @@
         <td><%= card.country.to_s + card.number.to_s + "x" %></td>
         <td><%= card.pin %></td>
         <td><% unless card.user==nil %>
-          <% unless @users.find_by(id: card.user).name==nil %>
-          <%=  @users[card.user].name %>
-            <% end %><% end %>
+          <% unless @users.find_by(id: card.user).name==nil || @users.find_by(id: card.user).last_name==nil%>
+          <%=  @users.find_by(id: card.user).name + " " + @users.find_by(id: card.user).last_name%>
+            <% else %>
+            Sin nombre
+            <% end %>
+            
+            <% else %>
+
+            No registrado
+
+            <% end %>
 
           </td>
         <td><%= card.credit1 %></td>

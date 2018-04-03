@@ -1,0 +1,71 @@
+<script type="text/javascript">
+	
+
+	  $('.dropdown-button').dropdown({
+	      inDuration: 300,
+	      outDuration: 225,
+	      constrain_width: false, // Does not change width of dropdown to that of the activator
+	      hover: true, // Activate on hover
+	      gutter: 0, // Spacing from edge
+	      belowOrigin: false, // Displays dropdown below the button
+	      alignment: 'left' // Displays dropdown with edge aligned to the left of button
+    }
+  );
+
+  $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+    $('.fixed-action-btn').openFAB();
+    $('.tooltipped').tooltip();
+  });
+        
+</script>
+
+<% if user_signed_in? %>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    <li>
+    	<%= link_to raw("<i class='material-icons'>insert_chart</i> Inicio"), root_path  %>
+    </li>
+    <li>
+    	<%= link_to raw("<i class='material-icons'>insert_chart</i> Perfil"), user_path(current_user.id)  %>
+    </li>
+    <li class="divider"></li>
+    <li>
+    	<%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %>
+    </li>
+  </ul>
+
+
+  <% if current_user.is_owner? %>
+  	<% unless @company==nil %>
+	  <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+	    <a class="btn-floating btn-large red tooltipped" data-position="top" data-tooltip="Menú de empresa" href=<%= company_path(@company) %>>
+	      <i class="large mdi-navigation-menu material-icons"> apps</i>
+	    </a>
+	    <ul>
+	      <li><a href=<%= company_panel_path(@company) %> class="btn-floating red tooltipped" data-position="top" data-tooltip="Entorno de trabajo">
+	      	<i class="material-icons">touch_app</i>
+	      </a></li>
+	      <li><a href=<%= new_company_card_path(@company) %> data-position="top" data-tooltip="Crear tarjetas" class="btn-floating yellow darken-1 tooltipped">
+	      	<i class="material-icons">credit_card</i>
+	      </a></li>
+
+	      <li><a href=<%= company_cards_path(@company) %> data-position="top" data-tooltip="Clientes" class="btn-floating green tooltipped">
+	      	<i class="material-icons">people</i>
+	      </a></li>
+
+	      <li><a href="#" data-position="top" data-tooltip="Estadísticas" class="btn-floating blue tooltipped">
+	      	<i class="material-icons">timeline</i>
+	      </a></li>
+
+
+	    </ul>
+	  </div>
+
+	<% end %><% end %>
+
+
+<% end %>
+
+

@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
 	def update
 		
 		if @user.update(user_params)
-			redirect_to user_path, notice: 'Perfil actualizado'
+			redirect_to root_path, notice: 'Perfil actualizado'
 		else
 			#No se pudo guardar
 			redirect_to user_path, notice: 'Epa! Hubo un error...'

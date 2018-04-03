@@ -116,6 +116,13 @@ class CardsController < ApplicationController
   end
 
   def create
+#QUITAR ESTO CUANDO SE AUTOMATICE LA TAREA DE CRACIÓN DE TARJETAS
+    unless current_user.is_admin?
+
+      redirect_to root_path, notice: "Por el momento no estás autorizado a realizar esta tarea."
+    else
+
+
     # Variables del hash: "cant",  "type" ("tabla","impresion" o "encargo"), "commit"=>"Crear", "company_id"
     set_company
     create_params
@@ -174,6 +181,8 @@ class CardsController < ApplicationController
         Tarjetas exitosas: " + buenas.to_s + " | Tarjetas malas: " + malas.to_s + " | Empezando desde el ID: " + inicio.to_s + " hasta : " + fin.to_s
 
     end
+
+  end
   end
 
   # PATCH/PUT /cards/1

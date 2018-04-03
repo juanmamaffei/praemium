@@ -1,0 +1,44 @@
+
+:javascript
+  var elem = document.querySelector('.sidenav');
+  var instance = M.Sidenav.init(elem, options);
+
+  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+  // var collapsibleElem = document.querySelector('.collapsible');
+  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
+%ul#slide-out.side-nav
+  %li
+    .user-view
+      .background
+        %img{:src=>"images/office.jpg"}
+
+      %a{:href=>"#!user"}
+        %img.circle{:src=>"images/yuna.jpg"}
+      %a{:href=>"#!name"}
+        %span.white-text.name John Doe
+      %a{:href=>"#!email"}
+        %span.white-text.email jdandturk@gmail.com
+
+    %li
+      %a{:href=>"#!"}
+        %i.material-icons cloud
+        First Link With Icon
+    %li
+      %a{:href=>"#!"}
+      Second Link
+    %li
+      .divider
+    %li
+      %a.subheader Subheader
+    %li
+      %a.waves-effect{:href=>"#!"} Third Link With Waves
+
+%a{:href=>"#", "data-activates"=>"slide-out", :class=>"button-collapse"}
+  %i.mdi-navigation-menu

@@ -18,13 +18,12 @@
           =image_tag("logoh.png", :width => 250)
 
         -if user_signed_in?
-          %ul#nav-mobile.right.hide-on-med-and-down
-            %li
-              =link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "btn"
-            %li
-              =link_to "Perfil", user_path(current_user.id), class: "btn" # Cerrar sesión
-            %li
-              %a{:href=>"#", "data-activates"=>"slide-out", :class=>"btn button-collapse"} Menu
+
+
+          %ul#nav-mobile.right.black
+            %a.dropdown-button{:href=>'#', "data-activates"=>'dropdown1'}
+              %i.material-icons menu
+            
         -else
           %ul.right.hide-on-med-and-down
             %li

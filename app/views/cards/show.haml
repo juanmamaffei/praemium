@@ -26,7 +26,7 @@
 
               -else
                 .col.center
-                  USUARIO NO REGISTRADO. Recordarle que obtendrá descuentos si está registrado.
+                  USUARIO NO REGISTRADO. Recordarle que obtendrá beneficios si está registrado.
       .row
         .col.s12.m6
           .card.center
@@ -61,11 +61,12 @@
                         - estado = "INACTIVA"      
                   %strong         
                     Estado de la tarjeta: #{estado}
-                  %p Para activar nuevamente, presione EDITAR y cambie el valor de ESTADO por 1.
+                  %p Para activar nuevamente, presione EDITAR y cambie el valor de ESTADO por 1 - ACTIVADA.
       .row
         
       .row.center
         = link_to 'Cambiar estado', edit_company_card_path(@company,@card), :class=> "btn"
+        = link_to 'Ver movimientos', company_card_transactions_path(@company,@card), :class=> "btn"
         =link_to "Volver", company_panel_path(@company), :class=> "btn"
         -#= link_to 'Back', company_cards_path
         
