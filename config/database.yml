@@ -19,6 +19,8 @@ production:
   <<: *default
   database: praemium
   username: deploy
+  host: localhost
+  pool: 5
   password: Read116Coat498  
 
 
