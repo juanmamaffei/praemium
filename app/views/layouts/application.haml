@@ -36,18 +36,23 @@
     .container
       .row.center
         -unless notice==nil
-          .chip.center
-            = notice[0,2] 
-          -unless notice[0,2]="**"
-            :javascript
-              window.onload = function() {
-                #modal.open();
-              };
-            #modal.modal.modal-fixed-footer
+          
+          -if notice[0,2]=="**"
+            .card.red
+              %h1.white-text <i class="material-icons">error</i> Ocurrió un error
+
+              %strong.white-text
+                =notice
+            #noticia.modal.modal-fixed-footer
               .modal-content
                 %h4 Epa! Hubo un error
                 %p
-                  -notice
+                  =notice
               .modal-footer.center
                 %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+              %script
+                noticia.open();
+          -else
+            .chip.center
+              = notice
     = yield
