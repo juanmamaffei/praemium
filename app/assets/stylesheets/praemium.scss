@@ -1,0 +1,95 @@
+
+/* Colores */
+
+$negro: #1E130F;
+$verde: #4CA92C;
+$celeste: #0068AE;
+$azul: #003C91;
+$turquesa: #009CDD;
+
+.verde{
+	background-color: $verde;
+}
+
+.texto-verde{
+	color: $verde;
+	font-family: 'alpaca';	
+}
+
+.negro{
+	background-color: $negro;
+}
+
+.texto-negro{
+	color: $negro;
+	font-family: "alpaca"
+}
+
+.texto-blanco{
+	color: white;
+	font-family: "alpaca"
+}
+.azul{
+	background-color: $azul;
+
+}
+
+.texto-azul{
+	color: $azul;
+	font-family: 'alpaca';
+}
+
+.texto-turquesa-normal{
+	color: $turquesa;
+	font-family: 'normal';
+}
+.celeste{
+	background-color: $celeste;
+}
+
+.texto-celeste{
+	color: $celeste;
+	font-family: 'alpaca';	
+}
+
+.turquesa{
+	background-color: $turquesa;
+}
+
+.texto-turquesa{
+	color: $turquesa;
+	font-family: 'alpaca';	
+}
+
+.grantexto{
+	font-size: 3em;
+	text-align: right;
+	color: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+}
+.money{
+	font-size: 3em;
+	text-align: center;
+	color: $verde;
+}
+
+/* Espaciado */
+.bigp{
+	padding: 2em;
+}
+
+.nom{
+	margin-bottom: 0px !important;
+	margin-top: 0px !important;
+}
+/* Secciones
+
+body{
+	background-color: $verde;
+}
+
+*/
+.bg{
+	background-image: url("bg.png");
+	background-color: rgba(0,156,222,0.055);
+	background-size: cover;
+}

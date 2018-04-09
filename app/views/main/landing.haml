@@ -1,3 +1,4 @@
+!!!! 5
 %html
   %head
     %title Praemium
@@ -6,54 +7,88 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag
-    :javascript
+    %script
       $(document).ready(function(){
-        $('.parallax').parallax();
+      $('.modal').modal();
       });
-
-  %body
-    %nav
-      .nav-wrapper.white
-        .brand-logo.center
+  %body.bg
+    %header
+      .row.bigp.nom.valign-wrapper
+        .col.s12.m6.center
           = image_tag("logoh.png", width: "260")
-        %ul#nav-mobile.right.hide-on-med-and-down
-          %li
-            %a.waves-effect.waves-light.btn{:href=>'\users\sign_in'} Iniciar sesión
-    .parallax-container
-      .parallax
-        = image_tag "02.jpg"
-    .container
-      .row.center
-        -unless notice==nil
-          .chip.center
-            = notice
-    .row.separador
-      .container
-        .col.m6.s12
+          %br
+          %strong.texto-azul
+            Clientes leales
+        .col.s12.m6.texto-azul.hide-on-small-only
+          .grantexto Reforzá el vínculo con tus clientes, para que vuelvan a elegirte siempre.
+    %main
+      .row.bigp.azul.nom.texto-turquesa-normal.valign-wrapper
+        .col.s12.m6.center
+          %h1.texto-blanco Lo quiero en mi negocio
           %h5 Tu sistema de bonificaciones y prepagos en 24 horas
           %p
-            A sólo <strong>$999</strong> por mes.
+            A sólo <span class="money">$999</span> por mes.
             %br
-            %small Pesos argentinos
-          %p Costos iniciales bonificados <del><strong>$2499</strong></del> <strong>$0</strong>
+            %small.texto-verde Pesos argentinos
+          %p
+            Costos iniciales bonificados <br><del><strong>$2499</strong></del> <span class="money">$0</span>
+            %br
+            %small.texto-verde Pesos argentinos          
           %a.waves-effect.waves-light.btn Prueba gratuita
-        .col.m6.hide-on-small-only.responsive-img.materialboxed
-          -#= image_tag "01.jpg", :width=>'450'
-    .row.transparencia
-      .parallax-container.center
-        .col.m12.s12
-          %h5 ¿Ya contás con un sistema <span class="logo-embed">Praemium</span>?
+        .col.s12.m6.center
+          %h1.texto-blanco Tengo una tarjeta de un comercio adherido
+          %a.waves-effect.waves-light.btn{:href=>'\users\sign_up'} Registrar tarjeta
+          %p O si ya tenés cuenta en Praemium...
           %a.waves-effect.waves-light.btn{:href=>'\users\sign_in'} Iniciar sesión
-        .parallax
-          = image_tag "par2.jpg"
-    .row.separador
-      .container
-        .col.m8.s12
-          %h5 Si sos cliente de un comercio adherido a <span class="logo-embed">Praemium</span>...
-          .col.m6.s12
-            %a.waves-effect.waves-light.btn{:href=>'\users\sign_in'} Iniciar sesión
-          .col.m6.s12
-            %a.waves-effect.waves-light.btn Registrar tarjeta
-        .col.m4.hide-on-small-only
-          .materialboxed.responsive-img
-            = image_tag "03.jpg", :width=>'450'
+    %footer.negro
+      .container.texto-turquesa-normal
+        .row
+        .row
+          .col.l2.m2.s12.center
+            = image_tag("0.5x/logoblanco.png", width: "60")
+          .col.l2.m3.s6
+            %h5 Redes sociales
+            %p Facebook
+            %p Twitter
+            %p YouTube
+            %p Pinterest
+            %p Instagram
+          .col.l3.m4.s6
+            %h5 Blog
+            %p Beneficios para clientes
+            %p Beneficios para empresas
+            %p Comenzá una prueba gratuita
+          .col.l2.m3.s6
+            %h5 Cuenta
+            %p
+              %a{:href=>'\users\sign_up'} Registrarme
+            %p
+              %a{:href=>'\users\sign_in'} Iniciar sesión
+          .col.l3.m4.s6
+            %p
+              %a{:href=>'#privacidad'} Privacidad
+            %p
+              %a{:href=>'#term'} Términos y condiciones
+            %p
+              %a{:href=>'#licencia'} Licencia
+            #privacidad.modal.modal-fixed-footer
+              .modal-content
+                %h4 Contrato de privacidad
+                %p Privacidad
+              .modal-footer
+                %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+            #term.modal.modal-fixed-footer
+              .modal-content
+                %h4 Términos y condiciones
+                %p términos y condiciones
+              .modal-footer
+                %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+            #licencia.modal.modal-fixed-footer
+              .modal-content
+                %h4 Licencias
+                %p licencias
+              .modal-footer
+                %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+      .footer-copyright
+        .container.center
+          2018 Praemium. Todos los derechos reservados
