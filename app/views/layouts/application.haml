@@ -8,7 +8,10 @@
     = favicon_link_tag
     %script{:type=>"text/javascript", :src=>"https://code.jquery.com/jquery-3.2.1.min.js"}
     %script{:type=>"text/javascript", :src=>"js/materialize.min.js"}
-
+    %script
+      $(document).ready(function(){
+      $('.modal').modal();
+      });
 
 
   %body
@@ -34,5 +37,17 @@
       .row.center
         -unless notice==nil
           .chip.center
-            = notice
+            = notice[0,2] 
+          -unless notice[0,2]="**"
+            :javascript
+              window.onload = function() {
+                #modal.open();
+              };
+            #modal.modal.modal-fixed-footer
+              .modal-content
+                %h4 Epa! Hubo un error
+                %p
+                  -notice
+              .modal-footer.center
+                %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
     = yield

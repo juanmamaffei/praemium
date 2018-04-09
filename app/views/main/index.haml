@@ -6,6 +6,10 @@
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %script
+      $(document).ready(function(){
+      $('.modal').modal();
+      });
 
 
 
@@ -30,8 +34,25 @@
     .container
       .row.center
         -unless notice==nil
-          .chip.center
-            = notice
+          
+          -if notice[0,2]="**"
+            .card.red
+              %h1.white-text <i class="material-icons">error</i> Ocurrió un error
+
+              %strong.white-text
+                =notice
+            #noticia.modal.modal-fixed-footer
+              .modal-content
+                %h4 Epa! Hubo un error
+                %p
+                  =notice
+              .modal-footer.center
+                %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+              %script
+                noticia.open();
+          -else
+            .chip.center
+              = notice
     .container
       .row
         -if @cards.count != 0

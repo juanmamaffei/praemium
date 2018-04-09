@@ -43,32 +43,32 @@ class CardsController < ApplicationController
             if pin.to_s == card.pin.to_s
               card.user= current_user.id
               if card.save
-                redirect_to root_path, notice: "Asignaste usuario a tu nueva tarjeta"
+                redirect_to root_path, notice: "**Asignaste usuario a tu nueva tarjeta"
               else
-                redirect_to root_path, notice: "Tus datos son correctos pero ocurrió un error. Contactá con el administrador"
+                redirect_to root_path, notice: "**Tus datos son correctos pero ocurrió un error. Contactá con el administrador"
               end
             else
-              redirect_to root_path, notice: "Pin incorrecto"+pin.to_s+" | "+ card.pin.to_s
+              redirect_to root_path, notice: "**Pin incorrecto"+pin.to_s+" | "+ card.pin.to_s
             end
 
 
           else
             #Esta tarjeta tiene otro usuario asignado
-            redirect_to root_path, notice: "Esta tarjeta ya tiene un usuario asignado"
+            redirect_to root_path, notice: "**Esta tarjeta ya tiene un usuario asignado"
           end
           
         else
           #No existe esa tarjeta
-          redirect_to root_path, notice: "No existe esa tarjeta."
+          redirect_to root_path, notice: "**No existe esa tarjeta."
         end
         
       else
         #Pin inválido
-        redirect_to root_path, notice: "Pin inválido"
+        redirect_to root_path, notice: "**Pin inválido"
       end
     else
       #Num inválido
-      redirect_to root_path, notice: "Número de tarjeta inválido"
+      redirect_to root_path, notice: "**Número de tarjeta inválido"
     end
     
 
@@ -79,7 +79,7 @@ class CardsController < ApplicationController
   def show
     set_company
     unless @company.id == @card.company_id
-      redirect_to root_path, notice: "COMPAÑÍA INVÁLIDA"
+      redirect_to root_path, notice: "**COMPAÑÍA INVÁLIDA"
       
     end
     @transaction = Transaction.new
@@ -119,7 +119,7 @@ class CardsController < ApplicationController
 #QUITAR ESTO CUANDO SE AUTOMATICE LA TAREA DE CRACIÓN DE TARJETAS
     unless current_user.is_admin?
 
-      redirect_to root_path, notice: "Por el momento no estás autorizado a realizar esta tarea."
+      redirect_to root_path, notice: "**Por el momento no estás autorizado a realizar esta tarea."
     else
 
 
@@ -229,17 +229,17 @@ class CardsController < ApplicationController
         if card_company == @company.id
           @card = Card.find_by number: card_number
           if @card == nil
-            @error = "El número de cliente de la tarjeta es inválido"
+            @error = "**El número de cliente de la tarjeta es inválido"
           else
             redirect_to company_card_path(@company,@card)
           end
         else
-          @error = "La tarjeta no pertenece a esta compañía"
+          @error = "**La tarjeta no pertenece a esta compañía"
         end
       else
 
         #CONSULTAR CLIENTE por QUERY a columnas CLIENT y COMPANY_ID
-        @error = "Número inválido"
+        @error = "**Número inválido"
       end
 
     else
