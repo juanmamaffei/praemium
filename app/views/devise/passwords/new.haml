@@ -1,0 +1,15 @@
+.container
+  .row 
+    .col.s12.l5.z-depth-3.center
+      .col.s12
+        %h5 ¿Olvidaste tu contraseña de <span class="texto-negro">praemium</span>?
+
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        = devise_error_messages!
+        .field
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: true, autocomplete: "email"
+        .actions
+          = f.submit "Enviarme instrucciones para recuperarla", :class => "btn"
+      = render "devise/shared/links"

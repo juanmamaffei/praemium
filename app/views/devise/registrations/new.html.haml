@@ -1,49 +1,48 @@
 .container
-  .row
-    .col.s12.l5
-      .card  
-        .card-content.white-text.teal
-          .card-title Crear cuenta
+  .row 
+    .col.s12.l5.z-depth-3.center
+      .col.s12
+        %h5 Crear cuenta en <span class="texto-negro">praemium</span>
 
-        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-          = devise_error_messages!
-          -#
-            .field
-              = f.label :name, "Nombre"
-              %br/
-              = f.text_field :name
-            .field
-              = f.label :last_name, "Apellido"
-              %br/
-              = f.text_field :last_name
-            .field
-              = f.label :birth_date, "Fecha de nacimiento"
-              %br/
-              = f.date_field :birth_date
-            .field
-              = f.label :dni, "DNI"
-              %br/
-              = f.text_field :dni
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = devise_error_messages!
+        -#
+          .field
+            = f.label :name, "Nombre"
+            %br/
+            = f.text_field :name
+          .field
+            = f.label :last_name, "Apellido"
+            %br/
+            = f.text_field :last_name
+          .field
+            = f.label :birth_date, "Fecha de nacimiento"
+            %br/
+            = f.date_field :birth_date
+          .field
+            = f.label :dni, "DNI"
+            %br/
+            = f.text_field :dni
 
-          .field
-            = f.label :email
-            %br/
-            = f.email_field :email, autocomplete: "email"
-          .field
-            = f.label :password
-            - if @minimum_password_length
-              %em
-                (Al menos #{@minimum_password_length} caracteres)
-            %br/
-            = f.password_field :password, autocomplete: "off"
-          .field
-            = f.label :password_confirmation
-            %br/
-            = f.password_field :password_confirmation, autocomplete: "off"
-            = flash[:alert]
-            = recaptcha_tags
-          .card-action.center
-            = f.submit "Registrar", :class => "btn"
-          .card-action
-            = render "devise/shared/links"
+        .field
+          = f.label :email
+          %br/
+          = f.email_field :email, autocomplete: "email"
+        .field
+          = f.label :password
+          - if @minimum_password_length
+            %em
+              (Al menos #{@minimum_password_length} caracteres)
+          %br/
+          = f.password_field :password, autocomplete: "off"
+        .field
+          = f.label :password_confirmation
+        .row.center
+          = f.password_field :password_confirmation, autocomplete: "off"
+          = flash[:alert]
+          = recaptcha_tags
+        .card-action.center
+          = f.submit "Registrar", :class => "btn"
+        .card-action
+          = render "devise/shared/links"
 
