@@ -47,7 +47,8 @@ gem 'cancancan', '~> 1.10'
 gem 'devise-i18n'
 gem 'jquery-turbolinks'
 gem 'recaptcha', require: 'recaptcha/rails'
-
+gem 'barby', '~> 0.6.2' #Códigos de barra (generador)
+gem 'chunky_png', '~> 1.3', '>= 1.3.5' #Generador de PNG
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -18,6 +18,9 @@ class CardsController < ApplicationController
     @cards = Card.where(company_id: @company)
     @users = User.all
 
+    require 'barby'
+    require 'barby/barcode/ean_13'
+    require 'barby/outputter/png_outputter'
   end
 
   def asignuser

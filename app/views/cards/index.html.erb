@@ -1,11 +1,14 @@
 
 <h1>Gestión de tarjetas y Clientes</h1>
 
+
+
 <table class="striped">
   <thead>
     <tr>
       <th>Número de tarjeta</th>
-      <th>Pin</th>>
+      <th>Código de barras</th>
+      <th>Pin</th>
       <th>Apellido y nombre</th>
       <th>Saldo</th>
       <th>Estado de la tarjeta</th>
@@ -18,7 +21,8 @@
       
     <% @cards.each do |card| %>
       <tr>
-        <td><%= card.country.to_s + card.number.to_s + "x" %></td>
+        <td><% cod = card.country.to_s + card.number.to_s %><%= cbar = Barby::EAN13.new(cod) %></td>
+        <td><img src="<%= cbar.to_image.to_data_url %>"></td>
         <td><%= card.pin %></td>
         <td><% unless card.user==nil %>
           <% unless @users.find_by(id: card.user).name==nil || @users.find_by(id: card.user).last_name==nil%>
