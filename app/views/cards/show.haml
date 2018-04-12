@@ -35,8 +35,8 @@
                 %h2 SALDO ACTUAL
               .card-actions
                 %i.material-icons.medium monetization_on
-                %span.money
-                  = @card.credit1
+                %span.money.black-text
+                  = (@card.credit1.to_f)/100
       
         .col.s12.m6
           .card.center

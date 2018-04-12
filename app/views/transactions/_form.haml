@@ -9,7 +9,21 @@
           %li
             = message
   .field
-    = form.label :Monto
+
+    = form.label "Monto en CENTAVOS"
     = form.number_field :amount, id: :transaction_amount
   .actions
     = form.submit "Confirmar",:class=> "btn"
+.row.red.center
+  .white-text
+    %strong No olvide que debe ingresar la cantidad en centavos.
+    %br
+    Por ejemplo, 25 para recargar $0,25
+    %br
+    125 para recargar $1,25
+    %br
+    10000 para recargar $100
+    %br
+    %strong También debe anteponer el signo menos (-) para debitar una compra.
+    %br
+    Por ejemplo, -250, para debitar una compra de $2,50.

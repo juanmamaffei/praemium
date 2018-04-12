@@ -20,6 +20,14 @@
    }
 
 
+-unless notice==nil
+  -if notice[0,3]=="*T*"
+    .container
+      .card.green
+        %h1.white-text <i class="material-icons">done</i> Transacción correcta
+
+        %strong.white-text
+          =notice
 
 
 .container

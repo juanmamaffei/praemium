@@ -13,7 +13,7 @@
       <th>Saldo</th>
       <th>Estado de la tarjeta</th>
       <th colspan="3"></th>
-          </tr>
+    </tr>
   </thead>
 
   <tbody>
@@ -31,17 +31,34 @@
             <% end %>
             
             <% else %>
-
-            No registrado
-
+              No registrado
             <% end %>
 
           </td>
-        <td><%= card.credit1 %></td>
-        <td><%= card.status %></td>
-        <td><%= link_to 'Movimientos', company_card_transactions_path(@company,card) %></td>
-        <td><%= link_to 'Cargar', company_card_path(@company,card) %></td>
-        <td><%= link_to 'Cambiar estado', edit_company_card_path(@company,card) %></td>
+        <td>$ <%= (card.credit1.to_f)/100 %></td>
+        <td><%= card.status %>
+                <% if card.status == 1 %>
+                  - ACTIVADA
+                <% end %>
+                <%if card.status == 2 %>
+                  - ROBADA/ PERDIDA
+                <% end %>
+                <% if card.status == 3 %>
+                  - EN PROCESO DE FABRICACIÓN / ENVÍO
+                <% end %>
+                <% if card.status == 4 %>
+                  - ENTREGADA E INACTIVA
+                <% end %>
+                <% if card.status == 0 %>
+                  - INACTIVA
+                <% end %> 
+</td>
+
+
+
+        <td><%= link_to raw('<i class="large mdi-navigation-menu material-icons"> view_headline</i>'), company_card_transactions_path(@company,card), :class => "btn-large black tooltipped", "data-tooltip"=>"Ver movimientos"  %></td>
+        <td><%= link_to raw('<i class="large mdi-navigation-menu material-icons"> monetization_on</i>'), company_card_path(@company,card), :class => "btn-large black tooltipped", "data-tooltip"=>"Recargar o Comprar"  %></td>
+        <td><%= link_to raw('<i class="large mdi-navigation-menu material-icons"> offline_pin</i>'), edit_company_card_path(@company,card), :class => "btn-large black tooltipped", "data-tooltip"=>"Cambiar estado (robada, perdida, activa, inactiva)" %></td>
         <% #<td><%= link_to 'Destroy', [@company,card], method: :delete, data: { confirm: 'Are you sure?' } %>
       </tr>
     <% end %>
