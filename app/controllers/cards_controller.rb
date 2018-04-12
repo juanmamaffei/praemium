@@ -18,9 +18,18 @@ class CardsController < ApplicationController
     @cards = Card.where(company_id: @company)
     @users = User.all
 
+    #Requires para generar códigos de barra
     require 'barby'
     require 'barby/barcode/ean_13'
     require 'barby/outputter/png_outputter'
+    
+    #Exportar a xlsx
+
+    respond_to do |format|
+      format.html
+      #format.csv { send_data @cards.to_csv }
+      format.xlsx { render xlsx: "index.xlsx"}
+    end
   end
 
   def asignuser

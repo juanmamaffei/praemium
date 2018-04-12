@@ -1,0 +1,22 @@
+
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Cards") do |sheet|
+  # this is the head row of your spreadsheet
+  sheet.add_row ["Número de tarjeta", "Código de barras", "PIN"]
+  
+  # each card is a row on your spreadsheet
+  @cards.each do |card|
+
+  	#Generar número de tarjeta
+	cod = card.country.to_s + card.number.to_s
+	cbar = Barby::EAN13.new(cod)
+
+	img = cbar.to_image.to_data_url
+
+
+
+    sheet.add_row [cbar.to_s, "sheet.add_image(img)" ,card.pin]
+  end
+end
+
