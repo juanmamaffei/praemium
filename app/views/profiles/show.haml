@@ -23,7 +23,9 @@
           =f.text_area :bio
       .row
         .col.s12.m6
-          
+          -if current_user.is_admin?
+            .red.white-text Permisos:
+            =f.text_field :permissions
         .col.s12.m6
 
       .row
