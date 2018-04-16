@@ -1,7 +1,9 @@
 .container.white.z-depth-3
   .row.center
-    .col.s12.black.banner
-      %img.circle{:src=> "http://www.um.es/docencia/barzana/materializecss/images/yuna.jpg"}
+    .col.s12.banner.negro.texto-turquesa
+      -#%img.circle{:src=> "http://www.um.es/docencia/barzana/materializecss/images/yuna.jpg"}
+      %i.large.material-icons people
+      .big Perfil
   .container.center
     =form_for @user do |f|
       .row

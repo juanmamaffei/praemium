@@ -37,8 +37,10 @@
           = f.password_field :password, autocomplete: "off"
         .field
           = f.label :password_confirmation
-        .row.center
+        .field
           = f.password_field :password_confirmation, autocomplete: "off"
+        .row.center
+          
           = flash[:alert]
           = recaptcha_tags
         .card-action.center

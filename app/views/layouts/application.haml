@@ -12,13 +12,31 @@
       $(document).ready(function(){
       $('.modal').modal();
       });
+    :javascript
+      $('.dropdown-button').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrainWidth: false, // Does not change width of dropdown to that of the activator
+        hover: true, // Activate on hover
+        gutter: 0, // Spacing from edge
+        belowOrigin: false, // Displays dropdown below the button
+        alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      }
+      );
+    :javascript
+      $(document).ready(function(){
+        $('.fixed-action-btn').floatingActionButton();
+        $('.fixed-action-btn').openFAB();
+        $('.tooltipped').tooltip();
+      });
 
 
   %body
     %nav
       .nav-wrapper.white
         .brand-logo.center
-          =image_tag("logoh.png", :width => 250)
+
+          =link_to image_tag("logoh.png", :width => 250), root_path
 
         -if user_signed_in?
 

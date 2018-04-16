@@ -17,20 +17,19 @@
     %nav
       .nav-wrapper.white
         .brand-logo.center
-          =image_tag("logoh.png", :width => 250)
-
+          =link_to image_tag("logoh.png", :width => 250), root_path
+  
         -if user_signed_in?
-          %ul#nav-mobile.right.hide-on-med-and-down
-            %li
-              =link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "btn"
-            %li
-              =link_to "Perfil", user_path(current_user.id), class: "btn" # Cerrar sesión
+          %ul#nav-mobile.right.black
+            %a.dropdown-button{:href=>'#', "data-activates"=>'dropdown1'}
+              %i.material-icons menu
+            
         -else
           %ul.right.hide-on-med-and-down
             %li
               =link_to "Iniciar sesión", new_user_session_path
 
-
+    =render partial: "layouts/sidenav"
     .container
       .row.center
         -unless notice==nil
@@ -56,26 +55,30 @@
     .container
       .row
         -if @cards.count != 0
-          .col.s12.m6
+          .col.s12.m9
             %h1 Tarjetas registradas
             - @cards.each do |card|
               .card  
-                .card-content.white-text.teal
+                .card-content.white-text.turquesa
                   %ul
-                    %li
+                    %li.texto-negro.center.big
                       = @company_names.find_by(id: card.company_id).name
-                    %li
-                      N de cliente:
-                      = card.client
-                    %li
-                      Saldo: 
-                      = card.credit1
                     %li
                       -if card.credit2_enabled?
                         Saldo 2:
                         = card.credit2
+                    %li.center
+                      - cod = card.country.to_s + card.number.to_s
+                      - cbar = Barby::EAN13.new(cod)
+                      = image_tag(cbar.to_image.to_data_url)
+                    %li.center
+                      = cbar
                 .card-actions.center
+                  .big
+                    Saldo: $
+                    = (card.credit1.to_f)/100
                   = link_to 'Movimientos', company_card_transactions_path(card.company,card.id), :class=>"btn"
+
 
         -if @companies.count != 0
           .col.s12.m6

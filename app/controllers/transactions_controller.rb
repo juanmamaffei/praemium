@@ -18,7 +18,7 @@ class TransactionsController < ApplicationController
       end
     end
 
-    @transactions = Transaction.where(card: @card, company: @company)
+    @transactions = Transaction.where(card: @card, company: @company).order("created_at DESC")
     
   end
 

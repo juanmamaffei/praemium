@@ -23,9 +23,11 @@ class ProfilesController < ApplicationController
 		end
 
 		def user_params
-			params.require(:user).permit(:email, :name, :last_name, :dni, :birth_date, :bio)
+			
 			if current_user.is_admin?
-				params.require(:user).permit(:permissions)
+				params.require(:user).permit(:permissions, :email, :name, :last_name, :dni, :birth_date, :bio)
+			else
+				params.require(:user).permit(:email, :name, :last_name, :dni, :birth_date, :bio)
 			end
 		end
 

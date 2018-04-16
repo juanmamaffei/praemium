@@ -55,7 +55,7 @@ class CardsController < ApplicationController
             if pin.to_s == card.pin.to_s
               card.user= current_user.id
               if card.save
-                redirect_to root_path, notice: "**Asignaste usuario a tu nueva tarjeta"
+                redirect_to root_path, notice: "Asignaste usuario a tu nueva tarjeta"
               else
                 redirect_to root_path, notice: "**Tus datos son correctos pero ocurrió un error. Contactá con el administrador"
               end
