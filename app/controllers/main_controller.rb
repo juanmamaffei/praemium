@@ -6,6 +6,11 @@ class MainController < ApplicationController
 		set_cards
 		set_companies
 		verify_profile
+
+	    #Requires para generar códigos de barra
+	    require 'barby'
+	    require 'barby/barcode/ean_13'
+	    require 'barby/outputter/png_outputter'
 	end
 
 	def landing
