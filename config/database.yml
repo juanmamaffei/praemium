@@ -9,22 +9,29 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
-development:
-  <<: *default
-  database: praemium
-  username: juanma
-  password: read116coat498  
+#development:
+#  <<: *default
+#  database: praemium
+#  username: juanma
+#  password: read116coat498  
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: praemium
+  database: praemium_production
   pool: 5
   username: root
   password: gxu209ibl641mjn772laz023
 
-
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: praemium_development
+  pool: 5
+  username: root
+  password: gxu209ibl641mjn772laz023
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
