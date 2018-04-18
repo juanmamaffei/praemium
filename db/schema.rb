@@ -12,10 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20180417051920) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "cards", force: :cascade do |t|
+  create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "company_id"
     t.integer "user"
     t.integer "country", default: 779
@@ -32,7 +29,7 @@ ActiveRecord::Schema.define(version: 20180417051920) do
     t.index ["number"], name: "index_cards_on_number", unique: true
   end
 
-  create_table "companies", force: :cascade do |t|
+  create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "url"
     t.integer "admin"
@@ -43,7 +40,7 @@ ActiveRecord::Schema.define(version: 20180417051920) do
     t.string "alias"
   end
 
-  create_table "transactions", force: :cascade do |t|
+  create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "card_id"
     t.integer "company_id"
     t.integer "user_id"
@@ -56,7 +53,7 @@ ActiveRecord::Schema.define(version: 20180417051920) do
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

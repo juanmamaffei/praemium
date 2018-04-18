@@ -1,5 +1,5 @@
 bundle
-rake:db migrate
+rake:db migrate RAILS_ENV=production
 rm -rf public/assets
 rake assets:clean RAILS_ENV=production
 rake assets:precompile RAILS_ENV=production

@@ -31,14 +31,14 @@ Rails.application.routes.draw do
   end
 
   #Rutas dinámicas para nombres de usuario de las compañías
-  datos = Company.all
+  #datos = Company.all
   
-  datos.each do |c|
+  #datos.each do |c|
     #A menos que el alias esté vacío...
-    unless c.alias == nil
-      get c.alias, to: 'companies#show', :id => c.id    
-    end
-  end
+  #  unless c.alias == nil
+  #    get c.alias, to: 'companies#show', :id => c.id    
+  #  end
+  #end
   
 
 end
