@@ -16,12 +16,13 @@ development:
   password: read116coat498  
 
 production:
-  <<: *default
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   database: praemium
-  username: deploy
-  host: localhost
   pool: 5
-  password: Read116Coat498  
+  username: root
+  password: gxu209ibl641mjn772laz023
 
 
 # Warning: The database defined as "test" will be erased and
