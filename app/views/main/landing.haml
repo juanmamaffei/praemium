@@ -14,20 +14,25 @@
   %body.bg
     %header
       .row.bigp.nom.valign-wrapper
-        .col.s12.m6.center
+        .col.s12.center
           = image_tag("logoh.png", width: "260")
           %br
           %strong.texto-azul
             Clientes leales
-        .col.s12.m6.texto-azul.hide-on-small-only
+        .col.s12.texto-azul.hide-on-med-and-down
           .grantexto Reforzá el vínculo con tus clientes, para que vuelvan a elegirte siempre.
     %main
-      .row.bigp.azul.nom.texto-turquesa-normal.valign-wrapper
-        .col.s12.m6.center
+      .row.bigp.azul.nom.texto-turquesa-normal
+        .col.m12.l6.center
+          %h1.texto-blanco Tengo una tarjeta de un comercio adherido
+          %a.waves-effect.waves-light.btn{:href=>'\users\sign_up'} Registrar tarjeta
+          %p O si ya tenés cuenta en Praemium...
+          %a.waves-effect.waves-light.btn{:href=>'\users\sign_in'} Iniciar sesión
+        .col.m12.l6.center.valign
           %h1.texto-blanco Lo quiero en mi negocio
           %h5 Tu sistema de bonificaciones y prepagos en 24 horas
           %p
-            A sólo <span class="money">$999</span> por mes.
+            A sólo <span class="money">$1249</span> por mes.
             %br
             %small Pesos argentinos
           %p
@@ -35,61 +40,5 @@
             %br
             %small Pesos argentinos          
           %a.waves-effect.waves-light.btn Prueba gratuita
-        .col.s12.m6.center
-          %h1.texto-blanco Tengo una tarjeta de un comercio adherido
-          %a.waves-effect.waves-light.btn{:href=>'\users\sign_up'} Registrar tarjeta
-          %p O si ya tenés cuenta en Praemium...
-          %a.waves-effect.waves-light.btn{:href=>'\users\sign_in'} Iniciar sesión
-    %footer.negro
-      .container.texto-turquesa-normal
-        .row
-        .row
-          .col.l2.m2.s12.center
-            = image_tag("0.5x/logoblanco.png", width: "60")
-          .col.l2.m3.s6
-            %h5 Redes sociales
-            %p Facebook
-            %p Twitter
-            %p YouTube
-            %p Pinterest
-            %p Instagram
-          .col.l3.m4.s6
-            %h5 Blog
-            %p Beneficios para clientes
-            %p Beneficios para empresas
-            %p Comenzá una prueba gratuita
-          .col.l2.m3.s6
-            %h5 Cuenta
-            %p
-              %a{:href=>'\users\sign_up'} Registrarme
-            %p
-              %a{:href=>'\users\sign_in'} Iniciar sesión
-          .col.l3.m4.s6
-            %p
-              %a{:href=>'#privacidad'} Privacidad
-            %p
-              %a{:href=>'#term'} Términos y condiciones
-            %p
-              %a{:href=>'#licencia'} Licencia
-            #privacidad.modal.modal-fixed-footer
-              .modal-content
-                %h4 Contrato de privacidad
-                %p Privacidad
-              .modal-footer
-                %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
-            #term.modal.modal-fixed-footer
-              .modal-content
-                %h4 Términos y condiciones
-                %p términos y condiciones
-              .modal-footer
-                %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
-            #licencia.modal.modal-fixed-footer
-              .modal-content
-                %h4 Licencias
-                %p licencias
-
-              .modal-footer
-                %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
-      .footer-copyright
-        .container.center
-          2018 Praemium. Todos los derechos reservados
+        
+    =render partial: "layouts/footer"

@@ -1,0 +1,56 @@
+%footer.page-footer.black
+  .container.texto-turquesa-normal
+    .row
+    .row
+      .col.l2.m2.s12.center
+        = image_tag("0.5x/logoblanco.png", width: "60")
+      .col.l2.m3.s6
+        %h5 Redes sociales
+        %p Facebook
+        %p Twitter
+        %p YouTube
+        %p Pinterest
+        %p Instagram
+      .col.l3.m4.s6
+        %h5 Blog
+        %p
+          =link_to "Beneficios para clientes", "https://praemium.com.ar/blog/?page_id=10"
+        %p
+          =link_to "Beneficios para empresas", "https://praemium.com.ar/blog/?page_id=9"
+        %p
+          =link_to "Blog", "https://praemium.com.ar/blog/"
+
+      .col.l2.m3.s6
+        %h5 Cuenta
+        %p
+          %a{:href=>'\users\sign_up'} Registrarme
+        %p
+          %a{:href=>'\users\sign_in'} Iniciar sesión
+      .col.l3.m4.s6
+        %p
+          %a{:href=>'#privacidad'} Privacidad
+        %p
+          %a{:href=>'#term'} Términos y condiciones
+        %p
+          %a{:href=>'#licencia'} Licencia
+        #privacidad.modal.modal-fixed-footer
+          .modal-content
+            = render 'layouts/privacidad'
+          .modal-footer
+            %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+        #term.modal.modal-fixed-footer
+          .modal-content
+            = render 'layouts/terminos'
+            = render 'layouts/privacidad'
+          .modal-footer
+            %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+        #licencia.modal.modal-fixed-footer
+          .modal-content
+            %h4 Licencias
+            %p licencias
+
+          .modal-footer
+            %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+  .footer-copyright
+    .container.center
+      2018 Praemium. Todos los derechos reservados

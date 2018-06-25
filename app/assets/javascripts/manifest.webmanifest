@@ -1,0 +1,16 @@
+{
+  "name": "Praemium",
+  "short_name": "Praemium",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#222",
+  "description": "Sistema integrado de beneficios y prepagos para comercios.",
+  "icons": [{
+    "src": "images/3bg.png",
+    "sizes": "1572x1296",
+    "type": "image/png"
+  }],
+  "related_applications": [{
+    "platform": "web",
+  }]
+}

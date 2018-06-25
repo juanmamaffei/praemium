@@ -51,7 +51,7 @@ class TransactionsController < ApplicationController
     if @card.save
       respond_to do |format|
         if @transaction.save
-          format.html { redirect_to company_panel_path(@company), notice: '*T* Se generó la transacción correctamente. El cliente tiene ahora un saldo de $' + ((@card.credit1.to_f)/100).to_s }
+          format.html { redirect_to company_panel_path(@company), notice: '*T* Se generó la transacción correctamente. <h2 class="red-text center">El cliente tiene ahora un saldo de <span class="grantexto"><br><br><br>$' + ((@card.credit1.to_f)/100).to_s + '</span></h2><br>' }
           format.json { render :show, status: :created, location: @transaction }
         else
           format.html { render :new }

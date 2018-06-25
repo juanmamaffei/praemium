@@ -8,6 +8,8 @@
     = favicon_link_tag
     %script{:type=>"text/javascript", :src=>"https://code.jquery.com/jquery-3.2.1.min.js"}
     %script{:type=>"text/javascript", :src=>"js/materialize.min.js"}
+   
+    
     %script
       $(document).ready(function(){
       $('.modal').modal();
@@ -30,7 +32,7 @@
         $('.tooltipped').tooltip();
       });
 
-
+    %link{:rel=>"manifest", :href=>"#{asset_path "manifest.json.erb"} "}
   %body
     %nav
       .nav-wrapper.white
@@ -71,6 +73,8 @@
               %script
                 noticia.open();
           -else
-            .chip.center
-              = notice
+            -if notice[0,3]=="*T*"
+            -else
+              .chip.center
+                = notice
     = yield

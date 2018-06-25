@@ -12,7 +12,7 @@
       });
 
 
-
+    %link{:rel=>"manifest", :href=>"#{asset_path "manifest.json.erb"} "}
   %body
     %nav
       .nav-wrapper.white
@@ -55,7 +55,7 @@
     .container
       .row
         -if @cards.count != 0
-          .col.s12.m9
+          .col.m12.l9
             %h1 Tarjetas registradas
             - @cards.each do |card|
               .card  
@@ -79,15 +79,16 @@
                     = (card.credit1.to_f)/100
                   = link_to 'Movimientos', company_card_transactions_path(card.company,card.id), :class=>"btn"
 
+ 
 
         -if @companies.count != 0
-          .col.s12.m6
+          .col.m12.l6
             %h1 Gestión de empresas
             - @companies.each do |company|
               %p
                 = link_to company.name, company_path(:id=> company.id), :class=> "btn"
       .row  
-        .col.s12.m6
+        .col.m12.l6
           .card
             = form_tag(asignar_path, method: "post") do
               .card-title.black.white-text.center
@@ -99,3 +100,6 @@
                 = text_field_tag(:pin)
               .card-actions
                 = submit_tag("Añadir", :class=>"btn")
+    
+    =render partial: "layouts/footer"
+    

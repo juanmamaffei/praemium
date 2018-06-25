@@ -18,3 +18,4 @@
 //= require materialize
 //= require materialize-sprockets
 
+//= require serviceworker-companion

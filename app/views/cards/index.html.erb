@@ -1,17 +1,54 @@
 
-<h1>Gestión de tarjetas y Clientes</h1>
+<script type="text/javascript">
+  
+$(".mcb").on( 'change', function() {
+    if( $(this).is(':checked') ) {
+        // Hacer algo si el checkbox ha sido seleccionado
+        alert("El checkbox con valor " + $(this).val() + " ha sido seleccionado");
+    } else {
+        // Hacer algo si el checkbox ha sido deseleccionado
+        alert("El checkbox con valor " + $(this).val() + " ha sido deseleccionado");
+    }
+});
 
+
+</script>
+<div class="container">
+  <h1 class="center">Gestión de tarjetas y Clientes</h1>
+<div class="switch row">
+  <i class="material-icons">credit_card</i>Tarjetas inactivas: 
+    <label>
+      Ocultar
+      <input type="checkbox" id="mcb" checked="checked">
+      <span class="lever"></span>
+      Mostrar
+    </label>
+  </div>
 
 
 <table class="striped">
   <thead>
     <tr>
-      <th>Número de tarjeta</th>
-      <th>Código de barras</th>
+      <th>Número de tarjeta 
+
+        <i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i>
+        <i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i>
+
+      </th>
+      <!-- <th>Código de barras</th> -->
       <th>Pin</th>
-      <th>Apellido y nombre</th>
-      <th>Saldo</th>
-      <th>Estado de la tarjeta</th>
+      <th>Apellido y nombre
+        <i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i>
+        <i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i>
+      </th>
+      <th>Saldo
+        <i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i>
+        <i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i>
+      </th>
+      <th>Estado de la tarjeta
+        <i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i>
+        <i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i>
+      </th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,8 +58,8 @@
     <% @cards.each do |card| %>
       <tr>
         <td><% cod = card.country.to_s + card.number.to_s %><%= cbar = Barby::EAN13.new(cod) %></td>
-        <td><img src="<%= cbar.to_image.to_data_url %>"></td>
-        <td><%= card.pin %></td>
+        <!--<td><img src="<%= cbar.to_image.to_data_url %>"></td> -->
+        <td class="tooltipped" data-tooltip="<%= card.pin %>"><i class="material-icons">security</i></td>
         <td><% unless card.user==nil %>
           <% unless @users.find_by(id: card.user).name==nil || @users.find_by(id: card.user).last_name==nil%>
           <%=  @users.find_by(id: card.user).name + " " + @users.find_by(id: card.user).last_name%>
@@ -65,7 +102,7 @@
 <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
 <%= link_to 'Menú de gestión de empresa', company_path(@company), :class=> "btn" %>
