@@ -10,7 +10,15 @@
     %li
       .collapsible-header
         %i.material-icons touch_app
-        Entorno de trabajo
+        Entorno móvil
+      .collapsible-body
+        %span Es el entorno que permitirá realizar créditos y débitos usando la cámara de un dispositivo móvil para la lectura del código de barras.
+        %p
+        =link_to "Ir", company_panel_path(@company, :mobile => true), :class=> "btn"
+    %li
+      .collapsible-header
+        %i.material-icons important_devices
+        Entorno para PC
       .collapsible-body
         %span Es la forma más eficiente de realizar créditos y débitos a tarjetas de clientes. Está diseñado para una rápida carga con lector de códigos de barra o bien para un ingreso manual del número de cliente.
         %p

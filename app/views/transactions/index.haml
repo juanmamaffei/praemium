@@ -1,6 +1,5 @@
-
-.container
-  %h1 Movimientos
+%h1.center Movimientos
+.container.cajita
   .col.s12.m8.l6
     %table.striped
       %thead
@@ -21,17 +20,18 @@
               = transaction.created_at.strftime("%H:%M")
             %td
               - monto = transaction.amount
-              -if monto<0
-                .red-text Compra
-                %td.red-text
-                  $
-                  = (monto.to_f/100).abs
-              -else
-                .green-text Recarga
-                %td.green-text
-                  $
-                  = (monto.to_f/100).abs
+              -unless monto == nil
+                -if monto<0
+                  .red-text Compra
+                  %td.red-text
+                    $
+                    = (monto.to_f/100).abs
+                -else
+                  .green-text Recarga
+                  %td.green-text
+                    $
+                    = (monto.to_f/100).abs
             %td
               = transaction.description 
-
-    = link_to 'Volver', root_path, :class=> "btn"
+    .center
+      = link_to 'Volver', root_path, :class=> "btn"

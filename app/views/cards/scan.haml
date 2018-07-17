@@ -30,6 +30,7 @@
           =raw(notice)
 
 
+
 .container
   .row
     
@@ -46,18 +47,27 @@
         =render 'form', card: @card
       
     -if @paso==1
-      .card
-        :javascript
-          setInterval('q()',500);
-          function q(){
-            document.getElementById("q").focus();
-          }
-        %h1 Escanee la tarjeta o ingrese el número de cliente
-        = form_tag(company_panel_path(@company), method: "get") do
-          = label_tag(:q, "Ingrese número de tarjeta o número de cliente:")
-          = text_field_tag(:q)
-          .center
-            = submit_tag("Buscar", :class=>"btn")
+      -if @mobile == true
+        %h1 MÓVIL
+        /Escanear código de barras
+
+        /Mostrar opciones de cámara
+
+        /Colocar código ingresado en :q y enviar formulario
+
+      - else
+        .card
+          :javascript
+            setInterval('q()',500);
+            function q(){
+              document.getElementById("q").focus();
+            }
+          %h1 Escanee la tarjeta o ingrese el número de cliente
+          = form_tag(company_panel_path(@company), method: "get") do
+            = label_tag(:q, "Ingrese número de tarjeta o número de cliente:")
+            = text_field_tag(:q)
+            .center
+              = submit_tag("Buscar", :class=>"btn")
 
     -if @paso==3
       %h1 Cargando cambios ...

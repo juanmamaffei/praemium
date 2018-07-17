@@ -15,8 +15,8 @@
     %link{:rel=>"manifest", :href=>"#{asset_path "manifest.json"} "}
   %body
     %nav
-      .nav-wrapper.white
-        .brand-logo.center
+      .nav-wrapper.white.center
+        .brand-logo
           =link_to image_tag("logoh.png", :width => 250), root_path
   
         -if user_signed_in?
@@ -52,54 +52,61 @@
           -else
             .chip.center
               = notice
-    .container
-      .row
-        -if @cards.count != 0
-          .col.m12.l9
-            %h1 Tarjetas registradas
-            - @cards.each do |card|
-              .card  
-                .card-content.white-text.turquesa
-                  %ul
-                    %li.texto-negro.center.big
+    /.container
+    .row
+      -if @cards.count != 0
+        .col-sm-12.center
+          %h1 Tarjetas registradas
+        - @cards.each do |card|
+          .col-xs-12.col-sm-6.col-md-4
+            .card
+              .card-image
+                =image_tag("01.jpg")
+                .card-title
+                  .texto-negro.center
+                    .big    
                       = @company_names.find_by(id: card.company_id).name
-                    %li
-                      -if card.credit2_enabled?
-                        Saldo 2:
-                        = card.credit2
-                    %li.center
-                      - cod = card.country.to_s + card.number.to_s
-                      - cbar = Barby::EAN13.new(cod)
-                      = image_tag(cbar.to_image.to_data_url)
-                    %li.center
-                      = cbar
-                .card-actions.center
-                  .big
-                    Saldo: $
-                    = (card.credit1.to_f)/100
-                  = link_to 'Movimientos', company_card_transactions_path(card.company,card.id), :class=>"btn"
-
- 
-
-        -if @companies.count != 0
-          .col.m12.l6
-            %h1 Gestión de empresas
-            - @companies.each do |company|
-              %p
-                = link_to company.name, company_path(:id=> company.id), :class=> "btn"
-      .row  
-        .col.m12.l6
-          .card
-            = form_tag(asignar_path, method: "post") do
-              .card-title.black.white-text.center
-                Añadir tarjeta
-              .card-content
-                = label_tag(:num, "Número de tarjeta (13 dígitos):")
-                = text_field_tag(:num)
-                = label_tag(:pin, "PIN:")
-                = text_field_tag(:pin)
-              .card-actions
-                = submit_tag("Añadir", :class=>"btn")
-    
+                    =card.country.to_s + card.number.to_s
+              /.card-content.white-text.turquesa
+              /  %ul
+              /    %li
+              /    /%li.center
+              /    /  - cod = card.country.to_s + card.number.to_s
+              /    /  - cbar = Barby::EAN13.new(cod)
+              /    /  = image_tag(cbar.to_image.to_data_url)
+              /    /%li.center
+              /    /  = cbar
+              .card-actions.center
+                .big
+                  Saldo: $
+                  = (card.credit1.to_f)/100
+                  -if card.credit2_enabled?
+                    | Puntos: 
+                    = card.credit2
+                = link_to 'Movimientos', company_card_transactions_path(card.company,card.id), :class=>"btn"
+                = link_to 'Baja', company_card_transactions_path(card.company,card.id), :class=>"btn"
+                = link_to 'Configuración', company_card_transactions_path(card.company,card.id), :class=>"btn" 
+                = link_to 'Tienda', company_card_transactions_path(card.company,card.id), :class=>"btn"
+    .row.center-md  
+      -if @companies.count != 0
+        .col-sm-12.center
+          %h1 Gestión de empresas
+        - @companies.each do |company|
+          .col-sm-12.col-md-4.center-xs
+            = link_to company.name, company_path(:id=> company.id), :class=> "btn"
+    .row.center-md
+      .col-xs-12.col-sm-6.col-md-4
+        .card
+          = form_tag(asignar_path, method: "post") do
+            .card-title.black.white-text.center
+              Añadir tarjeta
+            .card-content
+              = label_tag(:num, "Número de tarjeta (13 dígitos):")
+              = text_field_tag(:num)
+              = label_tag(:pin, "PIN:")
+              = text_field_tag(:pin)
+            .card-actions
+              = submit_tag("Añadir", :class=>"btn")
+  
     =render partial: "layouts/footer"
     

@@ -1,16 +1,18 @@
 .container
-  .row 
-    .col.m12.z-depth-3.center
-      .col.m12
-        =image_tag("logoh.png", width: 200)
+  .row.verticaltotal.middle-xs
+    .col.m12.z-depth-3.center.transparenciafuerte
+      .col.m12.center-xs
+        %h1 Iniciar sesión
+        / =image_tag("logoh.png", width: 200)
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         .row.col.m12
-          = f.label :email
-          %br/
+          %h2 Correo electrónico
+         
+          
           = f.email_field :email, autofocus: true, autocomplete: "email"
         .row.col.m12
-          = f.label :password
-          %br/
+          %h2 Contraseña
+          
           = f.password_field :password, autocomplete: "off"
 
         - if devise_mapping.rememberable?

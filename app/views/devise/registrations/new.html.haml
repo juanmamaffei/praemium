@@ -1,6 +1,6 @@
 .container
-  .row 
-    .col.s12.l5.z-depth-3.center
+  .row.verticaltotal.middle-xs
+    .col.s12.z-depth-3.center.transparenciafuerte
       .col.s12
         %h5 Crear cuenta en <span class="texto-negro">praemium</span>
 
@@ -8,11 +8,11 @@
         = devise_error_messages!
         -#
           .field
-            = f.label :name, "Nombre"
+            %h2 Nombre
             %br/
             = f.text_field :name
           .field
-            = f.label :last_name, "Apellido"
+            %h2 Apellido
             %br/
             = f.text_field :last_name
           .field
@@ -25,21 +25,21 @@
             = f.text_field :dni
 
         .field
-          = f.label :email
+          %h2 Correo electrónico:
           %br/
           = f.email_field :email, autocomplete: "email"
         .field
-          = f.label :password
+          %h2 Contraseña: 
           - if @minimum_password_length
             %em
               (Al menos #{@minimum_password_length} caracteres)
           %br/
           = f.password_field :password, autocomplete: "off"
         .field
-          = f.label :password_confirmation
+          %h2 Confirmar contraseña:
         .field
           = f.password_field :password_confirmation, autocomplete: "off"
-        .row.center
+        .row.center.center-xs
           
           = flash[:alert]
           = recaptcha_tags

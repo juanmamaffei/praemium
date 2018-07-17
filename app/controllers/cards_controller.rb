@@ -227,6 +227,8 @@ class CardsController < ApplicationController
     set_company
     query_present
 
+    mobile_param
+
     if @q.present?
       #Paso 2: Consultar tarjeta
       @paso=2
@@ -304,5 +306,12 @@ class CardsController < ApplicationController
     end
     def query_present
       @q=params[:q]
+    end
+    def mobile_param
+      if params[:mobile].to_s == 'true'
+        @mobile = true
+      else
+        @mobile = false
+      end
     end
 end
