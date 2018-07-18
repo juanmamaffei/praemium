@@ -36,50 +36,55 @@
     
     -if @paso==2	
       -if @error!= nil
-        .card
-          %strong Se produjo un error:
+        .cajita.col-xs-12.center-xs
+          %h1 Se produjo un error:
           %p
             =@error
           %p
-            =link_to "Volver a carga", company_panel_path(@company), :class=> "btn"
+            -if @mobile == true
+              =link_to "Volver a cargar", company_panel_path(@company, :mobile => true), :class=> "btn lime"
+            -else
+              =link_to "Volver a cargar", company_panel_path(@company), :class=> "btn lime"
       -else
         %h1 Acredite o debite los puntos correspondientes
         =render 'form', card: @card
       
     -if @paso==1
-      -if @mobile == true
-        %h1 MÓVIL
-        /Escanear código de barras
 
-        /Mostrar opciones de cámara
+      .cajita.col-xs-12.center-xs
+        .col-xs-12.center-xs
+          -if @mobile==true
+            %h1 Tome una fotografía al código de barras
+            =render partial: 'file_input'
+          -else
+            :javascript
+              setInterval('q()',500);
+              function q(){
+                document.getElementById("q").focus();
+              }
 
-        /Colocar código ingresado en :q y enviar formulario
-
-      - else
-        .card
-          :javascript
-            setInterval('q()',500);
-            function q(){
-              document.getElementById("q").focus();
-            }
-          %h1 Escanee la tarjeta o ingrese el número de cliente
-          = form_tag(company_panel_path(@company), method: "get") do
+          %h1 O ingrese el número de la tarjeta
+        .col-xs-12.center-xs
+          = form_tag(company_panel_path(@company), method: "get", id: "query") do
             = label_tag(:q, "Ingrese número de tarjeta o número de cliente:")
             = text_field_tag(:q)
+            -if @mobile==true
+              =hidden_field_tag('mobile', 'true')
             .center
               = submit_tag("Buscar", :class=>"btn")
+
 
     -if @paso==3
       %h1 Cargando cambios ...
 
-    .row
-      .col.s12.m6
-        = link_to 'Volver', company_path(@company), :class=>"btn"
-      .col.s12.m6
-        .right   
-          %button{:onclick=>"launchFullScreen(document.documentElement);"}
-            %i.material-icons
-              fullscreen
-          %button{:onclick=>"cancelFullScreen();"}
-            %i.material-icons
-              fullscreen_exit
+  .row
+    .col-xs-12.center-xs
+      = link_to 'Volver', company_path(@company), :class=>"btn"
+    
+      .right   
+        %button{:onclick=>"launchFullScreen(document.documentElement);"}
+          %i.material-icons
+            fullscreen
+        %button{:onclick=>"cancelFullScreen();"}
+          %i.material-icons
+            fullscreen_exit

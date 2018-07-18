@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     #Entorno de trabajo
     get 'panel', to: 'cards#scan'
     post 'panel', to: 'cards#scan'
-
   
   end
 

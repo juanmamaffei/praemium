@@ -17,5 +17,6 @@
 //= require jquery.turbolinks
 //= require materialize
 //= require materialize-sprockets
-
+//= require quagga
 //= require serviceworker-companion
+

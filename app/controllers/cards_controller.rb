@@ -222,7 +222,6 @@ class CardsController < ApplicationController
     end
   end
 
-
   def scan
     set_company
     query_present
