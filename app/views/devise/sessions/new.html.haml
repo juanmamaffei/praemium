@@ -1,3 +1,4 @@
+#fb-root
 .container
   .row.verticaltotal.middle-xs
     .col.m12.z-depth-3.center.transparenciafuerte
@@ -21,5 +22,7 @@
             = f.label :remember_me
         .center
           = f.submit "Iniciar sesión", :class => "btn"
+        .center
+          .fb-login-button{"data-max-rows"=>"1", "data-size"=>"large", "data-button-type"=>"login_with", "data-show-faces"=>"true", "data-auto-logout-link"=>"false", "data-use-continue-as"=>"false"}
         .card-action
           = render "devise/shared/links"

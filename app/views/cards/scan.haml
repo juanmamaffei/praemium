@@ -54,16 +54,17 @@
       .cajita.col-xs-12.center-xs
         .col-xs-12.center-xs
           -if @mobile==true
-            %h1 Tome una fotografía al código de barras
+            %h1 Tome una fotografía al código de barras...
             =render partial: 'file_input'
+            %h1 O ingrese el número de la tarjeta
           -else
             :javascript
               setInterval('q()',500);
+              console.log('PC');
               function q(){
                 document.getElementById("q").focus();
               }
-
-          %h1 O ingrese el número de la tarjeta
+            %h1 Ingrese el número de la tarjeta
         .col-xs-12.center-xs
           = form_tag(company_panel_path(@company), method: "get", id: "query") do
             = label_tag(:q, "Ingrese número de tarjeta o número de cliente:")

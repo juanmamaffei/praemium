@@ -6,6 +6,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag
+    %meta{ :name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
     %script{:type=>"text/javascript", :src=>"https://code.jquery.com/jquery-3.2.1.min.js"}
     %script{:type=>"text/javascript", :src=>"js/materialize.min.js"}
    
@@ -33,6 +34,7 @@
       });
 
     %link{:rel=>"manifest", :href=>"#{asset_path "manifest.json"} "}
+    =render partial: "layouts/facebooksdk"
   %body
     %nav
       .nav-wrapper.white
