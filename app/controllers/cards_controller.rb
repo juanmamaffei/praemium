@@ -250,9 +250,38 @@ class CardsController < ApplicationController
           @error = "**La tarjeta no pertenece a esta compañía"
         end
       else
+        
+        if @q.length<5
+          #Llevar company.id a 4 dígitos
+          co=@company.id.to_s
+          unless co.length==4
+              begin
+                  co="0"+co
+              end until co.length==4
+          end
 
-        #CONSULTAR CLIENTE por QUERY a columnas CLIENT y COMPANY_ID
-        @error = "**Número inválido"
+          
+
+          #Llevar CLIENT a 5 caracteres
+          cl=@q.to_s
+
+          unless cl.length==5
+              begin
+                  cl="0"+cl
+              end until cl.length==5
+          end
+
+          card_number=co+cl;
+
+          @card = Card.find_by number: card_number
+            if @card == nil
+              @error = "**El número de cliente de la tarjeta es inválido"
+            else
+              redirect_to company_card_path(@company,@card)
+            end
+        else       
+          @error = "**Número inválido"
+        end
       end
 
     else

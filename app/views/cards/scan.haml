@@ -56,7 +56,7 @@
           -if @mobile==true
             %h1 Tome una fotografía al código de barras...
             =render partial: 'file_input'
-            %h1 O ingrese el número de la tarjeta
+            %h1 O ingrese el número de cliente
           -else
             :javascript
               setInterval('q()',500);
@@ -64,7 +64,7 @@
               function q(){
                 document.getElementById("q").focus();
               }
-            %h1 Ingrese el número de la tarjeta
+            %h1 Escanee tarjeta o ingrese número de cliente
         .col-xs-12.center-xs
           = form_tag(company_panel_path(@company), method: "get", id: "query") do
             = label_tag(:q, "Ingrese número de tarjeta o número de cliente:")
