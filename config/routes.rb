@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   
   resources :profiles, as: :users, only: [:show, :update]
   
-  devise_for :users, controllers: {registrations: "registrations"}
-  
+  #devise_for :users, controllers: {registrations: "registrations"}
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :companies do
   	resources :cards do

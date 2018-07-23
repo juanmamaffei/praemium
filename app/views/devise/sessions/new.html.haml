@@ -1,10 +1,11 @@
-#fb-root
+
 .container
   .row.verticaltotal.middle-xs
     .col.m12.z-depth-3.center.transparenciafuerte
       .col.m12.center-xs
         %h1 Iniciar sesión
         / =image_tag("logoh.png", width: 200)
+      = link_to "Ingresar con Facebook", user_facebook_omniauth_authorize_path, :class => "waves-effect waves-light btn blue"
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         .row.col.m12
           %h2 Correo electrónico
@@ -26,3 +27,4 @@
           .fb-login-button{"data-max-rows"=>"1", "data-size"=>"large", "data-button-type"=>"login_with", "data-show-faces"=>"true", "data-auto-logout-link"=>"false", "data-use-continue-as"=>"false"}
         .card-action
           = render "devise/shared/links"
+          

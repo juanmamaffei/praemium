@@ -1,3 +1,15 @@
+.container.center-xs.red.white-text
+  -if current_user.name == nil || current_user.name == ""
+    %p Completá tu nombre
+  -if current_user.last_name == nil || current_user.last_name == ""
+    %p Completá tu apellido
+  -else
+    -if current_user.dni == nil || current_user.dni == ""
+      %p Completá tu DNI
+    -else
+      -if current_user.birth_date == nil
+        %p Completá tu fecha de nacimiento
+
 .container.white.z-depth-3
   .row.center
     .col.s12.banner.negro.texto-turquesa
@@ -7,17 +19,41 @@
   .container.center
     =form_for @user do |f|
       .row
-        .col.s6.m4.offset-m2
-          =f.text_field :name
-        .col.s6.m4
-          =f.text_field :last_name
+        -if current_user.name == nil || current_user.name == ""
+          .col.red.s12.m4.offset-m2
+            %strong Nombre
+            =f.text_field :name
+        -else
+          .col.s12.m4.offset-m2
+            %strong Nombre
+            =f.text_field :name
+        -if current_user.last_name == nil || current_user.last_name == ""
+          .col.red.s12.m4
+            %strong Apellido
+            =f.text_field :last_name
+        -else
+          .col.s12.m4
+            =f.text_field :last_name
       .row
+
+        -if current_user.birth_date == nil
+          .col.s12.m6.red         
+            %strong Fecha de nacimiento
+            =f.date_field :birth_date
+        -else
+          .col.s12.m6
+            %strong Fecha de nacimiento
+            =f.date_field :birth_date
+        
+        -if current_user.dni == nil || current_user.dni == ""
+          .col.s12.m6.red
+            %strong DNI
+            =f.text_field :dni
+        -else
+          .col.s12.m6
+            %strong DNI
+            =f.text_field :dni
         .col.s12.m6
-          %strong
-            Fecha de nacimiento
-          =f.date_field :birth_date
-          %strong DNI
-          =f.text_field :dni
           %strong E-mail
           =f.text_field :email
         .col.s12.m6
