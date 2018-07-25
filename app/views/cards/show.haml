@@ -1,75 +1,81 @@
 .container
   .row
-    .card
-      %h1.center
-        =@company.name
-      .row
-        .col.s12.m8.offset-m2.16.offset-13
-          .card-panel.grey.lighten-5.z-depth-1
-            .row.valign-wrapper
-              -unless @usuario==nil
-                .col.s2
-                  %img.circle.responsive-img{:src=> "http://materializecss.com/images/yuna.jpg"}
-                .col.s10
-                  %span.black-text
-                    %h2
-                      =@usuario.name
-                      =@usuario.last_name
-                    %strong
-                      =@usuario.email
-                    | DNI:
-                    =@usuario.dni
-                    | Edad: 
-                    -unless @usuario.birth_date==nil
-                      =edad = Time.now.strftime("%Y").to_i - @usuario.birth_date.strftime("%Y").to_i
-                    años
+    %h1.center-xs.chip
+      =@company.name
+  .row.middle-xs.center-xs
+    .col.s12.m6
+      .card-panel.grey.lighten-5.z-depth-1
+        .row.valign-wrapper
+          -unless @usuario==nil
+            .col.s12.center
+              = image_tag @usuario.avatar.url(:medium), :class => "circle responsive-img"
+            .col.s10
+              %span.black-text
+                %h2
+                  =@usuario.name
+                  =@usuario.last_name
+                %strong
+                  =@usuario.email
+                | DNI:
+                =@usuario.dni
+                | Edad: 
+                -unless @usuario.birth_date==nil
+                  =edad = Time.now.strftime("%Y").to_i - @usuario.birth_date.strftime("%Y").to_i
+                años
 
+          -else
+            .col.center
+              USUARIO NO REGISTRADO. Recordarle que obtendrá beneficios si está registrado.
+    .col.s12.m6
+      .card
+        .card-content
+          .card-title.center
+            %h2 CARGAR (+) O CONSUMIR (-)
+          .card-actions
+            -if @card.status == 1
+              - estado = "1- ACTIVADA"
+              .row.center-xs
+                = render 'transactions/form', transaction: @transaction
+            -else
+              -if @card.status == 2
+                - estado = "2- ROBADA/ PERDIDA"
               -else
-                .col.center
-                  USUARIO NO REGISTRADO. Recordarle que obtendrá beneficios si está registrado.
-      .row
-        .col.s12.m6
-          .card.center
-            .card-content
-              .card-title
-                %h2 SALDO ACTUAL
-              .card-actions
-                %i.material-icons.medium monetization_on
-                %span.money.black-text
-                  = (@card.credit1.to_f)/100
-      
-        .col.s12.m6
-          .card.center
-            .card-content
-              .card-title
-                %h2 CARGAR (+) O CONSUMIR (-)
-              .card-actions
-                -if @card.status == 1
-                  - estado = "1- ACTIVADA"
-                  .row
-                    = render 'transactions/form', transaction: @transaction
+                -if @card.status == 3
+                  - estado = "3- EN PROCESO DE FABRICACIÓN / ENVÍO"
                 -else
-                  -if @card.status == 2
-                    - estado = "2- ROBADA/ PERDIDA"
+                  -if @card.status == 4
+                    - estado = "4 - ENTREGADA E INACTIVA"
                   -else
-                    -if @card.status == 3
-                      - estado = "3- EN PROCESO DE FABRICACIÓN / ENVÍO"
-                    -else
-                      -if @card.status == 4
-                        - estado = "4 - ENTREGADA E INACTIVA"
-                      -else
-                        - estado = "INACTIVA"      
-                  %strong         
-                    Estado de la tarjeta: #{estado}
-                  %p Para activar nuevamente, presione EDITAR y cambie el valor de ESTADO por 1 - ACTIVADA.
-      .row
-        
-      .row.center
-        = link_to 'Cambiar estado', edit_company_card_path(@company,@card), :class=> "btn"
-        = link_to 'Ver movimientos', company_card_transactions_path(@company,@card), :class=> "btn"
-        =link_to "Volver", company_panel_path(@company), :class=> "btn"
-        -#= link_to 'Back', company_cards_path
-        
+                    - estado = "INACTIVA"      
+              %strong         
+                Estado de la tarjeta: #{estado}
+              %p Para activar nuevamente, presione EDITAR y cambie el valor de ESTADO por 1 - ACTIVADA.
+  .row
+    .col.s12.m6
+      .card.center
+        .card-content
+          .card-title
+            %h2 SALDO ACTUAL
+          .card-actions
+            %i.material-icons.medium monetization_on
+            %span.money.black-text
+              = (@card.credit1.to_f)/100
+    .col.s12.m6
+      .card.center
+        .card-content
+          .card-title
+            %h2 PUNTAJE ACTUAL
+          .card-actions
+            %i.material-icons.medium bubble_chart
+            %span.money.black-text
+              = (@card.credit2.to_f)
+
+  .row.center-xs
+    = link_to 'Cambiar estado', edit_company_card_path(@company,@card), :class=> "btn"
+    = link_to 'Ver movimientos', company_card_transactions_path(@company,@card), :class=> "btn"
+    =link_to "Volver", company_panel_path(@company), :class=> "btn"
+    -#= link_to 'Back', company_cards_path
+      
 
 
 

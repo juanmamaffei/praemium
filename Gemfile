@@ -53,10 +53,11 @@ gem 'chunky_png', '~> 1.3', '>= 1.3.5' #Generador de PNG
 gem 'rubyzip', '>= 1.2.1'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
-
 gem 'omniauth-facebook'
-
 gem 'serviceworker-rails'
+gem 'paperclip', '~> 4.3', '>= 4.3.6'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

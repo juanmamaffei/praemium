@@ -14,8 +14,9 @@
   .row.center
     .col.s12.banner.negro.texto-turquesa
       -#%img.circle{:src=> "http://www.um.es/docencia/barzana/materializecss/images/yuna.jpg"}
-      %i.large.material-icons people
+      = image_tag @user.avatar.url(:thumb), :class => "circle responsive-img"
       .big Perfil
+
   .container.center
     =form_for @user do |f|
       .row
@@ -59,6 +60,13 @@
         .col.s12.m6
           %strong Bio
           =f.text_area :bio
+        .col.s12
+          %strong Foto de perfil
+          %p.center
+            = image_tag @user.avatar.url(:medium), :class => "responsive-img"
+          .filefield.inputfield
+            /%span Cambiar
+            = f.file_field :avatar, :class => "file-path-wrapper"
       .row
         .col.s12.m6
           -if current_user.is_admin?
@@ -66,7 +74,7 @@
             =f.text_field :permissions
         .col.s12.m6
 
-      .row
+      .row.center-xs
         =f.submit "Actualizar", :class => "btn"
-      .row
+      .row.center-xs
         =link_to "Modificar datos de acceso", edit_user_registration_path, class: "btn red" # Cerrar sesión

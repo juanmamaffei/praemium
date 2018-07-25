@@ -1,5 +1,5 @@
 
-.row
+.row.center-xs
   .col.s12.m6
     .card.center
       .card-content
@@ -16,7 +16,7 @@
         .card-title
           %h2 ESTADO
           =form_for @card, :url => {:action => "update"} do |form|
-            .row
+            .row.center-xs
               -# = form.label(:status, "Estado (INGRESE 1 PARA ACTIVAR)")
               -# = form.text_field(:status)
               .input-field.col.s12.fixed
