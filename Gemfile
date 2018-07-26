@@ -56,7 +56,7 @@ gem 'axlsx_rails'
 gem 'omniauth-facebook'
 gem 'serviceworker-rails'
 gem 'paperclip', '~> 4.3', '>= 4.3.6'
-
+gem "letter_opener", :group => :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

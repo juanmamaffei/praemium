@@ -1,5 +1,5 @@
 %p
-  Hello #{@resource.email}!
-%p Your account has been locked due to an excessive number of unsuccessful sign in attempts.
-%p Click the link below to unlock your account:
-%p= link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token)
+  Hola #{@resource.email}!
+%p Tu cuenta de Praemium fue bloqueada por una excesiva cantidad de intentos de acceso.
+%p Hacé clic en el siguiente enlace para desbloquearla:
+%p= link_to 'Desbloquear mi cuenta', unlock_url(@resource, unlock_token: @token)
