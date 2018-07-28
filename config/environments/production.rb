@@ -82,7 +82,7 @@ Rails.application.configure do
 
 
   #Mailer
-  config.action_mailer.default_url_options = { host: 'praemium.com.ar' }
+  config.action_mailer.default_url_options = { host: 'https://www.praemium.com.ar' }
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)

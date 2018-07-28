@@ -19,7 +19,7 @@ class MainController < ApplicationController
 	private
 		def set_cards
 			@cards = Card.where(user: current_user).order(created_at: :desc)
-			@company_names = Company.select("id", "name")
+			@company_names = Company.select("id", "name", "cover_file_name")
 		end
 
 		def set_companies

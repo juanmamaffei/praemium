@@ -1,61 +1,63 @@
 .container
   .row
-    .col.s12.l5
+    .col-xs-12
       .card  
         .card-content.white-text.teal
           .card-title Editar perfil
-        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-          = devise_error_messages!
-          -#
-            .field
-              = f.label :name, "Nombre"
-              %br/
-              = f.text_field :name
-            .field
-              = f.label :last_name, "Apellido"
-              %br/
-              = f.text_field :last_name
-            .field
-              = f.label :birth_date, "Fecha de nacimiento"
-              %br/
-              = f.date_field :birth_date
-            .field
-              = f.label :dni, "DNI"
-              %br/
-              = f.text_field :dni
+        .card-content
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+            = devise_error_messages!
+            -#
+              .field
+                = f.label :name, "Nombre"
+                %br/
+                = f.text_field :name
+              .field
+                = f.label :last_name, "Apellido"
+                %br/
+                = f.text_field :last_name
+              .field
+                = f.label :birth_date, "Fecha de nacimiento"
+                %br/
+                = f.date_field :birth_date
+              .field
+                = f.label :dni, "DNI"
+                %br/
+                = f.text_field :dni
 
-          .field
-            = f.label :email
-            %br/
-            = f.email_field :email, autofocus: true, autocomplete: "email"
-          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-            %div
-              Currently waiting confirmation for: #{resource.unconfirmed_email}
-          .field
-            = f.label :password
-            %i (deje en blanco si no desea modificarla)
-            %br/
-            = f.password_field :password, autocomplete: "off"
-            - if @minimum_password_length
+            .field
+              = f.label :email
               %br/
-              %em
-                al menos
-                = @minimum_password_length
-                caracteres
-          .field
-            = f.label :password_confirmation
-            %br/
-            = f.password_field :password_confirmation, autocomplete: "off"
-          .field
-            = f.label :current_password
-            %i (ingresar para confirmar los cambios)
-            %br/
-            = f.password_field :current_password, autocomplete: "off"
-          .actions
-            = f.submit "Actualizar", :class=> "btn"
+              = f.email_field :email, autofocus: true, autocomplete: "email"
+            - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+              %div
+                Currently waiting confirmation for: #{resource.unconfirmed_email}
+            .field
+              = f.label :password
+              %i (deje en blanco si no desea modificarla)
+              %br/
+              = f.password_field :password, autocomplete: "off"
+              - if @minimum_password_length
+                %br/
+                %em
+                  al menos
+                  = @minimum_password_length
+                  caracteres
+            .field
+              = f.label :password_confirmation
+              %br/
+              = f.password_field :password_confirmation, autocomplete: "off"
+            .field
+              = f.label :current_password
+              %i (ingresar para confirmar los cambios)
+              %br/
+              = f.password_field :current_password, autocomplete: "off"
+            .actions.center-xs
+              = link_to raw('<i class="material-icons">arrow_back</i>'), :back, :class => "btn"
+              = f.submit "Actualizar", :class=> "btn"
         -#
           %h3 Cancel my account
           %p
             Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
-        .card-actions
-          = link_to "Atrás", :back
+          .card-actions.center-xs
+          

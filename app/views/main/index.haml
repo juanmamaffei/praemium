@@ -58,15 +58,22 @@
         .col-sm-12.center
           %h1 Tarjetas registradas
         - @cards.each do |card|
+          - companyName = @company_names.find_by(id: card.company_id).name
           .col-xs-12.col-sm-6.col-md-4
             .card
-              .card-image
-                =image_tag("01.jpg")
-                .card-title
-                  .texto-negro.center
-                    .big    
-                      = @company_names.find_by(id: card.company_id).name
-                    =card.country.to_s + card.number.to_s
+              .card-image.waves-effect.waves-block.waves-light
+                =image_tag(@company_names.find_by(id: card.company_id).cover.url(:medium), :alt => "Portada de #{companyName}", :class=> "activator", :height => "150px", :width => "300px")
+              .card-content
+                %span.card-title.activator.grey-text.text-darken-4
+                  = companyName
+                  .chip #{card.client.to_s}
+                  %i.material-icons.right more_vert
+                %p.center
+                  Saldo: $
+                  = (card.credit1.to_f)/100
+                  /-if card.credit2_enabled?
+                  | Puntos: 
+                  = card.credit2
               /.card-content.white-text.turquesa
               /  %ul
               /    %li
@@ -76,17 +83,16 @@
               /    /  = image_tag(cbar.to_image.to_data_url)
               /    /%li.center
               /    /  = cbar
-              .card-actions.center
-                .big
-                  Saldo: $
-                  = (card.credit1.to_f)/100
-                  -if card.credit2_enabled?
-                    | Puntos: 
-                    = card.credit2
-                = link_to 'Movimientos', company_card_transactions_path(card.company,card.id), :class=>"btn"
-                = link_to 'Baja', company_card_transactions_path(card.company,card.id), :class=>"btn"
-                = link_to 'Configuración', company_card_transactions_path(card.company,card.id), :class=>"btn" 
-                = link_to 'Tienda', company_card_transactions_path(card.company,card.id), :class=>"btn"
+              .card-reveal
+                %span.card-title.grey-text.text-darken-4
+                  =companyName
+                  %i.material-icons.right close
+                
+                .collection
+                  = link_to 'Movimientos', company_card_transactions_path(card.company,card.id), :class=>"collection-item"
+                  = link_to 'Baja', company_card_transactions_path(card.company,card.id), :class=>"collection-item"
+                  = link_to 'Configuración', company_card_transactions_path(card.company,card.id), :class=>"collection-item" 
+                  = link_to 'Tienda', company_card_transactions_path(card.company,card.id), :class=>"collection-item"
     .row.center-md  
       -if @companies.count != 0
         .col-sm-12.center

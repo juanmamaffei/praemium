@@ -15,7 +15,11 @@ class CardsController < ApplicationController
     set_company
     verify_own_id
     
-    @cards = Card.where(company_id: @company)
+    if(params[:soloactivas])
+        @cards = Card.where(company_id: @company, status: "1").paginate(:page => params[:page], :per_page => 20)
+    else
+        @cards = Card.where(company_id: @company).paginate(:page => params[:page], :per_page => 20)
+    end
     @users = User.all
 
     #Requires para generar códigos de barra

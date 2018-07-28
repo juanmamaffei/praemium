@@ -1,4 +1,6 @@
-<%= form_with(model: company, local: true) do |form| %>
+<div class="container">
+  <div class="card">
+<%= form_with(model: company, local: true, html: { multipart: true }) do |form| %>
   <% if company.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
@@ -40,8 +42,16 @@
     <%= form.label :alias %>
     <%= form.text_field :alias, id: :company_alias %>
   </div>
- 
+  <div>Imagen actual
+    <%= image_tag @company.cover.url(:medium) %>
+  </div>
+ <div class="field">
+    Cambiar imagen
+    <%= form.label :cover %>
+    <%= form.file_field :cover %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+</div></div>
