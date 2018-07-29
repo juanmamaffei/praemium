@@ -15,11 +15,50 @@ class CardsController < ApplicationController
     set_company
     verify_own_id
     
-    if(params[:soloactivas])
-        @cards = Card.where(company_id: @company, status: "1").paginate(:page => params[:page], :per_page => 20)
-    else
-        @cards = Card.where(company_id: @company).paginate(:page => params[:page], :per_page => 20)
+    #Orden por defecto
+    filtro = 'client'
+    # Ordenamiento
+    if(params[:order]=="asc")
+      if(params[:field]=="name")
+        filtro = 'user'
+      end
+      if(params[:field]=="cardNumber")
+        filtro = 'number'
+      end
+      if(params[:field]=="amount")
+        filtro = 'credit1'
+      end
+      if(params[:field]=="score")
+        filtro = 'credit2'
+      end  
+          
     end
+    if(params[:order]=="desc")
+      if(params[:field]=="name")
+        filtro = 'user DESC'
+      end
+      if(params[:field]=="cardNumber")
+        filtro = 'number DESC'
+      end
+      if(params[:field]=="amount")
+        filtro = 'credit1 DESC'
+      end
+      if(params[:field]=="score")
+        filtro = 'credit2 DESC'
+      end  
+            
+    end
+    
+    
+    if(params[:soloactivas])
+        @cards = Card.where(company_id: @company, status: "1").order(filtro).paginate(:page => params[:page], :per_page => 20)
+        message = filtro
+    else
+        @cards = Card.where(company_id: @company).order(filtro).paginate(:page => params[:page], :per_page => 20)
+        message = filtro
+    end
+
+
     @users = User.all
 
     #Requires para generar códigos de barra

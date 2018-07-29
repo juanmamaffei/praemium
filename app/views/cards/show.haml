@@ -68,7 +68,7 @@
           .card-actions
             %i.material-icons.medium bubble_chart
             %span.money.black-text
-              = (@card.credit2.to_f)
+              = (@card.credit2)
 
   .row.center-xs
     = link_to 'Cambiar estado', edit_company_card_path(@company,@card), :class=> "btn"

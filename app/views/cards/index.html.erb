@@ -27,28 +27,31 @@
 <% end %>
 <div class="row center-xs"><%= will_paginate @cards %></div>
 
+
 <table class="striped">
   <thead>
     <tr>
       <th>Número de tarjeta 
 
-        <i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i>
-        <i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i>
+        <a href="?&order=asc&field=cardNumber"><i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i></a>
+        <a href="?&order=desc&field=cardNumber"><i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i></a>
 
       </th>
       <!-- <th>Código de barras</th> -->
       <th>Pin</th>
       <th>Apellido y nombre
-        <i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i>
-        <i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i>
+        <a href="?&order=asc&field=name"><i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i></a>
+        <a href="?&order=desc&field=name"><i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i></a>
       </th>
       <th>Saldo
-        <i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i>
-        <i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i>
+        <a href="?&order=asc&field=amount"><i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i></a>
+        <a href="?&order=desc&field=amount"><i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i></a>
+      </th>
+      <th>Puntaje
+        <a href="?&order=asc&field=score"><i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i></a>
+        <a href="?&order=desc&field=score"><i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i></a>
       </th>
       <th>Estado de la tarjeta
-        <i class="material-icons tooltipped" data-tooltip="Ordenar ascendentemente">arrow_drop_up</i>
-        <i class="material-icons tooltipped" data-tooltip="Ordenar descendentemente">arrow_drop_down</i>
       </th>
       <th colspan="3"></th>
     </tr>
@@ -58,10 +61,10 @@
     <% unless @cards.count== %>
     <% @cards.each do |card| %>
       <tr>
-        <td><% cod = card.country.to_s + card.number.to_s %><%= cbar = Barby::EAN13.new(cod) %></td>
+        <td class="tooltipped" data-tooltip="Núm. de cliente: <%= card.client %>"><% cod = card.country.to_s + card.number.to_s %><%= cbar = Barby::EAN13.new(cod) %></td>
         <!--<td><img src="<%= cbar.to_image.to_data_url %>"></td> -->
         <td class="tooltipped" data-tooltip="<%= card.pin %>"><i class="material-icons">security</i></td>
-        <td><% unless card.user==nil %>
+        <td class="tooltipped" data-tooltip="ID. Praemium: <%= card.user %>"><% unless card.user==nil %>
           <% unless @users.find_by(id: card.user).name==nil || @users.find_by(id: card.user).last_name==nil%>
           <%=  @users.find_by(id: card.user).name + " " + @users.find_by(id: card.user).last_name%>
             <% else %>
@@ -74,6 +77,7 @@
 
           </td>
         <td>$ <%= (card.credit1.to_f)/100 %></td>
+        <td> <%= card.credit2%></td>
         <td><%= card.status %>
                 <% if card.status == 1 %>
                   - ACTIVADA

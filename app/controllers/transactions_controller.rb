@@ -45,13 +45,49 @@ class TransactionsController < ApplicationController
     @transaction.company = @company
     @transaction.card = @card
     @transaction.user = current_user
-    
-    @card.credit1 = @card.credit1.to_i+transaction_params[:amount].to_i
+
+    if params[:cargar] == "Saldo"
+      if params[:commit] == "Confirmar" or "+"
+        @card.credit1 = @card.credit1.to_i+transaction_params[:amount].to_i
+        if transaction_params[:amount].to_i<0
+          @transaction[:description] = "Consumo de saldo"
+        else
+          @transaction[:description] = "Carga de saldo"
+        end
+      end
+      if params[:commit] == "+"
+        @card.credit1 = @card.credit1.to_i+transaction_params[:amount].to_i
+        @transaction[:description] = "Carga de saldo"
+      end
+      if params[:commit] == "-"
+        @card.credit1 = @card.credit1.to_i-transaction_params[:amount].to_i
+        @transaction[:description] = "Consumo de saldo"
+      end
+    end
+
+    if params[:cargar] == "Puntos"
+      if params[:commit] == "Confirmar"
+        @card.credit2 = @card.credit2.to_i+transaction_params[:amount].to_i
+        if transaction_params[:amount].to_i<0
+          @transaction[:description] = "Consumo de puntos"
+        else
+          @transaction[:description] = "Carga de puntos"
+        end
+      end
+      if params[:commit] == "+"
+        @card.credit2 = @card.credit2.to_i+transaction_params[:amount].to_i
+        @transaction[:description] = "Carga de puntos"
+      end
+      if params[:commit] == "-"
+        @card.credit2 = @card.credit2.to_i-transaction_params[:amount].to_i
+        @transaction[:description] = "Consumo de Puntos"
+      end
+    end
 
     if @card.save
       respond_to do |format|
         if @transaction.save
-          format.html { redirect_to company_panel_path(@company), notice: '*T* Se generó la transacción correctamente. <h2 class="red-text center">El cliente tiene ahora un saldo de <span class="grantexto"><br><br><br>$' + ((@card.credit1.to_f)/100).to_s + '</span></h2><br>' }
+          format.html { redirect_to company_panel_path(@company), notice: '*T* Se generó la transacción correctamente. <h2 class="red-text center">El cliente tiene ahora un saldo de <span class="grantexto"><br><br><br>$' + ((@card.credit1.to_f)/100).to_s + '|' + (@card.credit2).to_s + ' p</span></h2><br>' }
           format.json { render :show, status: :created, location: @transaction }
         else
           format.html { render :new }

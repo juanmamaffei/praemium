@@ -13,6 +13,7 @@ class User < ApplicationRecord
 	    user.name = auth.info.first_name
 	    #user.birth_date = auth.info.birthdate
 	    user.last_name = auth.info.last_name
+	    user.avatar_file_name = auth.info.image
 
 	  end
 	end

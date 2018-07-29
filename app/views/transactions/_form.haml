@@ -8,22 +8,36 @@
         -transaction.errors.full_messages.each do |message|
           %li
             = message
-  .field
+  .row.center
+    .col.s12
+      = form.label "Monto en CENTAVOS o CANTIDAD de puntos"
+      = form.number_field :amount, id: :transaction_amount
 
-    = form.label "Monto en CENTAVOS"
-    = form.number_field :amount, id: :transaction_amount
-  .actions
+  .row
+    .col-xs-12
+      =select_tag "cargar", options_for_select(["Saldo", "Puntos"], "Saldo"), :class => "browser-default"
+
+        
+
+  .row.hide-on-med-and-down.center-xs
     = form.submit "Confirmar",:class=> "btn"
-.row.red.center
-  .white-text
-    %strong No olvide que debe ingresar la cantidad en centavos.
-    %br
-    Por ejemplo, 25 para recargar $0,25
-    %br
-    125 para recargar $1,25
-    %br
-    10000 para recargar $100
-    %br
-    %strong También debe anteponer el signo menos (-) para debitar una compra.
-    %br
-    Por ejemplo, -250, para debitar una compra de $2,50.
+
+  .row.hide-on-large-only
+    .col-xs-6
+      =form.submit "+", :class=> "btn-floating btn-large waves-light green"
+    .col-xs-6
+      =form.submit "-", :class=> "btn-floating btn-large waves-light red"
+/
+  .row.red.center.hide-on-med-and-down
+    .white-text
+      %strong No olvide que debe ingresar la cantidad en centavos.
+      %br
+      Por ejemplo, 25 para recargar $0,25
+      %br
+      125 para recargar $1,25
+      %br
+      10000 para recargar $100
+      %br
+      %strong También debe anteponer el signo menos (-) para debitar una compra.
+      %br
+      Por ejemplo, -250, para debitar una compra de $2,50.
