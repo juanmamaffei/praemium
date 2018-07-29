@@ -1,54 +1,83 @@
-
-%p 
 :javascript
   $(document).ready(function(){
+    $('.parallax').parallax();
     $('.collapsible').collapsible();
   });
-.container
-  .row
-  %ul.collapsible{"data-collapsible"=>"accordion"}
-    %li
-      .collapsible-header
-        %i.material-icons touch_app
-        Entorno móvil
-      .collapsible-body
-        %span Es el entorno que permitirá realizar créditos y débitos usando la cámara de un dispositivo móvil para la lectura del código de barras.
-        %p
-        =link_to "Ir", company_panel_path(@company, :mobile => true), :class=> "btn"
-    %li
-      .collapsible-header
-        %i.material-icons important_devices
-        Entorno para PC
-      .collapsible-body
-        %span Es la forma más eficiente de realizar créditos y débitos a tarjetas de clientes. Está diseñado para una rápida carga con lector de códigos de barra o bien para un ingreso manual del número de cliente.
-        %p
-        =link_to "Ir", company_panel_path(@company), :class=> "btn"
-    %li
-      .collapsible-header
-        %i.material-icons
-          credit_card
-        Crear tarjetas
-      .collapsible-body
-        %span Desde este menú se podrán dar de alta tarjetas de membresía para luego:
-        %ul
-          %li encargar su impresión,
-          %li imprimir tarjetas de códigos con diseño estándar, o bien 
-          %li imprimir lista de códigos de barra y PIN para encargar la producción de las tarjetas a #{@company.name}
-        %p
-          =link_to "Ir", new_company_card_path(@company), :class=> "btn"
-    %li
-      .collapsible-header
-        %i.material-icons people
-        Clientes
-      .collapsible-body
-        %span Desde aquí se pueden visualizar todas las tarjetas dadas de alta y toda la información relativa a las mismas, incluyendo los datos de los usuarios que las han registrado.
-        %p
-          =link_to "Ir", company_cards_path(@company), :class=> "btn"
-    %li
-      .collapsible-header
-        %i.material-icons timeline
-        Estadísticas
-      .collapsible-body
-        %span Cuando se genera un volumen de datos lo suficientemente grande en su sistema, Praemium le ofrecerá sin cargo estadísticas que permitirán mejorar el servicio a sus clientes o captar nuevos.
+  $( window ).load(function() {
+    $('.parallax').parallax();
+  });
+-if user_signed_in?
+  -unless @nopuedeadministrar == true
+    .row
+    .row.teal.lighten-5
+      .container
+        
+        %ul.collapsible{"data-collapsible"=>"accordion"}
+          %li
+            .collapsible-header
+              %i.material-icons touch_app
+              Entorno móvil
+            .collapsible-body
+              %span Es el entorno que permitirá realizar créditos y débitos usando la cámara de un dispositivo móvil para la lectura del código de barras.
+              %p
+              =link_to "Ir", company_panel_path(@company, :mobile => true), :class=> "btn"
+          %li
+            .collapsible-header
+              %i.material-icons important_devices
+              Entorno para PC
+            .collapsible-body
+              %span Es la forma más eficiente de realizar créditos y débitos a tarjetas de clientes. Está diseñado para una rápida carga con lector de códigos de barra o bien para un ingreso manual del número de cliente.
+              %p
+              =link_to "Ir", company_panel_path(@company), :class=> "btn"
+          %li
+            .collapsible-header
+              %i.material-icons
+                credit_card
+              Crear tarjetas
+            .collapsible-body
+              %span Desde este menú se podrán dar de alta tarjetas de membresía para luego:
+              %ul
+                %li encargar su impresión,
+                %li imprimir tarjetas de códigos con diseño estándar, o bien 
+                %li imprimir lista de códigos de barra y PIN para encargar la producción de las tarjetas a #{@company.name}
+              %p
+                =link_to "Ir", new_company_card_path(@company), :class=> "btn"
+          %li
+            .collapsible-header
+              %i.material-icons people
+              Clientes
+            .collapsible-body
+              %span Desde aquí se pueden visualizar todas las tarjetas dadas de alta y toda la información relativa a las mismas, incluyendo los datos de los usuarios que las han registrado.
+              %p
+                =link_to "Ir", company_cards_path(@company), :class=> "btn"
+          %li
+            .collapsible-header
+              %i.material-icons timeline
+              Estadísticas
+            .collapsible-body
+              %span Cuando se genera un volumen de datos lo suficientemente grande en su sistema, Praemium le ofrecerá sin cargo estadísticas que permitirán mejorar el servicio a sus clientes o captar nuevos.
+    %h2.center LA INFORMACIÓN MOSTRADA A CONTINUACIÓN ES LA PÁGINA QUE VEN LOS USUARIOS NO REGISTRADOS. PUEDE EDITAR ESTO EN LA CONFIGURACIÓN DE SU PÁGINA
+.parallax-container
+  .parallax
+    =image_tag(@company.cover.url(:large), :alt => "Portada")
+  %h1.titCompany.center-xs
+    = @company.name
+.row.nomargin
+  .container
+    .col.s12
+      %h2.texto-azul Bienvenido a #{@company.name}
+    .col.s12
+      %p Hola! Bienvenido a nuestro sitio.
+    .col.s12
+      %h2.texto-celeste Tu tarjeta
+      %p Si estás acá, seguramente te dieron una tarjeta <span class="texto-verde">Praemium</span>, que te permitirá SUMAR puntos por cada compra que hagas, y utilizarla para realizar PAGOS de productos y servicios en la empresa.
+      %p Si ya tenés cuenta en Praemium, podés Iniciar sesión, y agregar el número de tarjeta en tu cuenta. De lo contrario, podés Registrarte.
+      %p.center-xs
+        %a.btn.waves-effect{:href=>'\users\sign_up'} Registrarme
+        %a.btn.waves-effect{:href=>'\users\sign_in'} Iniciar sesión
+.parallax-container
+  .parallax
+    =image_tag(@company.cover.url(:large), :alt => "Portada")
+=render partial: "layouts/footer"
 
 

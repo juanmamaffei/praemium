@@ -34,29 +34,28 @@
     %link{:rel=>"manifest", :href=>"#{asset_path "manifest.json"} "}
     =render partial: "layouts/facebooksdk"
   %body
-    %nav
-      .nav-wrapper.white
-        .brand-logo.center
+    -if user_signed_in?
+      %nav
 
-          =link_to image_tag("logoh.png", :width => 250), root_path
+        .nav-wrapper.white.littlePadding
+          .brand-logo
+            
+            =link_to image_tag("logoh.png", :width => 250), root_path
 
-        -if user_signed_in?
-
-
-          %ul#nav-mobile.right.black
-            %a.dropdown-button{:href=>'#', "data-activates"=>'dropdown1'}
+          %ul.right.black-text#nav-mobile
+            %a.black-text.dropdown-button{:href=>'#', "data-activates"=>'dropdown1'}
               %i.material-icons menu
             
-        -else
-          %ul.right.hide-on-med-and-down
-            %li
-              =link_to "Iniciar sesión", new_user_session_path
-    %col.s12.red-text
+          /
+          /  -else
+          /    %ul.right.hide-on-med-and-down
+          /      %li
+          /        =link_to "Iniciar sesión", new_user_session_path
+    
     =render partial: "layouts/sidenav"
-    .container
-      .row.center
-        -unless notice==nil
-          
+    -unless notice==nil
+      .container
+        .row.center          
           -if notice[0,2]=="**"
             .card.red
               %h1.white-text <i class="material-icons">error</i> Ocurrió un error

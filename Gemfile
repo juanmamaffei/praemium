@@ -39,7 +39,7 @@ gem 'jbuilder', '~> 2.5'
 
 #Gemas agregadas
 gem 'devise', '~> 4.4', '>= 4.4.1'
-gem 'materialize-sass', '~> 0.99.0'
+
 gem 'material_icons' 
 gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
@@ -58,6 +58,7 @@ gem 'serviceworker-rails'
 gem 'paperclip', '~> 4.3', '>= 4.3.6'
 gem "letter_opener", :group => :development
 gem 'will_paginate-materialize'
+gem 'materialize-sass', '~> 0.99.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

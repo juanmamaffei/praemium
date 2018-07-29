@@ -15,7 +15,7 @@
     %link{:rel=>"manifest", :href=>"#{asset_path "manifest.json"} "}
   %body
     %nav
-      .nav-wrapper.white.center
+      .nav-wrapper.white
         .brand-logo
           =link_to image_tag("logoh.png", :width => 250), root_path
   
@@ -25,7 +25,7 @@
               %i.material-icons menu
             
         -else
-          %ul.right.hide-on-med-and-down
+          %ul.right
             %li
               =link_to "Iniciar sesión", new_user_session_path
 
@@ -92,7 +92,7 @@
                   = link_to 'Movimientos', company_card_transactions_path(card.company,card.id), :class=>"collection-item"
                   = link_to 'Baja', company_card_transactions_path(card.company,card.id), :class=>"collection-item"
                   = link_to 'Configuración', company_card_transactions_path(card.company,card.id), :class=>"collection-item" 
-                  = link_to 'Tienda', company_card_transactions_path(card.company,card.id), :class=>"collection-item"
+                  = link_to 'Tienda', company_path(card.company), :class=>"collection-item"
     .row.center-md  
       -if @companies.count != 0
         .col-sm-12.center

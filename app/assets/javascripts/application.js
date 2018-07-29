@@ -18,5 +18,5 @@
 //= require materialize-sprockets
 //= require quagga
 //= require serviceworker-companion
-//= require_tree .
+
 

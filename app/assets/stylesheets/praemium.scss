@@ -92,7 +92,19 @@ body{
 
 */
 .bg{
-	background-image: url("bg.png");
+	/* background-image: url("bg.png"); */
 	background-color: rgba(0,156,222,0.055);
 	background-size: cover;
+}
+.littlePadding{
+	padding: 3px;
+}
+.nomargin{
+	margin: 0 auto;
+}
+.parallax-container{
+	height: 150px !important;
+}
+.titCompany{
+	text-shadow: 2px 2px #ffffff;
 }

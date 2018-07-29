@@ -1,10 +1,10 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   #Admin sin restricciones
   before_action :authenticate_admin!, only: [:index, :destroy, :new, :create]
   #Dueño de compañía A, SHOW y EDIT compañía A.
-  before_action :authenticate_owner!, only: [:show, :edit, :update]
+  before_action :authenticate_owner!, only: [:edit, :update]
   #Empleado de compañía A, SHOW de compañía A.
   #Cliente, NADA.
 
@@ -17,7 +17,9 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    verify_own_id
+    if user_signed_in?
+      verify_own_id
+    end
     @cards = Card.where(company_id: @company)
     
   end
@@ -86,7 +88,7 @@ class CompaniesController < ApplicationController
     def verify_own_id
       unless (@company.admin == current_user.id)
         unless current_user.is_admin?
-           redirect_to root_path
+           @nopuedeadministrar = true
         end
       end
     end
