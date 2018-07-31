@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show]
   #Admin sin restricciones
-  before_action :authenticate_admin!, only: [:index, :destroy, :new, :create]
+  before_action :authenticate_admin!, only: [:index, :destroy]
   #Dueño de compañía A, SHOW y EDIT compañía A.
   before_action :authenticate_owner!, only: [:edit, :update]
   #Empleado de compañía A, SHOW de compañía A.
@@ -33,19 +33,95 @@ class CompaniesController < ApplicationController
   def edit
     verify_own_id
   end
+  def freeTrial
 
+    set_company_id
+    if @company.clientcount == 0
+      buenas=0
+      malas=0
+      for i in 1..10
+        card = Card.new
+        card.company_id = @company.id
+        card.credit1 = 0
+        card.credit2 = 0
+        card.credit2_enabled = true
+      # Armar CLIENT(i) y NUMBER (CO,CO,CO,CO,CL,CL,CL,CL,CL)
+        card.client = i
+        #Llevar CLIENT a 5 caracteres
+        cl=i.to_s
+
+        unless cl.length==5
+            begin
+                cl="0"+cl
+            end until cl.length==5
+        end
+
+        #Llevar COMPANY a 4 caracteres
+        co=@company.id.to_s
+
+        unless co.length==4
+            begin
+                co="0"+co
+            end until co.length==4
+        end
+
+        card.number=co+cl
+      # Generar PIN aleatorio
+        card.pin = rand(1000..9999)
+
+        #Cambiar STATUS según opción elegida
+
+        # Si se guarda, avisar, si no ... también
+
+          if card.save
+            buenas=buenas+1
+            @company.clientcount=@company.clientcount+1
+            @company.save
+          else
+            malas=malas+1
+          end
+        end       
+        redirect_to company_prueba_path(@company), notice: "Se crearon tus 10 tarjetas de prueba... 
+        Tarjetas exitosas: " + buenas.to_s + " | Tarjetas malas: " + malas.to_s + " | Empezando desde el ID: 1 hasta : 10"
+
+    end
+    unless @company.alias == "freeTrial"
+      redirect_to root_path
+    end
+  end
   # POST /companies
   # POST /companies.json
   def create
+    
     @company = Company.new(company_params)
+    #Si el usuario tiene permiso 32, decirle que afloje un toque...
+    if current_user.permissions == 32
+      redirect_to root_path
+    else
+    #Si el usuario no es administrador, entonces solicitó una prueba gratuita.
+    #forzar los parámetros estándar de la prueba gratuita
+    unless current_user.is_admin?
+      @company.admin = current_user.id
+      @company.clientcount = 0
+      @company.alias = "freeTrial"
+      #Bloquear la creación de empresas (para que no cree 2 millones...)
+      #usando el permiso 32
+      if current_user.permissions < 30
+        current_user.permissions = 32
+        current_user.save
+      end
+    end
+    
+    
 
-    respond_to do |format|
-      if @company.save
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
-        format.json { render :show, status: :created, location: @company }
-      else
-        format.html { render :new }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @company.save
+          format.html { redirect_to company_prueba_path(@company) }
+          format.json { render :show, status: :created, location: @company }
+        else
+          format.html { render :new }
+          format.json { render json: @company.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -55,7 +131,7 @@ class CompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @company.update(company_params)
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+        format.html { redirect_to @company, notice: 'Se actualizaron los datos correctamente.' }
         format.json { render :show, status: :ok, location: @company }
       else
         format.html { render :edit }
@@ -79,7 +155,9 @@ class CompaniesController < ApplicationController
     def set_company
       @company = Company.find(params[:id])
     end
-
+    def set_company_id
+      @company = Company.find(params[:company_id])
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:name, :url, :admin, :clientcount, :employers, :alias, :cover)

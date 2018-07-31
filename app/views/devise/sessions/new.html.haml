@@ -1,30 +1,33 @@
-
-.container
-  .row.verticaltotal.middle-xs
-    .col.m12.z-depth-3.center.transparenciafuerte
-      .col.m12.center-xs
-        %h1 Iniciar sesión
-        / =image_tag("logoh.png", width: 200)
-      = link_to "Ingresar con Facebook", user_facebook_omniauth_authorize_path, :class => "waves-effect waves-light btn blue"
+.row
+.container.verticaltotal.middle-xs
+  .row.middle-xs.center-xs.z-depth-3.transparenciafuerte
+    .col-xs-12.bigmargin.bigpadding
+      =image_tag("logoh", :height=> "45")
+    .col-xs-12
+      %h1.center-xs Iniciar sesión
+      / =image_tag("logoh.png", width: 200)
+    .col-xs-12
+      = link_to "Ingresar con Facebook", user_facebook_omniauth_authorize_path, :class => "waves-effect waves-light btn azulFb"
+    .col-xs-12
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        .row.col.m12
+        .col-xs-12
           %h2 Correo electrónico
          
           
-          = f.email_field :email, autofocus: true, autocomplete: "email"
-        .row.col.m12
+          = f.email_field :email, autofocus: true, autocomplete: "email", :class=>"blue lighten-5"
+        .col-xs-12
           %h2 Contraseña
           
-          = f.password_field :password, autocomplete: "off"
+          = f.password_field :password, autocomplete: "off", :class=>"blue lighten-5"
 
         - if devise_mapping.rememberable?
-          .row.col.m12
+          .col-xs-12
             = f.check_box :remember_me
             = f.label :remember_me
-        .center
+        .col-xs-12
           = f.submit "Iniciar sesión", :class => "btn"
-        .center
+        .col-xs-12
           .fb-login-button{"data-max-rows"=>"1", "data-size"=>"large", "data-button-type"=>"login_with", "data-show-faces"=>"true", "data-auto-logout-link"=>"false", "data-use-continue-as"=>"false"}
-        .card-action
+        .col-xs-12
           = render "devise/shared/links"
-          
+            

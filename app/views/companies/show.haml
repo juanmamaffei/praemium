@@ -15,6 +15,8 @@
       .container
         .col.s12.center
           %h1 Gestión de empresa
+          -if @company.alias == "freeTrial"
+            =link_to "Instrucciones de prueba", company_prueba_path(@company)
         %ul.collapsible{"data-collapsible"=>"accordion"}
           %li
             .collapsible-header

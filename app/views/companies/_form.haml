@@ -39,7 +39,7 @@
           = form.file_field :cover
   
       .col.s12.center-xs
-        = form.submit "Actualizar datos", :class => "btn"
+        = form.submit "Guardar", :class => "btn"
 
 -if current_user.is_admin?
   = render 'forma', company: @company
