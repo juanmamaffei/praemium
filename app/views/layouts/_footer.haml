@@ -1,15 +1,13 @@
 %footer.page-footer.black
   .container.texto-turquesa-normal
     .row
-      .col.l2.m2.s12.center
+      .col.l2.s12.center
         = image_tag("0.5x/logoblanco.png", width: "60")
       .col.l2.m3.s6
         %h5 Redes sociales
         %p Facebook
-        %p Twitter
         %p YouTube
-        %p Pinterest
-        %p Instagram
+        %p LinkedIn
       .col.l3.m4.s6
         %h5 Blog
         %p
@@ -19,19 +17,26 @@
         %p
           =link_to "Blog", "https://praemium.com.ar/blog/"
 
-      .col.l2.m3.s6
-        %h5 Cuenta
-        %p
-          %a{:href=>'\users\sign_up'} Registrarme
-        %p
-          %a{:href=>'\users\sign_in'} Iniciar sesión
-      .col.l3.m4.s6
+      
+      .col.l3.m4.s12
+        %h5 Legales
         %p
           %a{:href=>'#privacidad'} Privacidad
         %p
           %a{:href=>'#term'} Términos y condiciones
         %p
           %a{:href=>'#licencia'} Licencia
+      .col.s12.center
+        -unless user_signed_in?
+          %h5 Cuenta
+          %p
+            %a{:href=>'\users\sign_up'} Registrarme
+          %p
+            %a{:href=>'\users\sign_in'} Iniciar sesión
+        -else
+          %h5 Soy un comerciante
+          %p
+            =link_to "Iniciar prueba gratis", new_company_path, :class=>"btn red"
         #privacidad.modal.modal-fixed-footer
           .modal-content
             = render 'layouts/privacidad'

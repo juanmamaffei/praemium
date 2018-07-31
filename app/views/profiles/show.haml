@@ -1,80 +1,79 @@
-.container.center-xs.red.white-text
-  -if current_user.name == nil || current_user.name == ""
-    %p Completá tu nombre
-  -if current_user.last_name == nil || current_user.last_name == ""
-    %p Completá tu apellido
-  -else
+-if current_user.name == nil || current_user.name == "" || current_user.last_name == nil || current_user.last_name == "" || current_user.dni == nil || current_user.dni == "" || current_user.birth_date == nil
+  .container.center-xs.red.white-text.bordeRedondeado
+    %h1.center.ul Antes de seguir, necesitamos que completes los siguientes datos:
+    -if current_user.name == nil || current_user.name == ""
+      %li Nombre.
+    -if current_user.last_name == nil || current_user.last_name == ""
+      %li Apellido  
     -if current_user.dni == nil || current_user.dni == ""
-      %p Completá tu DNI
-    -else
-      -if current_user.birth_date == nil
-        %p Completá tu fecha de nacimiento
+      %li DNI
+    -if current_user.birth_date == nil
+      %li Fecha de nacimiento
 
-.container.white.z-depth-3
+.container.white.bordeRedondeadoVerde.z-depth-3
   .row.center
-    .col.s12.banner.negro.texto-turquesa
-      -#%img.circle{:src=> "http://www.um.es/docencia/barzana/materializecss/images/yuna.jpg"}
+    .col.s12.banner.texto-turquesa
       = image_tag @user.avatar.url(:thumb), :class => "circle responsive-img"
       .big Perfil
 
-  .container.center
-    =form_for @user do |f|
-      .row
-        -if current_user.name == nil || current_user.name == ""
-          .col.red.s12.m4.offset-m2
-            %strong Nombre
-            =f.text_field :name
-        -else
-          .col.s12.m4.offset-m2
-            %strong Nombre
-            =f.text_field :name
-        -if current_user.last_name == nil || current_user.last_name == ""
-          .col.red.s12.m4
-            %strong Apellido
-            =f.text_field :last_name
-        -else
-          .col.s12.m4
-            =f.text_field :last_name
-      .row
+  =form_for @user do |f|
+    .row
+      -if current_user.name == nil || current_user.name == ""
+        .col.red.s12.m6.bordeRedondeado
+          %strong Nombre
+          =f.text_field :name
+      -else
+        .col.s12.m6
+          %strong Nombre
+          =f.text_field :name, :class=>"blue lighten-5"
+      -if current_user.last_name == nil || current_user.last_name == ""
+        .col.red.s12.m6.bordeRedondeado
+          %strong Apellido
+          =f.text_field :last_name
+      -else
+        .col.s12.m6
+          %strong Apellido
+          =f.text_field :last_name, :class=>"blue lighten-5"
+    .row
 
-        -if current_user.birth_date == nil
-          .col.s12.m6.red         
-            %strong Fecha de nacimiento
-            =f.date_field :birth_date
-        -else
-          .col.s12.m6
-            %strong Fecha de nacimiento
-            =f.date_field :birth_date
-        
-        -if current_user.dni == nil || current_user.dni == ""
-          .col.s12.m6.red
-            %strong DNI
-            =f.text_field :dni
-        -else
-          .col.s12.m6
-            %strong DNI
-            =f.text_field :dni
+      -if current_user.birth_date == nil
+        .col.s12.m6.red.bordeRedondeado         
+          %strong Fecha de nacimiento
+          =f.date_field :birth_date
+      -else
         .col.s12.m6
-          %strong E-mail
-          =f.text_field :email
+          %strong Fecha de nacimiento
+          =f.date_field :birth_date, :class=>"blue lighten-5"
+      
+      -if current_user.dni == nil || current_user.dni == ""
+        .col.s12.m6.red.bordeRedondeado
+          %strong DNI
+          =f.text_field :dni
+      -else
         .col.s12.m6
-          %strong Bio
-          =f.text_area :bio
-        .col.s12
-          %strong Foto de perfil
-          %p.center
-            = image_tag @user.avatar.url(:medium), :class => "responsive-img"
-          .filefield.inputfield
-            /%span Cambiar
-            = f.file_field :avatar, :class => "file-path-wrapper"
-      .row
-        .col.s12.m6
-          -if current_user.is_admin?
-            .red.white-text Permisos:
-            =f.text_field :permissions
-        .col.s12.m6
+          %strong DNI
+          =f.text_field :dni, :class=>"blue lighten-5"
+      .col.s12.m6
+        %strong E-mail
+        =f.text_field :email, :class=>"blue lighten-5"
+      .col.s12.m6
+        %strong Bio
+        =f.text_area :bio, :class=>"blue lighten-5"
+      .col.s12
+        %strong Foto de perfil
+        %p.center
+          = image_tag @user.avatar.url(:medium), :class => "responsive-img"
+        .filefield.inputfield
+          /%span Cambiar
+          = f.file_field :avatar, :class => "file-path-wrapper blue lighten-5"
+    .row
+      .col.s12.m6
+        -if current_user.is_admin?
+          .red.white-text Permisos:
+          =f.text_field :permissions
+      .col.s12.m6
 
-      .row.center-xs
-        =f.submit "Actualizar", :class => "btn"
-      .row.center-xs
-        =link_to "Modificar datos de acceso", edit_user_registration_path, class: "btn red" # Cerrar sesión
+    .row.center-xs
+      =f.submit "Actualizar", :class => "btn"
+    .row.center-xs
+      =link_to "Modificar datos de acceso", edit_user_registration_path, class: "btn red" # Cerrar sesión

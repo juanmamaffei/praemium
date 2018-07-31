@@ -1,50 +1,53 @@
+.row
 .container
-  .row.verticaltotal.middle-xs
+  .row.middle-xs
     .col.s12.z-depth-3.center.transparenciafuerte
       .col.s12
         %h5 Crear cuenta en <span class="texto-negro">praemium</span>
+      .col.s12
+        = link_to "Ingresar con Facebook", user_facebook_omniauth_authorize_path, :class => "waves-effect waves-light btn azulFb"
+      .col.s12
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = devise_error_messages!
+          -#
+            .field
+              %h2 Nombre
+              %br/
+              = f.text_field :name, :class=>"blue lighten-5"
+            .field
+              %h2 Apellido
+              %br/
+              = f.text_field :last_name, :class=>"blue lighten-5"
+            .field
+              = f.label :birth_date, "Fecha de nacimiento", :class=>"blue lighten-5"
+              %br/
+              = f.date_field :birth_date, :class=>"blue lighten-5"
+            .field
+              = f.label :dni, "DNI", :class=>"blue lighten-5"
+              %br/
+              = f.text_field :dni, :class=>"blue lighten-5"
 
-      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-        = devise_error_messages!
-        -#
           .field
-            %h2 Nombre
+            %h2 Correo electrónico:
             %br/
-            = f.text_field :name
+            = f.email_field :email, autocomplete: "email", :class=>"blue lighten-5"
           .field
-            %h2 Apellido
+            %h2 Contraseña: 
+            - if @minimum_password_length
+              %em
+                (Al menos #{@minimum_password_length} caracteres)
             %br/
-            = f.text_field :last_name
+            = f.password_field :password, autocomplete: "off", :class=>"blue lighten-5"
           .field
-            = f.label :birth_date, "Fecha de nacimiento"
-            %br/
-            = f.date_field :birth_date
+            %h2 Confirmar contraseña:
           .field
-            = f.label :dni, "DNI"
-            %br/
-            = f.text_field :dni
-
-        .field
-          %h2 Correo electrónico:
-          %br/
-          = f.email_field :email, autocomplete: "email"
-        .field
-          %h2 Contraseña: 
-          - if @minimum_password_length
-            %em
-              (Al menos #{@minimum_password_length} caracteres)
-          %br/
-          = f.password_field :password, autocomplete: "off"
-        .field
-          %h2 Confirmar contraseña:
-        .field
-          = f.password_field :password_confirmation, autocomplete: "off"
-        .row.center.center-xs
-          
-          = flash[:alert]
-          = recaptcha_tags
-        .card-action.center
-          = f.submit "Registrar", :class => "btn"
-        .card-action
-          = render "devise/shared/links"
+            = f.password_field :password_confirmation, autocomplete: "off", :class=>"blue lighten-5"
+          .row.center.center-xs
+            
+            = flash[:alert]
+            = recaptcha_tags
+          .card-action.center
+            = f.submit "Registrar", :class => "btn"
+          .card-action
+            = render "devise/shared/links"
 

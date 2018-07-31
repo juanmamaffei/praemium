@@ -29,16 +29,16 @@ class MainController < ApplicationController
 		def verify_profile
 			#Verifica la existencia de los distintos elementos del perfil. Si no existe alguno, redirecciona a la edición del mismo.
 			if current_user.name == nil || current_user.name == ""
-				redirect_to user_path(current_user.id), notice: "Completá tu nombre"
+				redirect_to user_path(current_user.id), notice: "Completá tu nombre", incomplete:true
 			else
 				if current_user.last_name == nil || current_user.last_name == ""
-					redirect_to user_path(current_user.id), notice: "Completá tu apellido"
+					redirect_to user_path(current_user.id), notice: "Completá tu apellido", incomplete:true
 				else
 					if current_user.dni == nil || current_user.dni == ""
-						redirect_to user_path(current_user.id), notice: "Completá tu DNI"
+						redirect_to user_path(current_user.id), notice: "Completá tu DNI", incomplete:true
 					else
 						if current_user.birth_date == nil
-							redirect_to user_path(current_user.id), notice: "Completá tu fecha de nacimiento"
+							redirect_to user_path(current_user.id), notice: "Completá tu fecha de nacimiento", incomplete:true
 						end
 					end
 				end

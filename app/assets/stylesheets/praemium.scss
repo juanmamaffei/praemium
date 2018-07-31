@@ -91,13 +91,18 @@ $turquesa: #009CDD;
 .bigmargin{
 	margin: 5px;
 }
-/* Secciones
+/* Secciones */
 
 body{
-	background-color: $verde;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main{
+  flex: 1 0 auto;
 }
 
-*/
+
 .bg{
 	/* background-image: url("bg.png"); */
 	background-color: rgba(0,156,222,0.055);
@@ -129,4 +134,17 @@ body{
 	bottom: 0;
 	left: 0; 
 	right: 0;
+}
+
+/* Bordes */
+.bordeRedondeadoVerde {
+    border-radius: 15px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+}
+.bordeRedondeado {
+    border-radius: 15px;
+    border: 2px;
+    padding: 20px; 
+
 }

@@ -1,24 +1,24 @@
-.container.z-depth-3
+.container.bordeRedondeadoVerde.verde.white-text
   .row
 
     .col.s12
       %h1.center <i class="material-icons">add_shopping_cart</i> Comercio creado correctamente
-      .big Listo #{current_user.name}!
-      Tu comercio #{@company.name} está creado y ya te asignamos los permisos para que lo edites. También te creamos 10 tarjetas completamente gratis, para que comiences a probar tu servicio.
+      .big.center.texto-blanco Bienvenido a Praemium #{current_user.name}!
+      %p Tu comercio <b>#{@company.name}</b> está creado y ya te asignamos los permisos para que lo edites. También te creamos 10 tarjetas completamente gratis, para que comiences a probar tu servicio.
   .row
     .col.s12.m6
       %h2.center Acceso
       La URL para acceder al mismo es
-      %a{:href=>"https://www.praemium.com.ar/companies/#{@company.id}", :target=>"_blank"} https://www.praemium.com.ar/companies/#{@company.id}
+      %a{:href=>"https://www.praemium.com.ar/companies/#{@company.id}", :target=>"_blank", :class=> "chip"} https://www.praemium.com.ar/companies/#{@company.id}
       =link_to company_path(@company), company_path(@company)
 
     .col.s12.m6
       %p
         Podés solicitarnos un cambio.... algo así como 
-        %span.blue-text www.praemium.com.ar/#{@company.name.delete(' ')}
+        %span.black-text www.praemium.com.ar/#{@company.name.delete(' ')}
       %p
         O bien registrar un dominio propio (quizás 
-        %span.blue-text www.#{@company.name.delete(' ')}.com
+        %span.black-text www.#{@company.name.delete(' ')}.com
         )y pedirnos que lo redireccionemos a tu página
         %span.texto-verde Praemium
   .row.center
@@ -29,8 +29,9 @@
     .col.s12
       %ol
         %li Imprimir credenciales de tarjetas, para entregar a tus clientes.
-        %li Disfrutar de los servicios completamente gratis!
-        %li Si te gustó el servicio y querés contratar Praemium, adheríte desde cualquiera de los dos botones. Un representante se comunicará con vos para ultimar detalles y asistirte en lo que necesites, y en menos de un día hábil tendrás el sistema completo funcionando!
+        %li Probar los servicios con diez de tus clientes, completamente gratis! Podés ver un rápido tutorial sobre cómo hacerlo en el siguiente video.
+        .video-container <iframe width="853" height="480" src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0" frameborder="0" allowfullscreen></iframe>
+        %li.black-text Si te gustó el servicio y querés contratar Praemium, adheríte haciendo clic en cualquiera de los dos botones que se muestran a continuación. Un representante se comunicará con vos para ultimar detalles y asistirte en lo que necesites, y en menos de un día hábil tendrás el sistema completo funcionando!
     .col.s12.center
       =render partial: "suscription"
       %a.btn{:href=>"http://mpago.la/1HKD1h"} Suscribirme

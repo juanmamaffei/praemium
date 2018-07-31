@@ -1,10 +1,10 @@
 .row
-.container.verticaltotal.middle-xs
+.container.middle-xs
   .row.middle-xs.center-xs.z-depth-3.transparenciafuerte
     .col-xs-12.bigmargin.bigpadding
       =image_tag("logoh", :height=> "45")
     .col-xs-12
-      %h1.center-xs Iniciar sesión
+      %h1.center-xs Iniciar sesión en <span class="texto-negro">praemium</span>
       / =image_tag("logoh.png", width: 200)
     .col-xs-12
       = link_to "Ingresar con Facebook", user_facebook_omniauth_authorize_path, :class => "waves-effect waves-light btn azulFb"
