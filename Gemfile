@@ -59,7 +59,7 @@ gem 'paperclip', '~> 4.3', '>= 4.3.6'
 gem "letter_opener", :group => :development
 gem 'will_paginate-materialize'
 gem 'materialize-sass', '~> 0.99.0'
-
+gem 'redcarpet', '~> 3.3', '>= 3.3.4'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

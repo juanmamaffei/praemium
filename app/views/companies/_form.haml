@@ -1,0 +1,45 @@
+:javascript
+  $(document).ready(function(){
+    $('.parallax').parallax();
+  });
+  $( window ).load(function() {
+    $('.parallax').parallax();
+  });
+
+-if company.errors.any?
+  #error_explanation
+    = pluralize(company.errors.count, "error")
+    errores
+    %ul
+      -company.errors.full_messages.each do |message|
+        %li
+          = message
+.parallax-container
+  .parallax
+    = image_tag @company.cover.url(:large)
+  %h1.center-xs
+    = @tit
+.container.teal.lighten-4
+  = form_with(model: company, local: true, html: { multipart: true }) do |form|
+    .row.bigp
+      .col.s12
+        %h2 Nombre del comercio
+        .teal.lighten-5
+          = form.text_field :name, id: :company_name
+
+      .col.s12
+        %h2 Texto para mostrar
+        .teal.lighten-5
+          = form.text_field :markup_content
+
+      .col.s12
+        %h2 Cambiar imagen de portada
+        %strong Dimensiones sugeridas: __ X __
+        .teal.lighten-5
+          = form.file_field :cover
+  
+      .col.s12.center-xs
+        = form.submit "Actualizar datos", :class => "btn"
+
+-if current_user.is_admin?
+  = render 'forma', company: @company

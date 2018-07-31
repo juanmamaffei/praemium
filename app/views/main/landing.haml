@@ -12,10 +12,23 @@
       $('.modal').modal();
       });
   %body.bg
+    .row.hide
+      %h1 Fidelización de clientes, prepagos y bonificaciones. Sistema para la mejora de las ventas.
+      %p Te damos un sistema completo, fácil de usar, económico que tus clientes pueden usar desde cualquier dispositivo.
+      %p Sirve en Android, iOS, Windows, Windows Phone, todas las distribuciones Linux. No requiere más euqipamiento que tu celular y es muy fácil y seguro de usar.
+      %h2 Fidelización de clientes con tarjetas digitales o plásticas
+      %p Imprimimos tarjetas plásticas con el logo y nombre de tu empresa, o bien, podés recurrir a tarjetas digitales.
+      %h2 Sistema de pagos online, sistema de puntos y bonificaciones
+      %p A través de nuestro sistema, tus clientes podrán recargar su saldo, agilizando el proceso de compras en tu comercio.
+      %p También lo podrás utilizar como sistema de puntos, para dar premios y mejorar la experiencia de compra de tus clientes.
+      %h2 Sitio web gratis, hosting gratuito
+      %p Con el servicio básico de Praemium, te damos un sitio gratuito que servirá como landing page (página de aterrizaje) para tus ventas, una tienda y un dominio praemium.com.ar/TUNEGOCIO.
+      %p Si ya tenés dominio, podés redireccionarlo a nuestro sitio, o bien agregar un enlace al mismo, para combinarlos.
+      %p Si no tenés dominio TUNEGOCIO.COM, podés comunicarte con nosotros y lo adquirimos por vos.
     %header
       .row.bigp.nom.valign-wrapper
         .col.s12.center
-          = image_tag("logoh.png", width: "260")
+          = image_tag("logoh.png", width: "260", alt: "Logo de Praemium. Clientes leales. Fidelización de clientes. Sistema de prepagos. Sistema de puntos.")
           %br
           %strong.texto-azul
             Clientes leales
@@ -24,21 +37,28 @@
     %main
       .row.bigp.azul.nom.texto-turquesa-normal
         .col.m12.l6.center
-          %h1.texto-blanco Tengo una tarjeta de un comercio adherido
+          %h2.texto-blanco Tengo una tarjeta de un comercio adherido
+
           %a.waves-effect.waves-light.btn{:href=>'\users\sign_up'} Registrar tarjeta
           %p O si ya tenés cuenta en Praemium...
           %a.waves-effect.waves-light.btn{:href=>'\users\sign_in'} Iniciar sesión
         .col.m12.l6.center.valign
-          %h1.texto-blanco Lo quiero en mi negocio
+          %h2.texto-blanco Lo quiero en mi negocio
           %h5 Tu sistema de bonificaciones y prepagos en 24 horas
           %p
-            A sólo <span class="money">$1249</span> por mes.
+            A sólo <span class="money">$2299</span> por mes.
             %br
             %small Pesos argentinos
           %p
-            Costos iniciales bonificados <br><del><strong>$2499</strong></del> <span class="money">$0</span>
+            Costos iniciales bonificados <br><del><strong>$3499</strong></del> <span class="money">$0</span>
             %br
             %small Pesos argentinos          
-          %a.waves-effect.waves-light.btn Prueba gratuita
-        
+          %a.waves-effect.waves-light.btn Probar gratis
+      .row.hide
+        .col.s12.m4
+          =image_tag("p1.png", :class => "responsive-img materialboxed", :alt => "Tarjetas de fidelización de clientes. Praemium, Clientes leales..")
+        .col.s12.m4
+          =image_tag("p2.png", :class => "responsive-img materialboxed", :alt => "Las tarjetas sirven para sumar puntos y canjearlos por productos o servicios, o bien para utilizarlas como un sistema de prepago, pudiendo prescindir del dinero en efectivo. El sistema, además, brinda estadísticas que sirven al comerciante para poder mejorar sus productos y servicios.")
+        .col.s12.m4
+          =image_tag("p3.png", :class => "responsive-img materialboxed", :alt => "Tarjetas de fidelización de clientes. Praemium, Clientes leales. El sistema, además, brinda estadísticas que sirven al comerciante para poder mejorar sus productos y servicios.")
     =render partial: "layouts/footer"

@@ -47,7 +47,7 @@ class TransactionsController < ApplicationController
     @transaction.user = current_user
 
     if params[:cargar] == "Saldo"
-      if params[:commit] == "Confirmar" or "+"
+      if params[:commit] == "Confirmar"
         @card.credit1 = @card.credit1.to_i+transaction_params[:amount].to_i
         if transaction_params[:amount].to_i<0
           @transaction[:description] = "Consumo de saldo"
