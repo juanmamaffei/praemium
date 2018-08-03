@@ -22,6 +22,7 @@ class CompaniesController < ApplicationController
     end
     @cards = Card.where(company_id: @company)
     
+    
   end
 
   # GET /companies/new
@@ -160,7 +161,7 @@ class CompaniesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name, :url, :admin, :clientcount, :employers, :alias, :cover)
+      params.require(:company).permit(:name, :url, :admin, :clientcount, :employers, :alias, :cover, :markdown_content)
     end
 
     def verify_own_id

@@ -77,7 +77,9 @@
     .col.s12
       %h2.texto-azul Bienvenido a #{@company.name}
     .col.s12
-      %p Hola! Bienvenido a nuestro sitio.
+      -markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+      -unless @company.markdown_content == nil
+        =raw(markdown.render(@company.markdown_content).html_safe)
     .col.s12
       %h2.texto-celeste Tu tarjeta
       %p Si estás acá, seguramente te dieron una tarjeta <span class="texto-verde">Praemium</span>, que te permitirá SUMAR puntos por cada compra que hagas, y utilizarla para realizar PAGOS de productos y servicios en la empresa.

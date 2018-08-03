@@ -2,30 +2,35 @@
   .container.texto-turquesa-normal
     .row
       .col.l2.s12.center
-        = image_tag("0.5x/logoblanco.png", width: "60")
+        = link_to(image_tag("0.5x/logoblanco.png", width: "60"), "https://www.praemium.com.ar")
       .col.l2.m3.s6
         %h5 Redes sociales
-        %p Facebook
-        %p YouTube
-        %p LinkedIn
+        %p 
+          =link_to "Facebook", "https://www.facebook.com/praemium.oficial/", :target => "_blank"
+        %p
+          =link_to "YouTube", "https://www.youtube.com/channel/UCPN9PoYJ1FSyeWU7e6z6chQ?view_as=subscriber", :target => "_blank"
+        %p 
+          =link_to "LinkedIn", "https://www.linkedin.com/company/praemium-argentina/", :target => "_blank"
       .col.l3.m4.s6
-        %h5 Blog
+        %h5
+          =link_to "Blog", "https://praemium.com.ar/blog", :target => "_blank"
         %p
-          =link_to "Beneficios para clientes", "https://praemium.com.ar/blog/?page_id=10"
+          =link_to "Ayuda y Documentación", "https://praemium.com.ar/blog/docs", :target => "_blank"
         %p
-          =link_to "Beneficios para empresas", "https://praemium.com.ar/blog/?page_id=9"
-        %p
-          =link_to "Blog", "https://praemium.com.ar/blog/"
+          =link_to "Hacé crecer tu comercio", "https://praemium.com.ar/blog", :target => "_blank"
 
       
+      
+      
+
       .col.l3.m4.s12
         %h5 Legales
         %p
           %a{:href=>'#privacidad'} Privacidad
         %p
           %a{:href=>'#term'} Términos y condiciones
-        %p
-          %a{:href=>'#licencia'} Licencia
+        /%p
+        /  %a{:href=>'#licencia'} Licencia
       .col.s12.center
         -unless user_signed_in?
           %h5 Cuenta

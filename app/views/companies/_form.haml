@@ -30,7 +30,7 @@
       .col.s12
         %h2 Texto para mostrar
         .teal.lighten-5
-          = form.text_field :markup_content
+          = form.text_area :markdown_content, rows: 50, :style=>"height: 350px;"
 
       .col.s12
         %h2 Cambiar imagen de portada
