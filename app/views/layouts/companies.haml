@@ -1,0 +1,73 @@
+%html
+  %head
+    %title Praemium
+    = csrf_meta_tags
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+    %meta{ :name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
+    
+    
+    :javascript
+      $(document).ready(function(){
+      $('.modal').modal();
+      });
+    :javascript
+      $('.dropdown-button').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrainWidth: false, // Does not change width of dropdown to that of the activator
+        hover: true, // Activate on hover
+        gutter: 0, // Spacing from edge
+        belowOrigin: false, // Displays dropdown below the button
+        alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      }
+      );
+    :javascript
+      $(document).ready(function(){
+        $('.fixed-action-btn').floatingActionButton();
+        $('.fixed-action-btn').openFAB();
+        $('.tooltipped').tooltip();
+      });
+
+    %link{:rel=>"manifest", :href=>"#{asset_path "manifest.json"} "}
+    =render partial: "layouts/facebooksdk"
+  %body
+    -if user_signed_in?
+      %nav
+
+        .nav-wrapper.white.littlePadding
+          .brand-logo.center
+            
+            =link_to image_tag("logoh.png", :width => 200), root_path
+
+          %ul.black-text#nav-mobile
+            %a.black-text.dropdown-button{:href=>'#', "data-activates"=>'dropdown1'}
+              %i.material-icons menu
+    
+    =render partial: "layouts/sidenav"
+    -unless notice==nil
+      .container
+        .row.center          
+          -if notice[0,2]=="**"
+            .card.red
+              %h1.white-text <i class="material-icons">error</i> Ocurrió un error
+
+              %strong.white-text
+                =notice
+            #noticia.modal.modal-fixed-footer
+              .modal-content
+                %h4 Epa! Hubo un error
+                %p
+                  =notice
+              .modal-footer.center
+                %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+              %script
+                noticia.open();
+          -else
+            -if notice[0,3]=="*T*"
+            -else
+              .chip.center
+                = notice
+    = yield

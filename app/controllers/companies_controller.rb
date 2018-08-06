@@ -17,12 +17,17 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @npa = "false"
+
+
+    
     if user_signed_in?
       verify_own_id
     end
+
     @cards = Card.where(company_id: @company)
     
-    
+    render layout: "companies"
   end
 
   # GET /companies/new
@@ -165,10 +170,11 @@ class CompaniesController < ApplicationController
     end
 
     def verify_own_id
-      unless (@company.admin == current_user.id)
-        unless current_user.is_admin?
-           @nopuedeadministrar = true
-        end
+      unless (@company.admin == current_user.id) or current_user.is_admin?
+
+           @npa = "true"
+    
       end
+
     end
 end

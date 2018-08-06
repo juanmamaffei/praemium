@@ -9,7 +9,7 @@
 
 -if user_signed_in?
   .row
-  -unless @nopuedeadministrar == true
+  -if @npa == "false"
     
     .row.teal.lighten-5
       .container
@@ -29,7 +29,7 @@
           %li
             .collapsible-header
               %i.material-icons important_devices
-              Entorno para PC
+              Entorno general
             .collapsible-body
               %span Es la forma más eficiente de realizar créditos y débitos a tarjetas de clientes. Está diseñado para una rápida carga con lector de códigos de barra o bien para un ingreso manual del número de cliente.
               %p
@@ -67,6 +67,7 @@
       .col.s12.center A CONTINUACIÓN SE MUESTRA LA PÁGINA QUE VE EL RESTO DE LOS USUARIOS DE PRAEMIUM, SUS CLIENTES Y TAMBIÉN LOS VISITANTES NO REGISTRADOS.
       .col.s12.center
         =link_to "Editar página", edit_company_path(@company.id), :class => "btn red bigmargin" #, :onclick => "javascript:(function(ele) { window.open(ele.href, ele.title, 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes, width=75%, resizable=yes') })(this); return true;"
+
 .parallax-container
   .parallax
     =image_tag(@company.cover.url(:large), :alt => "Portada")
@@ -75,7 +76,7 @@
 .row.nomargin
   .container
     .col.s12
-      %h2.texto-azul Bienvenido a #{@company.name}
+      /%h2.texto-azul Bienvenido a #{@company.name}
     .col.s12
       -markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
       -unless @company.markdown_content == nil
@@ -91,6 +92,6 @@
 .parallax-container
   .parallax
     =image_tag(@company.cover.url(:large), :alt => "Portada")
-=render partial: "layouts/footer"
+=render partial: "layouts/footercompanies"
 
 
