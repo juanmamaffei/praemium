@@ -5,6 +5,17 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_in_path_for(resource)
+    if params[:redirect_to].present?
+      store_location_for(resource, params[:redirect_to])
+    elsif request.referer == new_session_url
+      super
+    else
+      stored_location_for(resource) || request.referer || root_path
+    end
+      
+  end
+
   def authenticate_owner!
   	redirect_to root_path unless user_signed_in? && current_user.is_owner? # || current_user.is_admin?)
   end

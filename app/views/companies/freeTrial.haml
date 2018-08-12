@@ -9,8 +9,7 @@
     .col.s12.m6
       %h2.center Acceso
       La URL para acceder al mismo es
-      %a{:href=>"https://www.praemium.com.ar/companies/#{@company.id}", :target=>"_blank", :class=> "chip"} https://www.praemium.com.ar/companies/#{@company.id}
-      =link_to company_path(@company), company_path(@company)
+      %a{:href=>"https://www.praemium.com.ar/c/#{@company.id}", :target=>"_blank", :class=> "chip"} https://www.praemium.com.ar/c/#{@company.id}
 
     .col.s12.m6
       %p
@@ -35,3 +34,10 @@
     .col.s12.center
       =render partial: "suscription"
       %a.btn{:href=>"http://mpago.la/1HKD1h"} Suscribirme
+    .col.s12.center.white-text
+      %p Si no tenés tarjeta de crédito. Comunicáte con nosotros para ofrecerte otros medios de pago.
+      %p
+        =link_to(image_tag("social/whatsapp", height: 24), "https://api.whatsapp.com/send?phone=+5493417183662&text=Hola! Quiero suscribirme a un plan pago de Praemium!")
+        341-718-3662
+      %p
+        =link_to(raw("<i class=material-icons>email</i> info@praemium.com.ar"), "mailto: info@praemium.com.ar", :class => "white-text") 

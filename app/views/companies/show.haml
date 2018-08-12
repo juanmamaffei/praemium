@@ -4,11 +4,15 @@
     $('.collapsible').collapsible();
     $('.carousel-slider').slider({full_width: true});//slider init
     $('.carousel').carousel();
+    $(".button-collapse").sideNav();
+    $('.scrollspy').scrollSpy();
   });
   $( window ).load(function() {
     $('.parallax').parallax();
     $('.carousel').carousel();
+    $(".button-collapse").sideNav();
     $('.carousel-slider').slider({full_width: true});//slider init
+    $('.scrollspy').scrollSpy();
   });
 
 -if user_signed_in?
@@ -73,81 +77,187 @@
         =link_to "Editar página", edit_company_path(@company.id), :class => "btn red bigmargin" #, :onclick => "javascript:(function(ele) { window.open(ele.href, ele.title, 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes, width=75%, resizable=yes') })(this); return true;"
 %nav.white
   .nav-wrapper
-    .littleMargin
-      =image_tag("logoh", height: 50)
+    .brand-logo
+      =image_tag(@company.logo.url(:medium), height: 50)
+    .hide-on-large-only
+      %a.black-text.button-collapse.sidenav-trigger{"data-activates"=>"mobile-demo", :href => "#"}
+        %i.material-icons menu
+    %ul.right.hide-on-med-and-down.black-text
+      -if @company.about_us_enabled?
+        %li
+          %a.black-text{ :href => "#about"} Acerca de
+      -if @company.other_info_enabled?
+        %li
+          %a.black-text{ :href => "#other"} Otra info
+      %li
+        %a.black-text{ :href => "#social"} Social
+      -unless user_signed_in?
+        %li
+          %a.black-text{ :href => "#cards"} Ingresar
+%ul.side-nav#mobile-demo
+  %li.center
+    =image_tag(@company.logo.url(:medium), :class => "logoCompany")
+  -if @company.about_us_enabled?
+    %li
+      %a.black-text{ :href => "#about"} Acerca de
+  -if @company.other_info_enabled?
+    %li
+      %a.black-text{ :href => "#other"} Otra info
+  %li
+    %a.black-text{ :href => "#social"} Social
+  -unless user_signed_in?
+    %li
+      %a.black-text{ :href => "#cards"} Ingresar
+  -if user_signed_in?
+    %li
+      %a.black-text{ :href => "#cards"} Tarjetas!
 .parallax-container.valign-wrapper.center-xs
   .parallax
     =image_tag(@company.cover.url(:large), :alt => "Portada")
   %h1.titCompany.center-xs.middle-xs
-    =image_tag("logoh", :class => "logoCompany")
+    =image_tag(@company.logo.url(:medium), :class => "logoCompany")
     /= @company.name
-.row
-  .container
-    .col.s12
-      /%h2.texto-azul Bienvenido a #{@company.name}
-    .col.s12
+-unless params[:notice].nil?
+  %h1.red.bordeRedondeado.texto-blanco
+    =params[:notice]
+  :javascript
+    alert("#{params[:notice]}");
+.container
+  .row.valign-wrapper
+    .col.s12.m4
+      =image_tag(@company.picture.url(:large), :class => "pictureCompany")
+    .col.s12.m8
       -markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
       -unless @company.markdown_content == nil
         =raw(markdown.render(@company.markdown_content).html_safe)
-    
+  
+  
+  -if @company.store_enabled?
     .col.s12
+      .red.texto-blanco.center.bordeRedondeado Muy pronto vas a poder habilitar tu tienda, y se va a ver más o menos así!
       %h2 Tienda
       En nuestra tienda, podrás adquirir nuestros productos y servicios.
-    .col.s12
-      %h5 Productos destacados
-      .carousel.carousel-slider
+      .carousel
         %a.carousel-item{:href=>"#one!"}
           =image_tag("03")
         %a.carousel-item{:href=>"#two!"}
           =image_tag("2bg")
         %a.carousel-item{:href=>"#three!"}
           =image_tag("p3")
-      %a.btn
+        %a.carousel-item{:href=>"#one!"}
+          =image_tag("03")
+        %a.carousel-item{:href=>"#two!"}
+          =image_tag("2bg")
+        %a.carousel-item{:href=>"#three!"}
+          =image_tag("p3")
+    .col.s12.center
+      %a.btn.center.grey.darken-4
         %i.material-icons shopping_cart
         Entrar a la tienda
-    .col.s12
-      %h2.texto-celeste Tu tarjeta
-      %p Si estás acá, seguramente te dieron una tarjeta <span class="texto-verde">Praemium</span>, que te permitirá SUMAR puntos por cada compra que hagas, y utilizarla para realizar PAGOS de productos y servicios en la empresa.
-      %p Si ya tenés cuenta en Praemium, podés Iniciar sesión, y agregar el número de tarjeta en tu cuenta. De lo contrario, podés Registrarte.
-    .col.s12.m6.center-xs.littleMargin
-      %a.btn.waves-effect.black.white-text{:href=>'\users\sign_up'} Registrarme
-    .col.s12.m6.center-xs.littleMargin  
-      %a.btn.waves-effect.black.white-text{:href=>'\users\sign_in'} Iniciar sesión
+.container.middle-xs
+  -if @company.about_us_enabled?
+  
+    .col.s12.m6
+      .card.horizontal.grey.darken-3.white-text.littlePadding2
+        -markdownAbUs = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+        -unless @company.about_us == nil or @company.about_us == "" or @company. == " "
+          .section.scrollspy#about
+            =raw(markdownAbUs.render(@company.about_us).html_safe)
+  -if @company.other_info_enabled?  
+
+    .col.s12.m6
+      .card.horizontal.grey.darken-5.white-text.littlePadding2
+        -markdownOtIn = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+        -unless @company.other_info == nil or @company.other_info == "" or @company. == " "
+          .section.scrollspy#other
+            =raw(markdownOtIn.render(@company.other_info).html_safe)
+    
+.container.middle-xs.littleMargin.center
+  .col.s12.center.section.scrollspy#cards
+    -if user_signed_in?
+      
+      %h2 Tus tarjetas de #{@company.name}
+      -if @cards.count >0
+        -@cards.each do |card|
+          .col-xs-12.col-sm-6.col-md-4
+            .card
+              .card-image.waves-effect.waves-block.waves-light
+                =image_tag(@company.cover.url(:medium), :alt => "Portada de #{@company.name}", :class=> "activator", :height => "150px", :width => "300px")
+              .card-content
+                %span.card-title.activator.grey-text.text-darken-4
+                  = @company.name
+                  .chip #{card.client.to_s}
+                  %i.material-icons.right more_vert
+                %p.center
+                  Saldo: $
+                  = (card.credit1.to_f)/100
+
+                  | Puntos: 
+                  = card.credit2
+    
+              .card-reveal
+                %span.card-title.grey-text.text-darken-4
+                  =@company.name
+                  %i.material-icons.right close
+                
+                .collection
+                  = link_to 'Movimientos', company_card_transactions_path(card.company,card.id), :class=>"collection-item"
+                  = link_to 'Baja', company_card_transactions_path(card.company,card.id), :class=>"collection-item"
+                  = link_to 'Configuración', company_card_transactions_path(card.company,card.id), :class=>"collection-item"
+      -else
+        No tenés tarjetas
+        
+        =link_to "Solicitar nueva tarjeta ", company_requestCard_path(@company.id)
+    -else
+      %p.texto-celeste.center Iniciá sesión o creá una nueva cuenta en Praemium, para obtener tu tarjeta de beneficios de este comercio.
+      .col.s12.m6.center-xs.littleMargin
+        =link_to "Crear cuenta", new_user_registration_path(redirect_to: request.path), :class=> "btn waves-effect grey darken-5 white-text"
+      .col.s12.m6.center-xs.littleMargin  
+        =link_to "Iniciar sesión", new_user_session_path(redirect_to: request.path), :class=> "btn waves-effect black white-text"
+
+
 .parallax-container
   .parallax
     =image_tag(@company.cover.url(:large), :alt => "Portada")
 %footer.page-footer.white.darken-2
   .container
     .row.center-xs
-      .col.s12.black-text
+      .col.s12.black-text.section.scrollspy#social
         =@company.name
-    .row
-      .col.l3.m4.s12.center
-        =image_tag("social/002-facebook", height: 24)
-        =link_to("Facebook", "http://www.facebook.com", :target=> "_blank")
-      .col.l3.m4.s12.center
-        =image_tag("social/7-email", height: 24)
-        =link_to("Email", "http://www.facebook.com", :target=> "_blank")
-      .col.l3.m4.s12.center
-        =image_tag("social/website", height: 24)
-        =link_to("Sitio web", "http://www.facebook.com", :target=> "_blank")
-      .col.l3.m4.s12.center
-        =image_tag("social/instagram", height: 24)
-        =link_to("Instagram", "http://www.facebook.com", :target=> "_blank")
-      .col.l3.m4.s12.center
-        =image_tag("social/linkedin", height: 24)
-        =link_to("LinkedIn", "http://www.facebook.com", :target=> "_blank")
-      .col.l3.m4.s12.center
-        =image_tag("social/phone", height: 24)
-        =link_to("Teléfono", "http://www.facebook.com", :target=> "_blank")
-      .col.l3.m4.s12.center
-        =image_tag("social/023-whatsapp-logo", height: 24)
-        =link_to("WhatsApp", "https://api.whatsapp.com/send?phone=#{@company.whatsapp}&text=Hola%20#{@company.name}!%20Mi%20nombre%20es%20**___**", :target=> "_blank")
-      .col.l3.m4.s12.center
-        =image_tag("social/twitter", height: 24)
-        =link_to("Teléfono", "http://www.facebook.com", :target=> "_blank")
-        /-unless @company.facebook == nil
-        /  Facebook
+      
+      -unless @company.facebook == nil or @company.facebook == "" or @company.facebook == " " 
+        .col.l3.m4.s12.center
+          =image_tag("social/002-facebook", height: 24)
+          =link_to("Facebook", @company.facebook, :target=> "_blank")
+      -unless @company.email == nil or @company.email == "" or @company.email == " "  
+        .col.l3.m4.s12.center
+          =image_tag("social/7-email", height: 24)
+          =link_to("Email", "mailto:#{@company.email}", :target=> "_blank")
+      -unless @company.website == nil or @company.website == "" or @company.website == " "  
+        .col.l3.m4.s12.center
+          =image_tag("social/website", height: 24)
+          =link_to("Sitio web", @company.website, :target=> "_blank")
+      -unless @company.instagram == nil or @company.instagram == "" or @company.instagram == " "  
+        .col.l3.m4.s12.center
+          =image_tag("social/instagram", height: 24)
+          =link_to("Instagram", @company.instagram, :target=> "_blank")
+      -unless @company.linkedin == nil or @company.linkedin == "" or @company.linkedin == " "  
+        .col.l3.m4.s12.center
+          =image_tag("social/linkedin", height: 24)
+          =link_to("LinkedIn", @company.linkedin, :target=> "_blank")
+      -unless @company.phone == nil or @company.phone == "" or @company.phone == " "  
+        .col.l3.m4.s12.center
+          =image_tag("social/phone", height: 24)
+          =link_to("Teléfono", @company.phone, :target=> "_blank")
+      -unless @company.whatsapp == nil or @company.whatsapp == "" or @company.whatsapp == " "  
+        .col.l3.m4.s12.center
+          =image_tag("social/023-whatsapp-logo", height: 24)
+          =link_to("WhatsApp", "https://api.whatsapp.com/send?phone=#{@company.whatsapp}&text=Hola%20#{@company.name}!%20Les%20escribo%20desde%20la%20web", :target=> "_blank")
+      -unless @company.twitter == nil or @company.twitter == "" or @company.twitter == " "  
+        .col.l3.m4.s12.center
+          =image_tag("social/twitter", height: 24)
+          =link_to("Twitter", @company.twitter, :target=> "_blank")
+
 =render partial: "layouts/footercompanies"
 
 

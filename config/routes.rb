@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     post 'panel', to: 'cards#scan'
     get 'prueba', to: 'companies#freeTrial'
     get 'stats', to: 'companies#stats'
+    get 'requestCard', to: 'companies#send_mail_card_request'
   
   end
 

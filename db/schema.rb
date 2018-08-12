@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180803212119) do
+ActiveRecord::Schema.define(version: 20180812015655) do
 
   create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "company_id"
@@ -44,6 +44,28 @@ ActiveRecord::Schema.define(version: 20180803212119) do
     t.datetime "cover_updated_at"
     t.text "markdown_content"
     t.text "content"
+    t.string "logo_file_name"
+    t.string "logo_content_type"
+    t.integer "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string "picture_file_name"
+    t.string "picture_content_type"
+    t.integer "picture_file_size"
+    t.datetime "picture_updated_at"
+    t.string "facebook"
+    t.string "twitter"
+    t.string "website"
+    t.string "email"
+    t.string "instagram"
+    t.string "linkedin"
+    t.string "phone"
+    t.string "whatsapp"
+    t.text "about_us"
+    t.boolean "about_us_enabled"
+    t.text "other_info"
+    t.boolean "other_info_enabled"
+    t.integer "template"
+    t.boolean "store_enabled"
   end
 
   create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -18,15 +18,11 @@ class CompaniesController < ApplicationController
   # GET /companies/1.json
   def show
     @npa = "false"
-
-
-    
     if user_signed_in?
-      verify_own_id
+      verify_own_id_npa
+      @cards = Card.where(company_id: @company.id, user: current_user.id)
     end
 
-    @cards = Card.where(company_id: @company)
-    
     render layout: "companies"
   end
 
@@ -158,6 +154,7 @@ class CompaniesController < ApplicationController
 
   def stats
     set_company_id
+    verify_own_id
 
     #Consultar a la base de datos
     @allTransactions = Transaction.where('company_id' => @company.id)
@@ -205,8 +202,16 @@ class CompaniesController < ApplicationController
         #Sumar credit1
 
         #Sumar credit2
-
+    
   end
+
+  def send_mail_card_request
+    set_company_id
+    ClientToOwnersMailer.with(user: current_user, company: @company).new_card_request.deliver_now
+    
+    redirect_to company_path(@company.id, notice: "Listo! Ya enviamos tus datos al administrador de #{@company.name}, para que cree tu tarjeta. Se pondrá en contacto con vos a la brevedad.")
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company
@@ -217,13 +222,21 @@ class CompaniesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name, :url, :admin, :clientcount, :employers, :alias, :cover, :markdown_content)
+      params.require(:company).permit(:name, :url, :admin, :clientcount, :employers, :alias, :cover, :markdown_content, :facebook, :website, :twitter, :email, :instagram, :linkedin, :whatsapp, :phone, :store_enabled, :picture, :logo, :about_us_enabled, :other_info_enabled, :about_us, :other_info)
     end
 
-    def verify_own_id
+    def verify_own_id_npa
       unless (@company.admin == current_user.id) or current_user.is_admin?
 
            @npa = "true"
+    
+      end
+
+    end
+    def verify_own_id
+      unless (@company.admin == current_user.id) or current_user.is_admin?
+
+           redirect_to root_path
     
       end
 

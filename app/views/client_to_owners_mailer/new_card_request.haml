@@ -1,0 +1,33 @@
+!!!HTML5
+
+%body
+	%p
+		Hola, administrador de <b>#{@company.name}</b>. Un usuario registrado solicitó una TARJETA para tu COMPAÑÍA.
+	%p
+		Los datos de este usuario son:
+	.card
+		%p
+			%strong Nombre:
+			=@user.name
+		%p
+			%strong Apellido:
+			=@user.last_name
+		%p
+			%strong Email:
+			=@user.email
+		%p
+			%strong Fecha de nacimiento:
+			=@user.birth_date
+		%p
+			%strong DNI:
+			=@user.dni
+		%p
+			=image_tag @user.avatar.url
+	%p
+		Esperamos que puedas comunicarte pronto con él, para acordar el intercambio y que pueda asignarla a su cuenta de usuario.
+	%p
+		Ante cualquier duda, no dudes en escribirnos a nuestros medios de contacto.
+	%p
+		Aprovechamos para mandarte un gran abrazo.
+	%p
+		El equipo de PRAEMIUM

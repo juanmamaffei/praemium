@@ -58,6 +58,7 @@
             = flash[:alert]
             = recaptcha_tags
           .card-action.center
+            = hidden_field_tag :redirect_to, params[:redirect_to]
             = f.submit "Registrar", :class => "btn"
           .card-action
             = render "devise/shared/links"

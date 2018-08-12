@@ -1,6 +1,7 @@
 :javascript
   $(document).ready(function(){
     $('.parallax').parallax();
+    $('.collapsible').collapsible();
   });
   $( window ).load(function() {
     $('.parallax').parallax();
@@ -24,20 +25,92 @@
     .row.bigp
       .col.s12
         %h2 Nombre del comercio
-        .teal.lighten-5
+        .white.bordeRedondeado
           = form.text_field :name, id: :company_name
 
       .col.s12
         %h2 Texto para mostrar
-        .teal.lighten-5
+        .white.bordeRedondeado
           = form.text_area :markdown_content, rows: 50, :style=>"height: 350px;"
 
+      
       .col.s12
-        %h2 Cambiar imagen de portada
-        %strong Dimensiones sugeridas: __ X __
-        .teal.lighten-5
-          = form.file_field :cover
-  
+        %h2
+          %i.material-icons shopping_cart
+          Tienda
+        .white.bordeRedondeado.center
+          =form.check_box :store_enabled, id:"store_enabled"
+          =form.label "Habilitar tienda", for:"store_enabled", id:"store_enabled"
+      .col.s12.center-xs
+        %ul.collapsible{"data-collapsible"=>"accordion"}
+          %li
+            .collapsible-header
+              %i.material-icons share
+              Enlaces
+            .collapsible-body.white
+              %strong.red-text Copie y pegue las URL completas (incluyendo http:// o https://)
+              %br
+              %strong Facebook
+              .teal.lighten-5.bordeRedondeado
+                = form.text_field :facebook
+              %strong Sitio web
+              .teal.lighten-5.bordeRedondeado
+                = form.text_field :website
+              %strong Twitter
+              .teal.lighten-5.bordeRedondeado
+                = form.text_field :twitter
+              %strong Email
+              .teal.lighten-5.bordeRedondeado
+                = form.text_field :email
+              %strong Instagram
+              .teal.lighten-5.bordeRedondeado
+                = form.text_field :instagram
+              %strong LinkedIn
+              .teal.lighten-5.bordeRedondeado
+                = form.text_field :linkedin
+              %strong WhatsApp
+              .teal.lighten-5.bordeRedondeado
+                = form.text_field :whatsapp
+              %strong Teléfono
+              .teal.lighten-5.bordeRedondeado
+                = form.text_field :phone
+          %li
+            .collapsible-header
+              %i.material-icons collections
+              Imágenes
+            .collapsible-body.white
+              %h2 Cambiar imagen de portada
+              %strong Dimensiones sugeridas: __ X __
+              .teal.lighten-5.bordeRedondeado
+                =image_tag @company.cover.url(:thumb)
+                = form.file_field :cover
+              %h2 Cambiar logo
+              %strong Dimensiones sugeridas: __ X __. Fondo transparente.
+              .teal.lighten-5.bordeRedondeado
+                =image_tag @company.logo.url(:thumb)
+                = form.file_field :logo                  
+              %h2 Cambiar imagen destacada
+              %strong Dimensiones sugeridas: __ X __. Color de fondo coincidente al de la página.
+              .teal.lighten-5.bordeRedondeado
+                =image_tag @company.picture.url(:thumb)
+                = form.file_field :picture
+            %li
+              .collapsible-header
+                %i.material-icons ballot
+                Contenido adicional
+              .collapsible-body.white
+                .teal.lighten-5.bordeRedondeado.center
+                  =form.check_box :about_us_enabled, id:"about_us_enabled"
+                  =form.label "Habilitar ACERCA DE...", for:"about_us_enabled", id:"about_us_enabled"
+                .teal.lighten-4.bordeRedondeado
+                  = form.text_area :about_us, rows: 50, :style=>"height: 350px;"
+                .teal.lighten-5.bordeRedondeado.center
+                  =form.check_box :other_info_enabled, id:"other_info_enabled"
+                  =form.label "Habilitar INFO ADICIONAL", for:"other_info_enabled", id:"other_info_enabled"
+                .teal.lighten-4.bordeRedondeado
+                  = form.text_area :other_info, rows: 50, :style=>"height: 350px;"
+
+
       .col.s12.center-xs
         = form.submit "Guardar", :class => "btn"
 
