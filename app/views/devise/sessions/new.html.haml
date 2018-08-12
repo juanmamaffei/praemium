@@ -1,11 +1,22 @@
 .row
+- unless notice==nil
+  .chip.center.red.white-text
+    =notice
+- unless alert==nil
+  .chip.center.red.white-text
+    =alert
 .container.middle-xs
+  
   .row.middle-xs.center-xs.z-depth-3.transparenciafuerte
-    .col-xs-12.bigmargin.bigpadding
-      =image_tag("logoh", :height=> "45")
-    .col-xs-12
-      %h1.center-xs Iniciar sesión en <span class="texto-negro">praemium</span>
-      / =image_tag("logoh.png", width: 200)
+    /.row.center-xs.middle-xs.teal.lighten-5
+    .col.m11.s9
+      %h5
+        Iniciar sesión
+        %span.hide-on-small-only en <span class="texto-negro">praemium</span>
+    .col.m1.s3.right
+      =link_to raw("<i class='material-icons'>close</i>"), :back, :class=>"black-text"
+    
+    
     .col-xs-12
       = link_to "Ingresar con Facebook", user_facebook_omniauth_authorize_path, :class => "waves-effect waves-light btn azulFb"
     .col-xs-12
@@ -30,4 +41,6 @@
           .fb-login-button{"data-max-rows"=>"1", "data-size"=>"large", "data-button-type"=>"login_with", "data-show-faces"=>"true", "data-auto-logout-link"=>"false", "data-use-continue-as"=>"false"}
         .col-xs-12
           = render "devise/shared/links"
+        .col-xs-12.bigmargin.bigpadding
+          =image_tag("logoh", :height=> "25", :alt => "Logo de Praemium. Fidelización, tienda online en 5 minutos, LEALTAD de clientes")
             

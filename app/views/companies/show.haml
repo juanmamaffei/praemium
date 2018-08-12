@@ -2,9 +2,13 @@
   $(document).ready(function(){
     $('.parallax').parallax();
     $('.collapsible').collapsible();
+    $('.carousel-slider').slider({full_width: true});//slider init
+    $('.carousel').carousel();
   });
   $( window ).load(function() {
     $('.parallax').parallax();
+    $('.carousel').carousel();
+    $('.carousel-slider').slider({full_width: true});//slider init
   });
 
 -if user_signed_in?
@@ -67,13 +71,17 @@
       .col.s12.center A CONTINUACIÓN SE MUESTRA LA PÁGINA QUE VE EL RESTO DE LOS USUARIOS DE PRAEMIUM, SUS CLIENTES Y TAMBIÉN LOS VISITANTES NO REGISTRADOS.
       .col.s12.center
         =link_to "Editar página", edit_company_path(@company.id), :class => "btn red bigmargin" #, :onclick => "javascript:(function(ele) { window.open(ele.href, ele.title, 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes, width=75%, resizable=yes') })(this); return true;"
-
-.parallax-container
+%nav.white
+  .nav-wrapper
+    .littleMargin
+      =image_tag("logoh", height: 50)
+.parallax-container.valign-wrapper.center-xs
   .parallax
     =image_tag(@company.cover.url(:large), :alt => "Portada")
-  %h1.titCompany.center-xs
-    = @company.name
-.row.nomargin
+  %h1.titCompany.center-xs.middle-xs
+    =image_tag("logoh", :class => "logoCompany")
+    /= @company.name
+.row
   .container
     .col.s12
       /%h2.texto-azul Bienvenido a #{@company.name}
@@ -81,17 +89,65 @@
       -markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
       -unless @company.markdown_content == nil
         =raw(markdown.render(@company.markdown_content).html_safe)
+    
+    .col.s12
+      %h2 Tienda
+      En nuestra tienda, podrás adquirir nuestros productos y servicios.
+    .col.s12
+      %h5 Productos destacados
+      .carousel.carousel-slider
+        %a.carousel-item{:href=>"#one!"}
+          =image_tag("03")
+        %a.carousel-item{:href=>"#two!"}
+          =image_tag("2bg")
+        %a.carousel-item{:href=>"#three!"}
+          =image_tag("p3")
+      %a.btn
+        %i.material-icons shopping_cart
+        Entrar a la tienda
     .col.s12
       %h2.texto-celeste Tu tarjeta
       %p Si estás acá, seguramente te dieron una tarjeta <span class="texto-verde">Praemium</span>, que te permitirá SUMAR puntos por cada compra que hagas, y utilizarla para realizar PAGOS de productos y servicios en la empresa.
       %p Si ya tenés cuenta en Praemium, podés Iniciar sesión, y agregar el número de tarjeta en tu cuenta. De lo contrario, podés Registrarte.
-    .col.s6.center-xs
-      %a.btn.waves-effect{:href=>'\users\sign_up'} Registrarme
-    .col.s6.center-xs  
-      %a.btn.waves-effect{:href=>'\users\sign_in'} Iniciar sesión
+    .col.s12.m6.center-xs.littleMargin
+      %a.btn.waves-effect.black.white-text{:href=>'\users\sign_up'} Registrarme
+    .col.s12.m6.center-xs.littleMargin  
+      %a.btn.waves-effect.black.white-text{:href=>'\users\sign_in'} Iniciar sesión
 .parallax-container
   .parallax
     =image_tag(@company.cover.url(:large), :alt => "Portada")
+%footer.page-footer.white.darken-2
+  .container
+    .row.center-xs
+      .col.s12.black-text
+        =@company.name
+    .row
+      .col.l3.m4.s12.center
+        =image_tag("social/002-facebook", height: 24)
+        =link_to("Facebook", "http://www.facebook.com", :target=> "_blank")
+      .col.l3.m4.s12.center
+        =image_tag("social/7-email", height: 24)
+        =link_to("Email", "http://www.facebook.com", :target=> "_blank")
+      .col.l3.m4.s12.center
+        =image_tag("social/website", height: 24)
+        =link_to("Sitio web", "http://www.facebook.com", :target=> "_blank")
+      .col.l3.m4.s12.center
+        =image_tag("social/instagram", height: 24)
+        =link_to("Instagram", "http://www.facebook.com", :target=> "_blank")
+      .col.l3.m4.s12.center
+        =image_tag("social/linkedin", height: 24)
+        =link_to("LinkedIn", "http://www.facebook.com", :target=> "_blank")
+      .col.l3.m4.s12.center
+        =image_tag("social/phone", height: 24)
+        =link_to("Teléfono", "http://www.facebook.com", :target=> "_blank")
+      .col.l3.m4.s12.center
+        =image_tag("social/023-whatsapp-logo", height: 24)
+        =link_to("WhatsApp", "https://api.whatsapp.com/send?phone=#{@company.whatsapp}&text=Hola%20#{@company.name}!%20Mi%20nombre%20es%20**___**", :target=> "_blank")
+      .col.l3.m4.s12.center
+        =image_tag("social/twitter", height: 24)
+        =link_to("Teléfono", "http://www.facebook.com", :target=> "_blank")
+        /-unless @company.facebook == nil
+        /  Facebook
 =render partial: "layouts/footercompanies"
 
 

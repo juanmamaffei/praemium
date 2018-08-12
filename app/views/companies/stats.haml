@@ -1,0 +1,141 @@
+.row.grey.lighten-3
+	.col.s12.center
+		%h2 Tarjetas
+	.col.l2.m4.s12
+		.card-panel.teal.lighten-3.white-text.center
+			%i.material-icons show_chart
+			%h5 Tarjetas totales
+			%h3.count
+				=@counter[2]
+			.progress.grey.lighten-1
+				.determinate.white{:style=>"width: 100%"}
+	.col.l2.m4.s12
+		.card-panel.green.lighten-2.white-text.center
+			%i.material-icons show_chart
+			%h5 Tarjetas activas
+			%h3.count
+				=@counter[3]
+			-porcentajeActivas = @counter[3].to_f / @counter[2].to_f * 100
+			-porcentajeRegistradas = @counter[6].to_f / @counter[3].to_f * 100
+			-porcentajeRegistradasTotal = @counter[6].to_f / @counter[2].to_f * 100
+			%strong #{porcentajeActivas.round(2)}% sobre el total
+			.progress.grey.lighten-1
+				.determinate.white{:style=>"width: #{porcentajeActivas}%"}
+				.determinate.teal{:style=>"width: #{porcentajeRegistradasTotal}%"}
+	.col.l2.m4.s12
+		.card-panel.green.lighten-3.white-text.center
+			%i.material-icons show_chart
+			%h5 Usuarios registrados
+			%h3.count
+				=@counter[6]
+			
+			%strong #{porcentajeRegistradas.round(2)}% de las activas
+			.progress.white
+				.determinate.teal{:style=>"width: #{porcentajeRegistradas}%"}
+	.col.l2.m4.s12
+		.card-panel.red.lighten-4.white-text.center
+			%i.material-icons show_chart
+			%h5 Tarjetas inactivas
+			%h3.count
+				=@counter[4]
+			-porcentajeInactivas = @counter[4].to_f / @counter[2].to_f * 100
+			%strong #{porcentajeInactivas.round(2)}% sobre el total
+			.progress.grey.lighten-3
+				.determinate.grey{:style=>"width: #{porcentajeInactivas}%"}
+	.col.l2.m4.s12
+		.card-panel.red.lighten-3.white-text.center
+			%i.material-icons show_chart
+			%h5 Tarjetas robadas
+			%h3.count
+				=@counter[5]
+			-porcentajeRobadas = @counter[5].to_f / @counter[2].to_f * 100
+			%strong #{porcentajeRobadas.round(2)}% sobre el total
+			.progress.grey.lighten-1
+				.determinate.white{:style=>"width: #{porcentajeRobadas}%"}
+
+	.col.l2.m4.s12
+		.card-panel.red.lighten-3.white-text.center
+			%i.material-icons show_chart
+			%h5 Usuarios NO registrados
+			%h3.count
+				=@counter[7].to_i-@counter[4].to_i
+			-porcentajeNoRegistradas = (@counter[7].to_i-@counter[4].to_i).to_f / @counter[3].to_f * 100
+			%strong #{porcentajeNoRegistradas.round(2)}% sobre las activas
+			.progress.grey.lighten-3
+				.determinate.grey{:style=>"width: #{porcentajeNoRegistradas}%"}
+.row.grey.lighten-1
+	.col.s12.center
+		%h2 Saldos
+	-cargaSaldo=0
+	-consumoSaldo=0
+	-cargaPuntos=0
+	-consumoPuntos=0
+		
+	-@allTransactions.each do |trans|
+		
+		-if trans.description == "Carga de saldo" or (trans.description == nil and trans.amount.to_i >0)
+			- cargaSaldo = cargaSaldo + trans.amount.to_i
+		-if trans.description == "Consumo de saldo" or (trans.description == nil and trans.amount.to_i<0)
+			- consumoSaldo = consumoSaldo + trans.amount.to_i
+		-if trans.description == "Carga de puntos"
+			- cargaPuntos = cargaPuntos + trans.amount.to_i
+		-if trans.description == "Consumo de puntos"
+			- consumoPuntos = consumoPuntos + trans.amount.to_i
+	
+	
+	.col.l2.m4.s12
+		.card-panel.teal.lighten-3.white-text.center
+			%i.material-icons show_chart
+			%h5 Total de cargas
+			%h3.count
+				$
+				=(cargaSaldo.to_f/100).round(2)
+			.progress.grey.lighten-1
+				.determinate.white{:style=>"width: 100%"}
+	.col.l2.m4.s12
+		.card-panel.red.white-text.center
+			%i.material-icons show_chart
+			%h5 Total de consumos
+			%h3.count
+				$
+				=-(consumoSaldo.to_f/100).round(2)
+			.progress.grey.lighten-1
+				.determinate.white{:style=>"width: 100%"}
+	.col.l2.m4.s12
+		.card-panel.green.white-text.center
+			%i.material-icons show_chart
+			%h5 Dinero en el sistema
+			%h3.count
+				$
+				=((cargaSaldo+consumoSaldo).to_f/100).round(2)
+			.progress.grey.lighten-1
+				.determinate.white{:style=>"width: 100%"}
+
+.row.teal.lighten-4
+	.col.s12.center
+		%h2 Puntos
+
+	.col.l2.m4.s12
+		.card-panel.teal.lighten-3.white-text.center
+			%i.material-icons show_chart
+			%h5 Total de cargas
+			%h3.count
+				=cargaPuntos
+			.progress.grey.lighten-1
+				.determinate.white{:style=>"width: 100%"}
+	.col.l2.m4.s12
+		.card-panel.red.white-text.center
+			%i.material-icons show_chart
+			%h5 Total de consumos
+			%h3.count
+				=consumoPuntos
+			.progress.grey.lighten-1
+				.determinate.white{:style=>"width: 100%"}
+	.col.l2.m4.s12
+		.card-panel.green.white-text.center
+			%i.material-icons show_chart
+			%h5 Puntos en el sistema
+			%h3.count
+				=(cargaPuntos+consumoPuntos)
+			.progress.grey.lighten-1
+				.determinate.white{:style=>"width: 100%"}

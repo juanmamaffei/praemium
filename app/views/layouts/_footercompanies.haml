@@ -1,21 +1,11 @@
 %footer.page-footer.black
   .container.texto-turquesa-normal
-    .row
-      .col.l2.m4.s12.center
-        = link_to(image_tag("0.5x/logoblanco.png", width: "40", alt: "Logo de Praemium: soluciones para comercios"), root_path)
-      .col.l3.m4.s12
+    .row.center-xs
+      .col.s12
         %a{:href=>'#term'} Información legal
 
       /%p
       /  %a{:href=>'#licencia'} Licencia
-    .col.s12.center
-      -unless user_signed_in?
-        %h5 Cuenta
-        %p
-          %a{:href=>'\users\sign_up'} Registrarme
-        %p
-          %a{:href=>'\users\sign_in'} Iniciar sesión
-
       #term.modal.modal-fixed-footer
         .modal-content
           = render 'layouts/terminos'
@@ -26,4 +16,6 @@
           %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
   .footer-copyright
     .container.center
-      Creado por <a href="https://www.praemium.com.ar">Praemium</a>.
+      .row.middle-xs.center-xs
+        = link_to(image_tag("0.5x/logoblanco.png", width: "35", alt: "Logo de Praemium: soluciones para comercios"), root_path)
+        Creado por <a href="https://www.praemium.com.ar"> Praemium</a>.

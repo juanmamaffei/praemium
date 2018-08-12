@@ -4,7 +4,7 @@ class CompaniesController < ApplicationController
   #Admin sin restricciones
   before_action :authenticate_admin!, only: [:index, :destroy]
   #Dueño de compañía A, SHOW y EDIT compañía A.
-  before_action :authenticate_owner!, only: [:edit, :update]
+  before_action :authenticate_owner!, only: [:edit, :update, :stats]
   #Empleado de compañía A, SHOW de compañía A.
   #Cliente, NADA.
 
@@ -156,6 +156,57 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def stats
+    set_company_id
+
+    #Consultar a la base de datos
+    @allTransactions = Transaction.where('company_id' => @company.id)
+    @allCards = Card.where('company_id' => @company.id)
+
+    @counter = Array.new
+    #Contar transacciones realizadas
+    @counter[1] = @allTransactions.count
+    
+    #Contar tarjetas totales
+    @counter[2] = @allCards.count
+
+    #Contar tarjetas activas
+    @counter[3] = @allCards.where('status'=> 1).count
+
+    #Tarjetas inactivas
+    @counter[4] = @allCards.where('status'=> 0).count
+
+    #Tarjetas robadas
+    @counter[5] = @allCards.where('status'=> 2).count
+
+    #Tarjetas registradas
+    @counter[6] = @allCards.where.not('user'=>nil).count
+
+    #Tarjetas NO registradas
+    @counter[7] = @allCards.where('user'=>nil).count
+
+    #Iterar transactions
+      #Total de saldo ingresado
+      
+      #Total de saldo consumido
+
+      #Total de puntos ingresados
+
+      #Total de puntos consumidos
+
+    #Iterar CARDS
+      #find Cliente. Guardarlo en array.
+
+        #Sumar credit1
+
+        #Sumar credit2
+      #Si no es cliente registrado, guardarlo en otro array.
+        
+        #Sumar credit1
+
+        #Sumar credit2
+
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company

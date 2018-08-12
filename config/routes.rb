@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   #devise_for :users, controllers: {registrations: "registrations"}
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
+  #Redireccionar c a companies
+  get '/c/:id', to: redirect('/companies/%{id}')
+  
   resources :companies do
   	resources :cards do
       resources :transactions
@@ -14,6 +17,7 @@ Rails.application.routes.draw do
     get 'panel', to: 'cards#scan'
     post 'panel', to: 'cards#scan'
     get 'prueba', to: 'companies#freeTrial'
+    get 'stats', to: 'companies#stats'
   
   end
 

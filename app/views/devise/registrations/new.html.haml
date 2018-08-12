@@ -1,9 +1,20 @@
 .row
+- unless notice==nil
+  .chip.center.red.white-text
+    =notice
+- unless alert==nil
+  .chip.center.red.white-text
+    =alert
 .container
   .row.middle-xs
     .col.s12.z-depth-3.center.transparenciafuerte
-      .col.s12
-        %h5 Crear cuenta en <span class="texto-negro">praemium</span>
+      .row.center-xs.middle-xs
+        .col.m11.s9
+          %h5
+            Crear cuenta
+            %span.hide-on-small-only en <span class="texto-negro">praemium</span>
+        .col.m1.s3.right
+          =link_to raw("<i class='material-icons'>close</i>"), :back, :class=>"black-text"
       .col.s12
         = link_to "Ingresar con Facebook", user_facebook_omniauth_authorize_path, :class => "waves-effect waves-light btn azulFb"
       .col.s12
@@ -50,4 +61,6 @@
             = f.submit "Registrar", :class => "btn"
           .card-action
             = render "devise/shared/links"
+          .col-xs-12.bigmargin.bigpadding
+            =image_tag("logoh", :height=> "25", :alt => "Logo de Praemium. Fidelización, tienda online en 5 minutos, LEALTAD de clientes")
 

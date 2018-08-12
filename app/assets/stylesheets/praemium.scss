@@ -114,12 +114,15 @@ main{
 .littlePadding2{
 	padding: 15px;
 }
-
+.littleMargin{
+	padding: 6px;
+}
 .nomargin{
 	margin: 0 auto;
 }
 .parallax-container{
-	height: 150px !important;
+	/* height: 150px !important; */
+	height: 100%;
 	width: 100%;
 }
 .page-footer{
@@ -128,6 +131,11 @@ main{
 .titCompany{
 	text-shadow: 2px 2px #ffffff;
 }
+.logoCompany{
+	max-height: 50%;
+	max-width: 50%;
+}
+
 .grid { 
 	position: "absolute"; 
 	top: 0; 
