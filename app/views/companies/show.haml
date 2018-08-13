@@ -1,3 +1,4 @@
+
 :javascript
   $(document).ready(function(){
     $('.parallax').parallax();
@@ -6,6 +7,7 @@
     $('.carousel').carousel();
     $(".button-collapse").sideNav();
     $('.scrollspy').scrollSpy();
+    $('.modal').modal();
   });
   $( window ).load(function() {
     $('.parallax').parallax();
@@ -13,68 +15,52 @@
     $(".button-collapse").sideNav();
     $('.carousel-slider').slider({full_width: true});//slider init
     $('.scrollspy').scrollSpy();
+    $('.modal').modal();
   });
-
 -if user_signed_in?
-  .row
   -if @npa == "false"
-    
-    .row.teal.lighten-5
-      .container
-        .col.s12.center
-          %h1 Gestión de empresa
-          -if @company.alias == "freeTrial"
-            =link_to "Instrucciones de prueba", company_prueba_path(@company)
-        %ul.collapsible{"data-collapsible"=>"accordion"}
+    %nav.black.white-text.center-xs
+      .nav-wrapper.center-xs
+        %ul#nav-mobile
           %li
-            .collapsible-header
-              %i.material-icons touch_app
-              Entorno móvil
-            .collapsible-body
-              %span Es el entorno que permitirá realizar créditos y débitos usando la cámara de un dispositivo móvil para la lectura del código de barras.
-              %p
-              =link_to "Ir", company_panel_path(@company, :mobile => true), :class=> "btn"
+            =link_to "Editar página", edit_company_path(@company.id), :class => "btn red"
           %li
-            .collapsible-header
-              %i.material-icons important_devices
-              Entorno general
-            .collapsible-body
-              %span Es la forma más eficiente de realizar créditos y débitos a tarjetas de clientes. Está diseñado para una rápida carga con lector de códigos de barra o bien para un ingreso manual del número de cliente.
-              %p
-              =link_to "Ir", company_panel_path(@company), :class=> "btn"
-          %li
-            .collapsible-header
-              %i.material-icons
-                credit_card
-              Crear tarjetas
-            .collapsible-body
-              %span Desde este menú se podrán dar de alta tarjetas de membresía para luego:
-              %ul
-                %li encargar su impresión,
-                %li imprimir tarjetas de códigos con diseño estándar, o bien 
-                %li imprimir lista de códigos de barra y PIN para encargar la producción de las tarjetas a #{@company.name}
-              %p
-                =link_to "Ir", new_company_card_path(@company), :class=> "btn"
-          %li
-            .collapsible-header
-              %i.material-icons people
-              Clientes
-            .collapsible-body
-              %span Desde aquí se pueden visualizar todas las tarjetas dadas de alta y toda la información relativa a las mismas, incluyendo los datos de los usuarios que las han registrado.
-              %p
-                =link_to "Ir", company_cards_path(@company), :class=> "btn"
-          %li
-            .collapsible-header
-              %i.material-icons timeline
-              Estadísticas
-            .collapsible-body
-              %span Cuando se genera un volumen de datos lo suficientemente grande en su sistema, Praemium le ofrecerá sin cargo estadísticas que permitirán mejorar el servicio a sus clientes o captar nuevos.
-    .row.black.white-text
-      .col.s12.center
-        %h1 Tu página
-      .col.s12.center A CONTINUACIÓN SE MUESTRA LA PÁGINA QUE VE EL RESTO DE LOS USUARIOS DE PRAEMIUM, SUS CLIENTES Y TAMBIÉN LOS VISITANTES NO REGISTRADOS.
-      .col.s12.center
-        =link_to "Editar página", edit_company_path(@company.id), :class => "btn red bigmargin" #, :onclick => "javascript:(function(ele) { window.open(ele.href, ele.title, 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes, width=75%, resizable=yes') })(this); return true;"
+            %a.modal-trigger.btn.green{:href=>"#dropMenu", "data-activates"=>"dropMenu"}
+              %span Menu
+              %i.material-icons arrow_drop_down
+    / MENÚ DE EMPRESA
+    =render partial: "company_menu"
+    %ul.modal.bottom-sheet.hide 
+      -if @company.alias == "freeTrial"
+        %li
+          =link_to "Instrucciones de prueba", company_prueba_path(@company)
+      %li
+        =link_to "Panel con CÁMARA", company_panel_path(@company, :mobile => true)
+      %li
+        =link_to "Panel GENERAL", company_panel_path(@company)
+      %li
+        =link_to "Crear tarjetas", new_company_card_path(@company)
+      %li
+        =link_to "Clientes", company_cards_path(@company)
+      %li
+        =link_to "Estadísticas", company_stats_path(@company)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %nav.white
   .nav-wrapper
     .brand-logo
@@ -117,11 +103,29 @@
   %h1.titCompany.center-xs.middle-xs
     =image_tag(@company.logo.url(:medium), :class => "logoCompany")
     /= @company.name
--unless params[:notice].nil?
-  %h1.red.bordeRedondeado.texto-blanco
-    =params[:notice]
-  :javascript
-    alert("#{params[:notice]}");
+-unless notice==nil
+  .container
+    .row.center          
+      -if notice[0,2]=="**"
+        .card.red
+          %h1.white-text <i class="material-icons">error</i> Ocurrió un error
+
+          %strong.white-text
+            =notice
+        #noticia.modal.modal-fixed-footer
+          .modal-content
+            %h4 Epa! Hubo un error
+            %p
+              =notice
+          .modal-footer.center
+            %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+          %script
+            noticia.open();
+      -else
+        -if notice[0,3]=="*T*"
+        -else
+          .chip.red.center-xs.center
+            = notice
 .container
   .row.valign-wrapper
     .col.s12.m4
@@ -183,6 +187,7 @@
             .card
               .card-image.waves-effect.waves-block.waves-light
                 =image_tag(@company.cover.url(:medium), :alt => "Portada de #{@company.name}", :class=> "activator", :height => "150px", :width => "300px")
+                /=image_tag(@company.logo.url(:thumb), :alt => "Logo de #{@company.name}", height: 30)
               .card-content
                 %span.card-title.activator.grey-text.text-darken-4
                   = @company.name
@@ -206,8 +211,9 @@
                   = link_to 'Configuración', company_card_transactions_path(card.company,card.id), :class=>"collection-item"
       -else
         No tenés tarjetas
+        =render partial: "layouts/add_card"
         
-        =link_to "Solicitar nueva tarjeta ", company_requestCard_path(@company.id)
+      =link_to "Solicitar nueva tarjeta ", company_requestCard_path(@company.id)
     -else
       %p.texto-celeste.center Iniciá sesión o creá una nueva cuenta en Praemium, para obtener tu tarjeta de beneficios de este comercio.
       .col.s12.m6.center-xs.littleMargin
@@ -258,6 +264,6 @@
           =image_tag("social/twitter", height: 24)
           =link_to("Twitter", @company.twitter, :target=> "_blank")
 
-=render partial: "layouts/footercompanies"
+
 
 

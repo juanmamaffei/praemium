@@ -103,7 +103,7 @@ class CardsController < ApplicationController
                 redirect_to root_path, notice: "**Tus datos son correctos pero ocurrió un error. Contactá con el administrador"
               end
             else
-              redirect_to root_path, notice: "**Pin incorrecto"+pin.to_s+" | "+ card.pin.to_s
+              redirect_to root_path, notice: "**Pin incorrecto"
             end
 
 

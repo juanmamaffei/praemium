@@ -1,0 +1,15 @@
+.row.center-md
+  .col-xs-12.col-sm-6.col-md-4
+    .card.bordeRedondeado
+      = form_tag(asignar_path, method: "post") do
+        .card-title.black.white-text.center
+          Añadir tarjeta
+        .card-content
+          = label_tag(:num, "Número de tarjeta (13 dígitos):")
+          .teal.lighten-5.littleBordeRedondeado
+            = text_field_tag(:num)
+          = label_tag(:pin, "PIN:")
+          .teal.lighten-5.littleBordeRedondeado
+            = text_field_tag(:pin)
+        .card-actions
+          = submit_tag("Añadir", :class=>"btn teal lighten-3 waves-effect")

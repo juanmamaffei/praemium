@@ -1,0 +1,49 @@
+#dropMenu.modal.bottom-sheet
+  .col.s12.center
+    %h1 Gestión de empresa
+    -if @company.alias == "freeTrial"
+      =link_to "Instrucciones de prueba", company_prueba_path(@company)
+  %ul.collapsible{"data-collapsible"=>"accordion"}
+    %li
+      .collapsible-header
+        %i.material-icons touch_app
+        Entorno móvil
+      .collapsible-body
+        %span Es el entorno que permitirá realizar créditos y débitos usando la cámara de un dispositivo móvil para la lectura del código de barras.
+        %p
+        =link_to "Ir", company_panel_path(@company, :mobile => true), :class=> "btn"
+    %li
+      .collapsible-header
+        %i.material-icons important_devices
+        Entorno general
+      .collapsible-body
+        %span Es la forma más eficiente de realizar créditos y débitos a tarjetas de clientes. Está diseñado para una rápida carga con lector de códigos de barra o bien para un ingreso manual del número de cliente.
+        %p
+        =link_to "Ir", company_panel_path(@company), :class=> "btn"
+    %li
+      .collapsible-header
+        %i.material-icons
+          credit_card
+        Crear tarjetas
+      .collapsible-body
+        %span Desde este menú se podrán dar de alta tarjetas de membresía para luego:
+        %ul
+          %li encargar su impresión,
+          %li imprimir tarjetas de códigos con diseño estándar, o bien 
+          %li imprimir lista de códigos de barra y PIN para encargar la producción de las tarjetas a #{@company.name}
+        %p
+          =link_to "Ir", new_company_card_path(@company), :class=> "btn"
+    %li
+      .collapsible-header
+        %i.material-icons people
+        Clientes
+      .collapsible-body
+        %span Desde aquí se pueden visualizar todas las tarjetas dadas de alta y toda la información relativa a las mismas, incluyendo los datos de los usuarios que las han registrado.
+        %p
+          =link_to "Ir", company_cards_path(@company), :class=> "btn"
+    %li
+      .collapsible-header
+        %i.material-icons timeline
+        Estadísticas
+      .collapsible-body
+        =link_to "Estadísticas", company_stats_path(@company)

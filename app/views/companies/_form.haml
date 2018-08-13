@@ -20,6 +20,7 @@
     = image_tag @company.cover.url(:large)
   %h1.center-xs
     = @tit
+    =link_to raw("<i class='material-icons'>close</i>"), :back, :class=>"btn-floating grey"
 .container.teal.lighten-4
   = form_with(model: company, local: true, html: { multipart: true }) do |form|
     .row.bigp

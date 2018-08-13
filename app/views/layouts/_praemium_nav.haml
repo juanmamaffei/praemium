@@ -1,0 +1,30 @@
+-if user_signed_in?
+  %nav.white
+    .nav-wrapper
+      .brand-logo
+        =image_tag("imagoBlack", height: 50)
+      .hide-on-large-only
+        %a.black-text.button-collapse.sidenav-trigger{"data-activates"=>"mobile-demo", :href => "#"}
+          %i.material-icons menu
+      %ul.right.hide-on-med-and-down.black-text
+        %li
+          = link_to "Mis tarjetas", root_path, :class => "black-text"
+        %li
+          = link_to "Mi perfil", user_path(current_user.id), :class => "black-text"
+        %li
+          %a.black-text{ :href => "https://praemium.com.ar/blog", :target=> "_blank"} Blog
+        %li
+          = link_to "Cerrar sesión", destroy_user_session_path, method: :delete, :class => "black-text"
+  %ul.side-nav#mobile-demo.grey.lighten-5
+    %li.center
+      =image_tag("logoh", :class => "logoCompany")
+    %li
+      = link_to raw("<i class='material-icons'>credit_card</i>Mis tarjetas"), root_path, :class => "black-text"
+    %li
+      = link_to raw("<i class='material-icons'>account_circle</i>Mi perfil"), user_path(current_user.id), :class => "black-text"
+    %li
+      %a.black-text{ :href => "https://praemium.com.ar/blog", :target=> "_blank"}
+        %i.material-icons info
+        Blog
+    %li
+      = link_to raw("<i class='material-icons'>close</i>Cerrar sesión"), destroy_user_session_path, method: :delete, :class => "black-text"

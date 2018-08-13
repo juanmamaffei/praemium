@@ -6,48 +6,55 @@
     %meta{ :name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    
     :javascript
       $(document).ready(function(){
-      $('.modal').modal();
+        $('.modal').modal();
+        $('.parallax').parallax();
+        $('.collapsible').collapsible();
+        $('.carousel-slider').slider({full_width: true});//slider init
+        $('.carousel').carousel();
+        $(".button-collapse").sideNav();
+        $('.scrollspy').scrollSpy();
       });
+      $( window ).load(function() {
+        $('.parallax').parallax();
+        $('.carousel').carousel();
+        $(".button-collapse").sideNav();
+        $('.carousel-slider').slider({full_width: true});//slider init
+        $('.scrollspy').scrollSpy();
+        $('.modal').modal();
+      });
+
 
 
     %link{:rel=>"manifest", :href=>"#{asset_path "manifest.json"} "}
   %body
-    %nav
-      .nav-wrapper.white
-        .brand-logo.center
-          =link_to image_tag("logoh.png", :width => 200), root_path
-  
-        -if user_signed_in?
-          %ul#nav-mobile
-            %a.black-text.dropdown-button{:href=>'#', "data-activates"=>'dropdown1'}
-              %i.material-icons menu
-
-
     =render partial: "layouts/sidenav"
-    .container
-      .row.center-xs
-        -unless notice==nil
-          
-          -if notice[0,2]=="**"
-            .card.red
-              %h1.white-text <i class="material-icons">error</i> Ocurrió un error
+    =render partial: "layouts/praemium_nav"
 
-              %strong.white-text
+
+    .row.center-xs
+      -unless notice==nil
+        
+        -if notice[0,2]=="**"
+          .card.red
+            %h1.white-text <i class="material-icons">error</i> Ocurrió un error
+
+            %strong.white-text
+              =notice
+          #noticia.modal.modal-fixed-footer
+            .modal-content
+              %h4 Epa! Hubo un error
+              %p
                 =notice
-            #noticia.modal.modal-fixed-footer
-              .modal-content
-                %h4 Epa! Hubo un error
-                %p
-                  =notice
-              .modal-footer.center
-                %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
-              %script
-                noticia.open();
-          -else
-            .chip.center
-              = notice
+            .modal-footer.center
+              %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+            %script
+              noticia.open();
+        -else
+          .chip.center
+            = notice
     .container
       .row
         -if @cards.count != 0
@@ -96,19 +103,6 @@
           - @companies.each do |company|
             .col-sm-12.col-md-4.center-xs
               = link_to company.name, company_path(:id=> company.id), :class=> "btn"
-      .row.center-md
-        .col-xs-12.col-sm-6.col-md-4
-          .card
-            = form_tag(asignar_path, method: "post") do
-              .card-title.black.white-text.center
-                Añadir tarjeta
-              .card-content
-                = label_tag(:num, "Número de tarjeta (13 dígitos):")
-                = text_field_tag(:num)
-                = label_tag(:pin, "PIN:")
-                = text_field_tag(:pin)
-              .card-actions
-                = submit_tag("Añadir", :class=>"btn")
-  
+      =render partial: "layouts/add_card"        
     =render partial: "layouts/footer"
     

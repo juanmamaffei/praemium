@@ -1,0 +1,30 @@
+-if user_signed_in?
+	.fixed-action-btn
+		%a.btn-floating.btn-large.waves.waves-effect.turquesa
+			%i.material-icons menu
+		%ul
+			%li
+				= link_to raw("<i class='material-icons'>credit_card</i> Perfil"), root_path, :class => "btn-floating green"
+				.texto-negro.textoSombreado Praemium
+			%li
+				%a.btn-floating.red.lighten-3.modal-trigger{:href => "#addCard"}
+					%i.material-icons add
+				.black-text.textoSombreado Agregar
+			%li
+				= link_to raw("<i class='material-icons'>account_circle</i> Perfil"), user_path(current_user.id), :class => "btn-floating blue"
+				.black-text.textoSombreado Mi Perfil
+			
+			%li
+				= link_to raw("<i class='material-icons'>close</i> Perfil"), destroy_user_session_path, method: :delete, :class => "btn-floating red"
+				.black-text.textoSombreado Cerrar
+#addCard.modal
+	.modal-content
+		.row
+			.col.s12.right
+				.btn.right.modal-close.btn-flat
+					%i.material-icons close
+		.row
+			.col.s12
+				=render partial: "layouts/add_card"
+		
+

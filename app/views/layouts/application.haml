@@ -13,67 +13,55 @@
       $(document).ready(function(){
       $('.modal').modal();
       });
-    :javascript
-      $('.dropdown-button').dropdown({
-        inDuration: 300,
-        outDuration: 225,
-        constrainWidth: false, // Does not change width of dropdown to that of the activator
-        hover: true, // Activate on hover
-        gutter: 0, // Spacing from edge
-        belowOrigin: false, // Displays dropdown below the button
-        alignment: 'left', // Displays dropdown with edge aligned to the left of button
-      }
-      );
+
     :javascript
       $(document).ready(function(){
         $('.fixed-action-btn').floatingActionButton();
         $('.fixed-action-btn').openFAB();
         $('.tooltipped').tooltip();
       });
-
+    :javascript
+      $(document).ready(function(){
+        $('.parallax').parallax();
+        $('.collapsible').collapsible();
+        $('.carousel-slider').slider({full_width: true});//slider init
+        $('.carousel').carousel();
+        $(".button-collapse").sideNav();
+        $('.scrollspy').scrollSpy();
+      });
+      $( window ).load(function() {
+        $('.parallax').parallax();
+        $('.carousel').carousel();
+        $(".button-collapse").sideNav();
+        $('.carousel-slider').slider({full_width: true});//slider init
+        $('.scrollspy').scrollSpy();
+      });
     %link{:rel=>"manifest", :href=>"#{asset_path "manifest.json"} "}
     =render partial: "layouts/facebooksdk"
   %body
-    -if user_signed_in?
-      %nav
-
-        .nav-wrapper.white.littlePadding
-          .brand-logo.center
-            
-            =link_to image_tag("logoh.png", :width => 200), root_path
-
-          %ul.black-text#nav-mobile
-            %a.black-text.dropdown-button{:href=>'#', "data-activates"=>'dropdown1'}
-              %i.material-icons menu
-            
-          /
-          /  -else
-          /    %ul.right.hide-on-med-and-down
-          /      %li
-          /        =link_to "Iniciar sesión", new_user_session_path
-    
     =render partial: "layouts/sidenav"
+    =render partial: "layouts/praemium_nav"
     -unless notice==nil
-      .container
-        .row.center          
-          -if notice[0,2]=="**"
-            .card.red
-              %h1.white-text <i class="material-icons">error</i> Ocurrió un error
+      .row.center-xs         
+        -if notice[0,2]=="**"
+          .card.red
+            %h1.white-text <i class="material-icons">error</i> Ocurrió un error
 
-              %strong.white-text
+            %strong.white-text
+              =notice
+          #noticia.modal.modal-fixed-footer
+            .modal-content
+              %h4 Epa! Hubo un error
+              %p
                 =notice
-            #noticia.modal.modal-fixed-footer
-              .modal-content
-                %h4 Epa! Hubo un error
-                %p
-                  =notice
-              .modal-footer.center
-                %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
-              %script
-                noticia.open();
+            .modal-footer.center
+              %a.modal-action.modal-close.waves-effect.btn-flat Cerrar
+            %script
+              noticia.open();
+        -else
+          -if notice[0,3]=="*T*"
           -else
-            -if notice[0,3]=="*T*"
-            -else
-              .chip.center
-                = notice
+            .chip.center
+              = notice
     = yield
+    =render partial: "layouts/footer"
