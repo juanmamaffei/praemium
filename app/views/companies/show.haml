@@ -233,35 +233,35 @@
       
       -unless @company.facebook == nil or @company.facebook == "" or @company.facebook == " " 
         .col.l3.m4.s12.center
-          =image_tag("social/002-facebook", height: 24)
+          =image_tag("002-facebook", height: 24)
           =link_to("Facebook", @company.facebook, :target=> "_blank")
       -unless @company.email == nil or @company.email == "" or @company.email == " "  
         .col.l3.m4.s12.center
-          =image_tag("social/7-email", height: 24)
+          =image_tag("7-email", height: 24)
           =link_to("Email", "mailto:#{@company.email}", :target=> "_blank")
       -unless @company.website == nil or @company.website == "" or @company.website == " "  
         .col.l3.m4.s12.center
-          =image_tag("social/website", height: 24)
+          =image_tag("website", height: 24)
           =link_to("Sitio web", @company.website, :target=> "_blank")
       -unless @company.instagram == nil or @company.instagram == "" or @company.instagram == " "  
         .col.l3.m4.s12.center
-          =image_tag("social/instagram", height: 24)
+          =image_tag("instagram", height: 24)
           =link_to("Instagram", @company.instagram, :target=> "_blank")
       -unless @company.linkedin == nil or @company.linkedin == "" or @company.linkedin == " "  
         .col.l3.m4.s12.center
-          =image_tag("social/linkedin", height: 24)
+          =image_tag("linkedin", height: 24)
           =link_to("LinkedIn", @company.linkedin, :target=> "_blank")
       -unless @company.phone == nil or @company.phone == "" or @company.phone == " "  
         .col.l3.m4.s12.center
-          =image_tag("social/phone", height: 24)
+          =image_tag("phone", height: 24)
           =link_to("Teléfono", @company.phone, :target=> "_blank")
       -unless @company.whatsapp == nil or @company.whatsapp == "" or @company.whatsapp == " "  
         .col.l3.m4.s12.center
-          =image_tag("social/023-whatsapp-logo", height: 24)
+          =image_tag("023-whatsapp-logo", height: 24)
           =link_to("WhatsApp", "https://api.whatsapp.com/send?phone=#{@company.whatsapp}&text=Hola%20#{@company.name}!%20Les%20escribo%20desde%20la%20web", :target=> "_blank")
       -unless @company.twitter == nil or @company.twitter == "" or @company.twitter == " "  
         .col.l3.m4.s12.center
-          =image_tag("social/twitter", height: 24)
+          =image_tag("twitter", height: 24)
           =link_to("Twitter", @company.twitter, :target=> "_blank")
 
 
