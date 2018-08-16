@@ -13,8 +13,13 @@
  *= require_self
  *= require material_icons
  *= require materialize
- *= require_tree .
+ *= require flexboxgrid
+ *= require font
+ *= require main
+ *= require praemium
  */
+
+
 
 @import 'materialize';
 

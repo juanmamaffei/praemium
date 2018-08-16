@@ -5,8 +5,8 @@ class ClientToOwnersMailer < ApplicationMailer
   	@user = params[:user]
   	@company = params[:company]
   	owner = User.find(@company.admin)
-  	
-  	mail(to: owner.email, bcc: "juanmamaffei@gmail.com", subject: "PRAEMIUM: Cliente solicita tarjeta de #{@company.name}")
+  	#attachments.inline['logo'] = asset_path('logoh')
+  	mail(to: owner.email, bcc: "juanmamaffei@gmail.com", subject: "IMPORTANTE! Responder a NUEVO cliente: Nueva petición de TARJETA para #{@company.name}")
   	
   end
 end
