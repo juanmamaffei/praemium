@@ -1,0 +1,75 @@
+
+.col.s12.m8.l4.bordeRedondeadoChiquito.black
+  %ul#tabs.tabs.black
+    %li.tab.col.s6
+      %a.white-text{href: "#tarjeta"} Tengo una tarjeta
+    %li.tab.col.s6.azul
+      %a.white-text{href: "#comercio"} Tengo un comercio
+  = form_for(:user, :url => registration_path(:user)) do |f|
+    #tarjeta.col.s12
+      %h2.center Registrá tu tarjeta
+      .input-field.col.s12
+        %h6.white-text Correo electrónico
+        /%input#email.validate.grey.lighten-5{:type => "email"}
+        = f.email_field :email, autocomplete: "email", :class=>"validate grey lighten-5"
+        /%label{:for=>"email", "data-error"=>"Mail incorrecto"}
+        /  Correo electrónico
+      .input-field.col.s12
+        %h6.white-text Contraseña
+        = f.password_field :password, autocomplete: "off", :class=>"validate grey lighten-5"
+        /%input#password.validate.grey.lighten-5{:type => "password"}
+        /%label{:for=>"password"}
+        /  Contraseña
+      .input-field.col.s12
+        %h6.white-text Confirmar contraseña
+        = f.password_field :password_confirmation, autocomplete: "off", :class=>"validate grey lighten-5"
+        /%input#confirmPassword.validate.grey.lighten-5{:type => "password"}
+        /%label{:for=>"confirmPassword"}
+        /  Confirmar contraseña
+      .col.s12.center
+        = flash[:alert]
+        = recaptcha_tags
+        = hidden_field_tag :redirect_to, params[:redirect_to]
+      .col.s12.center
+        = f.submit "Registrarme!", :class => "btn turquesa white-text"
+        /%a.white-text Registrarme!
+      .col.s12.center
+        %p.white-text O bien
+      .col.s12.center.btn.azulFb
+        = link_to "Iniciar con Facebook", user_facebook_omniauth_authorize_path, class: "white-text"  
+      .col.s12.center
+        %p Lol
+  = form_for(:user, :url => registration_path(:user)) do |g|
+    #comercio.col.s12.azul
+      %h2.center.white-text Registrá tu comercio
+      .input-field.col.s12
+        %h6.white-text Correo electrónico
+        /%input#email.validate.grey.lighten-5{:type => "email"}
+        = g.email_field :email, autocomplete: "email", :class=>"validate grey lighten-5"
+        /%label{:for=>"email", "data-error"=>"Mail incorrecto"}
+        /  Correo electrónico
+      .input-field.col.s12
+        %h6.white-text Contraseña
+        = g.password_field :password, autocomplete: "off", :class=>"validate grey lighten-5"
+        /%input#password.validate.grey.lighten-5{:type => "password"}
+        /%label{:for=>"password"}
+        /  Contraseña
+      .input-field.col.s12
+        %h6.white-text Confirmar contraseña
+        = g.password_field :password_confirmation, autocomplete: "off", :class=>"validate grey lighten-5"
+        /%input#confirmPassword.validate.grey.lighten-5{:type => "password"}
+        /%label{:for=>"confirmPassword"}
+        /  Confirmar contraseña
+      .col.s12.center
+        = flash[:alert]
+        = recaptcha_tags
+        = hidden_field_tag :redirect_to, params[:redirect_to]
+      .col.s12.center
+        = g.submit "Registrarme!", :class => "btn turquesa white-text"
+        /%a.white-text Registrarme!
+      .col.s12.center
+        %p.white-text O bien
+      .col.s12.center.btn.azulFb
+        = link_to "Iniciar con Facebook", user_facebook_omniauth_authorize_path, class: "white-text"  
+      .col.s12.center.texto-azul
+        %p *.*

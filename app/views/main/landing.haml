@@ -5,66 +5,252 @@
     = csrf_meta_tags
     %meta{ :name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'landing', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag
     :javascript
       $(document).ready(function(){
-      $('.modal').modal();
+        $('.modal').modal();
+        $(".button-collapse").sideNav();
+        $('.slider').slider();
+        $('ul.tabs').tabs();
+        $('.carousel').carousel();
+
       });
+      $( window ).load(function() {
+        $('.modal').modal();
+        $('ul.tabs').tabs();
+        $('.carousel').carousel();
+        $('.slider').slider();
+
+      });
+      window.onscroll = function() {scrollFunction()};
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+      }
+      function topFunction() {
+          document.body.scrollTop = 0; // For Safari
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      }
     %link{:rel=>"manifest", :href=>"#{asset_path "manifest.json"} "}
-  %body.bg
+  %body
+    
+    %nav.black
+      .nav-wrapper
+        = image_tag("bg", height: "85%", alt: "Logo de Praemium. Clientes leales. Fidelización de clientes. Sistema de prepagos. Sistema de puntos.", :class=> "barnd-logo bigmargin")
+        %a{:href=> "#", "data-activates"=>"mobile", :class => "button-collapse"}
+          %i.material-icons menu
+        %ul.right.hide-on-med-and-down
+          %li
+            =link_to "Iniciar sesión", new_user_session_path
+          %li
+            %a{href: "#planes"} Planes
+          %li
+            %a{href: "https://www.praemium.com.ar/blog", target: "_blank"} Blog
+        %ul.side-nav#mobile
+          %li
+            =link_to "Iniciar sesión", new_user_session_path
+          %li
+            %a{href: "#planes"} Planes
+          %li
+            %a{href: "https://www.praemium.com.ar/blog", target: "_blank"} Blog
 
-    .row.hide
-      %h1 Fidelización de clientes, prepagos y bonificaciones. Sistema para la mejora de las ventas.
-      %p Te damos un sistema completo, fácil de usar, económico que tus clientes pueden usar desde cualquier dispositivo.
-      %p Sirve en Android, iOS, Windows, Windows Phone, todas las distribuciones Linux. No requiere más euqipamiento que tu celular y es muy fácil y seguro de usar.
-      %h2 Fidelización de clientes con tarjetas digitales o plásticas
-      %p Imprimimos tarjetas plásticas con el logo y nombre de tu empresa, o bien, podés recurrir a tarjetas digitales.
-      %h2 Sistema de pagos online, sistema de puntos y bonificaciones
-      %p A través de nuestro sistema, tus clientes podrán recargar su saldo, agilizando el proceso de compras en tu comercio.
-      %p También lo podrás utilizar como sistema de puntos, para dar premios y mejorar la experiencia de compra de tus clientes.
-      %h2 Sitio web gratis, hosting gratuito
-      %p Con el servicio básico de Praemium, te damos un sitio gratuito que servirá como landing page (página de aterrizaje) para tus ventas, una tienda y un dominio praemium.com.ar/TUNEGOCIO.
-      %p Si ya tenés dominio, podés redireccionarlo a nuestro sitio, o bien agregar un enlace al mismo, para combinarlos.
-      %p Si no tenés dominio TUNEGOCIO.COM, podés comunicarte con nosotros y lo adquirimos por vos.
-    %header
-      .row.bigp.nom.valign-wrapper
+    .slider
+      %ul.slides
+        %li
+          =image_tag "bg00"
+          .caption.left-align
+            %h2 Dejá de perder clientes
+            %h3.light En Praemium tenemos la solución.
+        %li
+          =image_tag "land2"
+          .caption.center-align
+            %h2.black-text.titCompany Apuráte!
+            %h3.light.black-text.titCompany Quedan 48 cupos de PLANES GRATIS! No te lo pierdas!
+        %li
+          =image_tag "land3"
+          .caption.right-align
+            %h2 ¿Sabés cuánto vale tu negocio?
+            %h3.light Si usaras Praemium, en poco tiempo lo sabrías...
+    .container
+      .row.middle-xs
+        
+        .col.s12.m4.l8.center
+          /Video
+          .hide-on-med-and-down
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/KMAefQm1fvg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          .hide-on-large-only
+            %a.btn-flat ¿Qué es Praemium?
+
+        =render partial: "layouts/signup_component"
+    /Testimonios
+
+    /Dá una tarjeta
+    /ERROR
+
+
+    /Beneficios de usar Praemium
+    .container
+      .row
         .col.s12.center
-          = image_tag("logoh.png", width: "260", alt: "Logo de Praemium. Clientes leales. Fidelización de clientes. Sistema de prepagos. Sistema de puntos.")
-          %br
-          %strong.texto-azul
-            Clientes leales
-        .col.s12.texto-azul.hide-on-med-and-down
-          .grantexto Reforzá el vínculo con tus clientes, para que vuelvan a elegirte siempre.
-    %main
-      .row.bigp.azul.nom.texto-turquesa-normal
-        .col.m12.l6.center
-          %h2.texto-blanco Tengo una tarjeta de un comercio adherido
+          %h2 10 beneficios de usar Praemium 📳
+        .col.s12
+          %ol#lista5
+            %li
+              %h3 Conocer a tus clientes
+              %p El sistema Praemium te permitirá tener datos precisos de cada uno de tus clientes.
+            %li
+              %h3 Mantener a tus clientes
+              %p Con paquetes de prepagos o un sistema de bonificaciones por puntos.
+            %li
+              %h3 Mejorar la comunicación
+              %p A través de notificaciones directas al celular, correos electrónicos y mensajes directos.
+            %li
+              %h3 Conocer mejor tu negocio
+              %p A través de las estadísticas, podrás conocer aspectos de tu negocio que todavía ni imaginabas
+            %li
+              %h3 Brindar otros medios de pago
+              %p Podrán pagarte con tarjetas de crédito, débito, Rapipago, PagoFácil, transferencias, entre otros, gracias a que incorporamos fácilmente MercadoPago.
+            %li  
+              %h3 Jerarquizar tu negocio
+              %p Cada cliente podrá tener una tarjeta plástica personalizada con el nombre de tu negocio.
+            %li  
+              %h3 Ubicuidad
+              %p Vas a estar en el celular de todos tus clientes, al mismo tiempo y en cualquier lugar en el que se encuentren.
+            %li  
+              %h3 Mejorar tu flujo de trabajo
+              %p Podrás automatizar cuestiones como pagos y encargos, reduciendo colas y tiempos de espera.
+            %li  
+              %h3 Facilitar campañas de marketing
+              %p A través de notificaciones directas y correos a todos tus clientes, o grupos específicos de clientes, sólo con un par de clics.
+            %li  
+              %h3 Incrementar el valor
+              %p Tus clientes podrán acceder a todo su historial de compras, recargas y beneficios desde su celular, incrementando notablemente el valor de tu servicio.
+        .col.s12.center
+          %a.btn.green{href: "/users/sign_up"} Empezá HOY!
+    <button onclick="topFunction()" id="myBtn" title="Ir al inicio" class="btn-floating verde"><i class="material-icons">keyboard_arrow_up</i></button>
 
-          %a.waves-effect.waves-light.btn{:href=>'\users\sign_up'} Registrar tarjeta
-          %p O si ya tenés cuenta en Praemium...
-          %a.waves-effect.waves-light.btn{:href=>'\users\sign_in'} Iniciar sesión
-        .col.m12.l6.center.valign
-          %h2.texto-blanco Lo quiero en mi negocio
-          %h5 Tu sistema de bonificaciones, prepagos y tienda online en 24 horas
-          %p
-            A sólo <span class="money">$2299</span> por mes.
-            %br
-            %small Pesos argentinos
-          %p
-            Costos iniciales bonificados <br><del><strong>$3499</strong></del> <span class="money">$0</span>
-            %br
-            %small Pesos argentinos          
-          %a.waves-effect.waves-light.btn{:href=> '\users\sign_up'} Probar gratis
-          %p
-            =link_to(image_tag("whatsapp", height: 24), "https://api.whatsapp.com/send?phone=+5493417183662&text=Hola! Quiero obtener más información sobre los planes y servicios que ofrecen en Praemium!")
-            =link_to(raw("<i class=material-icons>email</i>"), "mailto: info@praemium.com.ar")
+    /Planes
+    .container#planes
+      %table.striped.responsive-table.centered
+        %thead
+          %tr
+            %th 
+            %th.pink.lighten-4.title Gratis
+            %th.cyan.lighten-4.title Básico
+            %th.teal.lighten-4.title Premium
+        %tbody
+          %tr
+            %td.title.encabezado Sitio web
+            %td Básico
+            %td Plantillas Premium
+            %td Plantillas Praemium + Asistencia
+          %tr
+            %td.title.encabezado URL
+            %td praemium.com.ar/c/ID
+            %td praemium.com.ar/tunegocio
+            %td tunegocio.com.ar o similar
+          %tr
+            %td.title.encabezado Marcas
+            %td Pie y publicidad
+            %td Pie de página
+            %td Pie de página
+          %tr
+            %td.title.encabezado Tarjetas virtuales
+            %td Hasta 50
+            %td Hasta 500
+            %td Hasta 1000
+          %tr
+            %td.title.encabezado Diseño de tarjeta impresa
+            %td.center.red-text
+              %i.material-icons close
+            %td Plantillas Praemium
+            %td Diseño por nuestros profesionales
+          %tr
+            %td.title.encabezado Estadísticas
+            %td Conteos
+            %td   Estadísticas detalladas e informes automatizados.
+            %td   Estadísticas detalladas e informes automatizados y analizados por nuestros profesionales.
+          %tr
+            %td.title.encabezado Tienda
+            %td.center.red-text
+              %i.material-icons close 
+            %td Hasta 10 artículos
+            %td Artículos ilimitados
+          %tr
+            %td.title.encabezado MercadoPago
+            %td.center.red-text
+              %i.material-icons close 
+            %td.center.green-text
+              %i.material-icons done
+              Carga manual
+            %td.center.green-text
+              %i.material-icons done
+              Carga automática 
+          %tr
+            %td.title.encabezado Datos de clientes
+            %td Información anónima
+            %td Datos de perfil
+            %td Datos de perfil y adicionales
+          %tr
+            %td.title.encabezado Aplicación web progresiva
+            %td App Praemium
+            %td App Praemium
+            %td App Praemium y WPA con el logo de tu comercio
+          %tr.white
+            %td
+            %td.center
+              %a.btn.red{href: "/users/sign_up"} Comenzar
+            %td.center
+              %a.btn.green{href: "http://mpago.la/2ywBYT"} Comenzar
+            %td.center
+              %a.btn.green{href: "http://mpago.la/4g2pNT"} Comenzar
 
-      .row.hide
-        .col.s12.m4
-          =image_tag("p1.png", :class => "responsive-img materialboxed", :alt => "Tarjetas de fidelización de clientes. Praemium, Clientes leales..")
-        .col.s12.m4
-          =image_tag("p2.png", :class => "responsive-img materialboxed", :alt => "Las tarjetas sirven para sumar puntos y canjearlos por productos o servicios, o bien para utilizarlas como un sistema de prepago, pudiendo prescindir del dinero en efectivo. El sistema, además, brinda estadísticas que sirven al comerciante para poder mejorar sus productos y servicios.")
-        .col.s12.m4
-          =image_tag("p3.png", :class => "responsive-img materialboxed", :alt => "Tarjetas de fidelización de clientes. Praemium, Clientes leales. El sistema, además, brinda estadísticas que sirven al comerciante para poder mejorar sus productos y servicios.")
+      .row
+        .col.s12.center
+          %h2 ¿Querés ver un ejemplo?
+        .col.s12.center
+          %a.btn-flat{href: "https://www.praemium.com.ar/c/1", target: "_blank"} Ir a La Gran Hamburguesa
+        .col.s12
+          .carousel.center{"data-indicators"=>"true"}
+            .carousel-item.center
+              /%h2 Sitio de cortesía
+              =image_tag "ss1"
+              
+            .carousel-item.center
+              /%h2 Sitio de cortesía
+              =image_tag "ss2", alt: "Sitio de cortesía creado en dos minutos, usando Praemium. Login incorporado, que te brindará la información de tus clientes al instante."
+            .carousel-item.center
+              /%h2 Sitio de cortesía
+              =image_tag "ss3", alt: "Sitio de cortesía creado en dos minutos, usando Praemium. Login incorporado, que te brindará la información de tus clientes al instante."
+            .carousel-item.center
+              /%h2 Registro en tu sitio
+              =image_tag "ss4", alt: "Sitio de cortesía creado en dos minutos, usando Praemium. Login incorporado, que te brindará la información de tus clientes al instante."
+            .carousel-item.center
+              /%h2 Tarjeta del cliente en tu sitio de cortesía
+              =image_tag "ss5", alt: "Sitio de cortesía creado en dos minutos, usando Praemium. Login incorporado, que te brindará la información de tus clientes al instante."                            
+            .carousel-item.center
+              /%h2 Tus clientes verán sus movimientos
+              =image_tag "ss6", alt: "Movimientos de la cuenta de tu cliente"
+            .carousel-item.center
+              /%h2 Estadísticas de uso
+              =image_tag "ss_stats", alt: "Estadísticas del sitio, para que veas qué compraron, cuándo, en qué sucursal, en qué horarios, quiénes, qué edades tienen..."
+            .carousel-item.center
+              /%h2 Estadísticas de uso
+              =image_tag "p1", alt: "Tarjetas de fidelización. Tarjetas con el nombre de tu comercio, para usar sistemas de puntos, o para que paguen con tu tarjeta!"
+            .carousel-item.center
+              /%h2 Estadísticas de uso
+              =image_tag "p2", alt: "Tarjetas de fidelización. Tarjetas con el nombre de tu comercio, para usar sistemas de puntos, o para que paguen con tu tarjeta!"
+            .carousel-item.center
+              /%h2 Estadísticas de uso
+              =image_tag "p3", alt: "Tarjetas de fidelización. Tarjetas con el nombre de tu comercio, para usar sistemas de puntos, o para que paguen con tu tarjeta!"
+        .col.s12.center
+          %p Este sitio fue creado en un par de minutos, usando el servicio gratuito de Praemium. Podrás ver cómo lo hicimos en nuestro canal de Youtube.
+    /Footer
     =render partial: "layouts/footer"
+            
+

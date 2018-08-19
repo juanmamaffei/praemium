@@ -2,13 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import url('https://fonts.googleapis.com/css?family=Michroma');
-@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+/* @import url('https://fonts.googleapis.com/css?family=Michroma'); */
+@import url('https://fonts.googleapis.com/css?family=Lora|Noticia+Text|Noto+Serif|Titillium+Web');
 
-html{
-  	font-family: 'Titillium Web', sans-serif;
-  }
+html, p, li{
+  	font-family: 'Noto Serif', serif;
+}
 
+h1, h2, h3, h4, h5, h6, btn, a {
+	font-family: 'Titillium Web', sans-serif;
+}
+.title{
+	font-family: 'Titillium Web', sans-serif;	
+}
 body{
 	/*background-color: #ff9800;
   	 background-image: url("./2bg.png");  */

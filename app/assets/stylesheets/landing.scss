@@ -1,0 +1,82 @@
+/* Colores */
+
+$negro: #1E130F;
+$verde: #4CA92C;
+$celeste: #0068AE;
+$azul: #003C91;
+$turquesa: #009CDD;
+
+.bg{
+
+    background-color: #cccccc;
+    background-image: linear-gradient($azul, $turquesa);
+}
+.dt{
+	
+}
+#lista5 {
+    counter-reset: li; 
+    list-style: none; 
+    *list-style: decimal; 
+    font: 15px 'trebuchet MS', 'lucida sans';
+    padding: 0;
+    margin-bottom: 4em;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+#lista5 ol {
+    margin: 0 0 0 2em; 
+}
+#lista5 {
+    list-style-type: none;
+    *list-style-type: decimal;
+    margin: 0;
+    margin-left: 1em;
+    padding: 0;
+    counter-reset: li-counter;
+}
+
+#lista5 > li{
+    position: relative;
+    margin-bottom: 1.5em;
+    padding: 1.5em;
+    background-color: $turquesa;
+    color: white;
+}
+
+#lista5 > li:before {
+    position: absolute;
+    top: -0.3em;
+    left: -0.5em;
+    width: 1.8em;
+    height: 1.2em;
+     
+    font-size: 2em;
+    line-height: 1.2;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background-color: $azul;
+     
+    transform: rotate(-20deg);
+    -ms-transform: rotate(-20deg);
+    -webkit-transform: rotate(-20deg);
+    z-index: 99;
+    overflow: hidden;
+     
+    content: counter(li-counter);
+    counter-increment: li-counter;
+}
+
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    
+}
+
+#myBtn:hover {
+    background-color: #555; /* Add a dark-grey background on hover */
+}

@@ -13,3 +13,4 @@ Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.configuration.assets.precompile += %w[serviceworker.js manifest.json.erb]
+Rails.application.config.assets.precompile += %w( landing.scss )
