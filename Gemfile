@@ -12,7 +12,7 @@ gem 'rails', '~> 5.1.5'
 #gem 'sqlite3'
 
   #gem 'pg'
-  gem 'mysql2'
+  #gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -39,6 +39,7 @@ gem 'jbuilder', '~> 2.5'
 
 #Gemas agregadas
 gem 'devise', '~> 4.4', '>= 4.4.1'
+#gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 
 gem 'material_icons' 
 gem 'haml', '~> 5.0', '>= 5.0.4'
@@ -51,11 +52,11 @@ gem 'barby', '~> 0.6.2' #Códigos de barra (generador)
 gem 'chunky_png', '~> 1.3', '>= 1.3.5' #Generador de PNG
 #gem 'axlsx_rails' #Exportar a XLSX
 gem 'rubyzip', '>= 1.2.1'
-gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+#gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
 gem 'omniauth-facebook'
 gem 'serviceworker-rails'
-gem 'paperclip', '~> 4.3', '>= 4.3.6'
+gem 'paperclip' #, '~> 4.3', '>= 4.3.6'
 gem "letter_opener", :group => :development
 gem 'will_paginate-materialize'
 gem 'materialize-sass', '~> 0.99.0'

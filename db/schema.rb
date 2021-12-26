@@ -12,8 +12,8 @@
 
 ActiveRecord::Schema.define(version: 20180812015655) do
 
-  create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "company_id"
+  create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
+    t.bigint "company_id"
     t.integer "user"
     t.integer "country", default: 779
     t.integer "credit1"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20180812015655) do
     t.index ["number"], name: "index_cards_on_number", unique: true
   end
 
-  create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.string "name"
     t.string "url"
     t.integer "admin"
@@ -40,17 +40,17 @@ ActiveRecord::Schema.define(version: 20180812015655) do
     t.string "alias"
     t.string "cover_file_name"
     t.string "cover_content_type"
-    t.integer "cover_file_size"
+    t.bigint "cover_file_size"
     t.datetime "cover_updated_at"
     t.text "markdown_content"
     t.text "content"
     t.string "logo_file_name"
     t.string "logo_content_type"
-    t.integer "logo_file_size"
+    t.bigint "logo_file_size"
     t.datetime "logo_updated_at"
     t.string "picture_file_name"
     t.string "picture_content_type"
-    t.integer "picture_file_size"
+    t.bigint "picture_file_size"
     t.datetime "picture_updated_at"
     t.string "facebook"
     t.string "twitter"
@@ -68,10 +68,10 @@ ActiveRecord::Schema.define(version: 20180812015655) do
     t.boolean "store_enabled"
   end
 
-  create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "card_id"
-    t.integer "company_id"
-    t.integer "user_id"
+  create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
+    t.bigint "card_id"
+    t.bigint "company_id"
+    t.bigint "user_id"
     t.integer "amount"
     t.string "description"
     t.datetime "created_at", null: false
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20180812015655) do
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -106,10 +106,14 @@ ActiveRecord::Schema.define(version: 20180812015655) do
     t.integer "permissions", default: 1
     t.string "avatar_file_name"
     t.string "avatar_content_type"
-    t.integer "avatar_file_size"
+    t.bigint "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cards", "companies"
+  add_foreign_key "transactions", "cards"
+  add_foreign_key "transactions", "companies"
+  add_foreign_key "transactions", "users"
 end
